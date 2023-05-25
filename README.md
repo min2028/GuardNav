@@ -3,7 +3,7 @@
 > A Safe Route Planning App
 
 ### Overview:
-The Safe Route Planning App aims to provide users with a reliable and user-friendly navigation experience, prioritizing their safety by leveraging historic crime information. With features like safe route planning, data visualization through heat maps, the app empowers users to make informed decisions while navigating Vancouver and ensures their confidence in reaching their destinations securely.
+GuardNav aims to provide users with a reliable and user-friendly navigation experience, prioritizing their safety by leveraging historic crime information. With features like safe route planning, data visualization through heat maps, the app empowers users to make informed decisions while navigating Vancouver and ensures their confidence in reaching their destinations securely.
 
 >
 
@@ -59,3 +59,5 @@ The Safe Route Planning App is intended for the following user groups:
 - CRUD to enable users to add, update, and delete their own reports of hazards and risks to be added to the database.
   - Enhance manual crime entry functionality with entry validation.
 - Real-time alerts of new hazards along the route.
+
+## Prototypes:

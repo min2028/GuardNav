@@ -32,7 +32,7 @@ The Safe Route Planning App is intended for the following user groups:
 >will definitely complete
 - Create a simple CRUD (Create, Read, Update, Delete) functionality to enable users to manage trips.
   - Users should be able to add trips by specifying a pair of source and destination locations.
-  - Each trip should include the suggested routes, the primary route selected by the user, and the name of the route.
+  - Each trip should include the suggested routes, the primary route selected by the user, and the name of the trip.
   - Users should be able to update the primary route and the name of the trip, similar to the timeline functionality in Google Maps.
   - Users should be able to delete trips from their history.
 

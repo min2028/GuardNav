@@ -39,9 +39,6 @@ The Safe Route Planning App is intended for the following user groups:
 - Utilize historic crime data to create the initial dataset for generating a heatmap.
   - The heatmap should display risk levels across Vancouver based on the crime data.
 
-- Implement a grid system to validate hazard reports.
-  - The hazard reports entered by users should be validated against a grid system.
-
 - Develop a basic user interface (UI) that includes a map displaying the generated heatmap and allows users to enter hazard reports.
 
 **Standard**
@@ -49,10 +46,13 @@ The Safe Route Planning App is intended for the following user groups:
 - Integrate route planning that avoids high risk areas.
 - Multiple route suggestions with varying levels of risk.
 - Risk categorization. [Frequency and intensity: weighted]
+- (friendly design for mobile users)
 
 
 **Stretch Goals**
 >will complete if time permits
+- Implement a grid representation to validate hazard reports.
+  - use aggregated number of reports in the area for the validation
 - User authentication and user profiles.
 - User preferences for risk levels and categories.
 - Alert system if off-route.

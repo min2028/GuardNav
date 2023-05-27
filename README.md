@@ -61,5 +61,13 @@ The Safe Route Planning App is intended for the following user groups:
 - Real-time alerts of new hazards along the route.
 
 ## Prototypes:
-![Untitled Jam 1](https://github.com/min2028/GuardNav/assets/33165850/7083c6d2-8b5c-463c-a068-b5ea331a15c8)
+
+### Landing Page
+<img width="954" alt="Screenshot 2023-05-26 at 8 10 14 PM" src="https://github.com/min2028/GuardNav/assets/93061872/f7d608d0-a44d-4d30-83fd-1925d36325f2">
+
+### Main Page
+<img width="949" alt="Screenshot 2023-05-26 at 8 12 44 PM" src="https://github.com/min2028/GuardNav/assets/93061872/c5108a4c-ed24-4b0a-9f66-c74e8843d62c">
+
+### Help Page
+<img width="906" alt="Screenshot 2023-05-26 at 8 13 08 PM" src="https://github.com/min2028/GuardNav/assets/93061872/bc542528-28f3-4af3-852b-011b7a820e1b">
 

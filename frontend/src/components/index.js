@@ -1,3 +1,4 @@
 import Map from "./Map";
+import PageContainer from "./PageContainer";
 
-export { Map };
+export { Map, PageContainer };

@@ -1,8 +1,10 @@
+import { Map, PageContainer } from "../components";
+
 const MapPage = () => {
     return (
-        <div>
-        <h1>MapPage</h1>
-        </div>
+        <PageContainer>
+            <Map />
+        </PageContainer>
     );
 };
 

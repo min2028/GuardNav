@@ -32,15 +32,12 @@ The Safe Route Planning App is intended for the following user groups:
 >will definitely complete
 - Create a simple CRUD (Create, Read, Update, Delete) functionality to enable users to manage trips.
   - Users should be able to add trips by specifying a pair of source and destination locations.
-  - Each trip should include the suggested routes, the primary route selected by the user, and the name of the route.
+  - Each trip should include the suggested routes, the primary route selected by the user, and the name of the trip.
   - Users should be able to update the primary route and the name of the trip, similar to the timeline functionality in Google Maps.
   - Users should be able to delete trips from their history.
 
 - Utilize historic crime data to create the initial dataset for generating a heatmap.
   - The heatmap should display risk levels across Vancouver based on the crime data.
-
-- Implement a grid system to validate hazard reports.
-  - The hazard reports entered by users should be validated against a grid system.
 
 - Develop a basic user interface (UI) that includes a map displaying the generated heatmap and allows users to enter hazard reports.
 
@@ -49,10 +46,13 @@ The Safe Route Planning App is intended for the following user groups:
 - Integrate route planning that avoids high risk areas.
 - Multiple route suggestions with varying levels of risk.
 - Risk categorization. [Frequency and intensity: weighted]
+- (friendly design for mobile users)
 
 
 **Stretch Goals**
 >will complete if time permits
+- Implement a grid representation to validate hazard reports.
+  - use aggregated number of reports in the area for the validation
 - User authentication and user profiles.
 - User preferences for risk levels and categories.
 - Alert system if off-route.

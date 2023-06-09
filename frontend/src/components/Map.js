@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentPosition, resetLocation } from '../reducers/LocationReducer';
 import PageContainer from './PageContainer';
 import LoadingSpinner from './LoadingSpinner';
+import WeatherInformation from './WeatherInformation';
 
 const Map = () => {
   const dispatch = useDispatch();
@@ -59,8 +60,10 @@ const Map = () => {
               options={{
                 disableDefaultUI: true,
                 zoomControl: true,
+                rotateControl: true,
               }}
             >
+              <WeatherInformation />
               <Marker position={currentPosition} />
             </GoogleMap>
           )}

@@ -45,9 +45,6 @@ const WeatherInformation = () => {
         (state) => state.location.currentPosition
     );
 
-    console.log(process.env.REACT_APP_OPEN_WEATHER);
-    console.log(weatherData);
-
     useEffect(() => {
         const getWeatherData = async () => {
             const response = await fetch(

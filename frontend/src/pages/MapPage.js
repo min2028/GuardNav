@@ -1,4 +1,4 @@
-import { Map, PageContainer, WeatherInformation } from "../components";
+import { Map, PageContainer, WeatherInformation, SearchBar } from "../components";
 import SideNavBar from "../components/SideNavBar";
 
 const MapPage = () => {

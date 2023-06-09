@@ -5,6 +5,7 @@ import { setCurrentPosition, resetLocation } from '../reducers/LocationReducer';
 import PageContainer from './PageContainer';
 import LoadingSpinner from './LoadingSpinner';
 import WeatherInformation from './WeatherInformation';
+import SearchBar from './SearchBar';
 
 const Map = () => {
   const dispatch = useDispatch();
@@ -63,6 +64,7 @@ const Map = () => {
                 rotateControl: true,
               }}
             >
+              <SearchBar />
               <WeatherInformation />
               <Marker position={currentPosition} />
             </GoogleMap>

@@ -1,7 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
-import { MapPage } from './pages';
+import {MapPage} from './pages';
 import styled from 'styled-components';
+import {ThemeProvider} from '@mui/material';
+import {theme} from "./styles/theme";
 
 const AppContainer = styled.div`
   display: flex;
@@ -14,7 +15,9 @@ const AppContainer = styled.div`
 function App() {
   return (
     <AppContainer className="App">
-      <MapPage />
+        <ThemeProvider theme={theme}>
+            <MapPage />
+        </ThemeProvider>
     </AppContainer>
   );
 }

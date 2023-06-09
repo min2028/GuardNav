@@ -4,7 +4,8 @@ export default function About() {
     return (
         <>
             <head>
-                <title>About</title>
+                <title>GuardNav - About</title>
+                <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
             </head>
         </>
     );

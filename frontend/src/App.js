@@ -1,5 +1,5 @@
 import './App.css';
-import { MapPage } from './pages';
+import {MapPage} from './pages';
 import styled from 'styled-components';
 import {ThemeProvider} from '@mui/material';
 import {theme} from "./styles/theme";

@@ -9,12 +9,14 @@ To Use:
 export const theme = createTheme({
     palette: {
         primary: {
+            main: '#ffffff',
             low: '#f0e3ec',
             mid: '#f08f7a',
             high: '#ea6249',
             hover: '#fcbd71'
         },
         secondary: {
+            main: '#000000',
             light: '#405169',
             lighter: '#556b87',
             dark: '#1d2633',

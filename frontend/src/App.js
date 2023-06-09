@@ -3,7 +3,6 @@ import './App.css';
 import { MapPage } from './pages';
 import styled from 'styled-components';
 
-
 const AppContainer = styled.div`
   display: flex;
   flex-direction: column;

@@ -11,6 +11,7 @@ const Map = () => {
   const dispatch = useDispatch();
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_KEY,
+    libraries: ['places'],
   });
 
   const { currentPosition } = useSelector(

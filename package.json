@@ -1,0 +1,8 @@
+{
+  "name": "GuardNav",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/min2028/GuardNav.git",
+  "author": "Aayush Raghuvamshi <aayush.raghuvamshi@gmail.com>",
+  "license": "MIT"
+}

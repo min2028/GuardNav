@@ -7,6 +7,7 @@ const NavBarContainer = styled.div`
     display: flex;
     align-items: center;
     height: 70px;
+    width: 100%;
 `;
 
 const LeftNav = styled.div`

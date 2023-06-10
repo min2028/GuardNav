@@ -40,6 +40,7 @@ const ContentTitle = styled.h3`
     font-size: 1.5rem;
     margin: 0px;
     font-weight: 600;
+    color: ${props => props.theme.palette.secondary.main};
 `;
 
 const ContentDesciptionContainer = styled.div`
@@ -54,6 +55,7 @@ const ContentDesciption = styled.p`
     font-size: 0.75rem;
     margin: 0px;
     font-weight: 500;
+    color: ${props => props.theme.palette.secondary.main};
 `;
 
 const HistoryCard = (props) => {

@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
-import { useJsApiLoader, GoogleMap, Marker } from '@react-google-maps/api';
-import { useDispatch, useSelector } from 'react-redux';
-import { setCurrentPosition, resetLocation } from '../reducers/LocationReducer';
+import React, {useEffect, useState} from 'react';
+import {useJsApiLoader, GoogleMap, Marker} from '@react-google-maps/api';
+import {useDispatch, useSelector} from 'react-redux';
+import {setCurrentPosition, resetLocation} from '../reducers/LocationReducer';
 import PageContainer from './PageContainer';
 import LoadingSpinner from './LoadingSpinner';
 import WeatherInformation from './WeatherInformation';
@@ -13,34 +13,34 @@ const Map = () => {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_KEY,
     libraries: ['places'],
   });
+  
+    const {currentPosition} = useSelector(
+        (state) => state.location
+    );
 
-  const { currentPosition } = useSelector(
-    (state) => state.location
-  );
+    console.log(isLoaded, currentPosition)
 
-  console.log(isLoaded, currentPosition)
+    useEffect(() => {
+        const getCurrentPosition = () => {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const {latitude, longitude} = position.coords;
+                        dispatch(setCurrentPosition({lat: latitude, lng: longitude}));
+                    },
+                    (error) => {
+                        console.log(error);
+                        dispatch(resetLocation());
+                    }
+                );
+            } else {
+                console.log('Geolocation is not supported by this browser.');
+                dispatch(resetLocation());
+            }
+        };
 
-  useEffect(() => {
-    const getCurrentPosition = () => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const { latitude, longitude } = position.coords;
-            dispatch(setCurrentPosition({ lat: latitude, lng: longitude }));
-          },
-          (error) => {
-            console.log(error);
-            dispatch(resetLocation());
-          }
-        );
-      } else {
-        console.log('Geolocation is not supported by this browser.');
-        dispatch(resetLocation());
-      }
-    };
-
-    getCurrentPosition();
-  }, [dispatch]);
+        getCurrentPosition();
+    }, [dispatch]);
 
   return (
     <PageContainer>
@@ -65,6 +65,7 @@ const Map = () => {
                 rotateControl: true,
               }}
             >
+              <SideNavBar />
               <SearchBar />
               <WeatherInformation />
               <Marker position={currentPosition} />

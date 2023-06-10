@@ -36,3 +36,20 @@
     transform: rotate(360deg);
   }
 }
+
+.pac-logo::after {
+  display: none !important;
+}
+
+.pac-container {
+  opacity: 0.9;
+  margin-top: 14px;
+  border-radius: 0 0 12px 12px;
+  box-shadow: none;
+  width: 35% !important;
+  margin-left: -24px !important;
+}
+
+.pac-item {
+  padding: 8px 12px;
+}

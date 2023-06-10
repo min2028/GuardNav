@@ -2,23 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import ThunderstormIcon from '@mui/icons-material/Thunderstorm';
-import WbSunnyIcon from '@mui/icons-material/WbSunny';
-import WbCloudyIcon from '@mui/icons-material/WbCloudy';
-import BeachAccessIcon from '@mui/icons-material/BeachAccess';
+import { Thunderstorm, WbSunny, WbCloudy, BeachAccess } from '@mui/icons-material';
 
 const WeatherIcon = ({ weather }) => {
     switch (weather) {
         case 'Thunderstorm':
-            return <ThunderstormIcon />;
+            return <Thunderstorm />;
         case 'Clear':
-            return <WbSunnyIcon />;
+            return <WbSunny />;
         case 'Clouds':
-            return <WbCloudyIcon />;
+            return <WbCloudy />;
         case 'Rain':
-            return <BeachAccessIcon />;
+            return <BeachAccess />;
         default:
-            return <WbSunnyIcon />;
+            return <WbSunny />;
     }
 };
 
@@ -30,7 +27,7 @@ const InformationContainer = styled.div`
     background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    opacity: 0.8;
+    opacity: 0.9;
     margin: 8px;
     padding: 8px 12px;
     position: absolute;
@@ -44,9 +41,6 @@ const WeatherInformation = () => {
     const currentPosition = useSelector(
         (state) => state.location.currentPosition
     );
-
-    console.log(process.env.REACT_APP_OPEN_WEATHER);
-    console.log(weatherData);
 
     useEffect(() => {
         const getWeatherData = async () => {

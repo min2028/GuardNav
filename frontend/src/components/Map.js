@@ -24,6 +24,7 @@ import HistoryIcon from '@mui/icons-material/History';
 import SearchIcon from '@mui/icons-material/Search';
 import {Fab} from "@mui/material";
 import SideNavBar from "./SideNavBar";
+import SearchBar from "./SearchBar";
 
 const drawerWidth = 240;
 
@@ -37,7 +38,6 @@ const DrawerHeader = styled('div')(({theme}) => ({
 }));
 
 const Map = () => {
-
     const theme = useTheme();
     const [open, setOpen] = useState(false);
 
@@ -52,6 +52,7 @@ const Map = () => {
     const dispatch = useDispatch();
     const {isLoaded} = useJsApiLoader({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_KEY,
+        libraries: ['places'],
     });
 
     const {currentPosition} = useSelector(
@@ -105,6 +106,7 @@ const Map = () => {
                                 rotateControl: true,
                             }}
                         >
+                            <SearchBar />
                             <SideNavBar/>
                             <WeatherInformation/>
                             <Marker position={currentPosition}/>

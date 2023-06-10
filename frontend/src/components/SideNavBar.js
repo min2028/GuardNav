@@ -20,7 +20,6 @@ import {useState} from "react"
 import {Fab} from "@mui/material";
 import HelpCenterIcon from '@mui/icons-material/HelpCenter';
 import ReportIcon from '@mui/icons-material/Report';
-import SearchBar from "./SearchBar";
 
 const drawerWidth = 240;
 
@@ -97,7 +96,6 @@ export default function SideNavBar() {
                             <MenuIcon/>
                         </IconButton>
                     </Fab>
-                    <SearchBar />
                 </Toolbar>
             </ButtonsFA>
             <Drawer

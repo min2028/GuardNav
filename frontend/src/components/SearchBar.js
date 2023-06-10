@@ -26,6 +26,10 @@ const SearchWrapper = styled.div`
     > div {
         width: 100%;
     }
+
+    // &:hover  {
+    //     background-color: red;
+    // }
 `;
  
 const SearchInput = styled.input`

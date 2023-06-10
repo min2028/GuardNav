@@ -64,12 +64,14 @@ const WeatherInformation = () => {
 
     return (
         <InformationContainer>
-            <WeatherIcon weather={weatherData?.weather[0].main || 'Clear'} />
-            <div style={{ margin: 'auto' }}>
-                {weatherData ? `${Math.trunc(weatherData.main.temp)}°C` : '- -'}
+            <WeatherIcon weather={weatherData?.weather?.[0]?.main || "Clear"} />
+            <div style={{ margin: "auto" }}>
+                {weatherData?.main?.temp
+                ? `${Math.trunc(weatherData.main.temp)}°C`
+                : "- -"}
             </div>
         </InformationContainer>
-    )
+    );
 };
 
 export default WeatherInformation;

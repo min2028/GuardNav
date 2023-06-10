@@ -3,7 +3,6 @@ import {styled, useTheme} from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
-import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
@@ -15,37 +14,15 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import HomeIcon from '@mui/icons-material/Home';
 import HistoryIcon from '@mui/icons-material/History';
-import SearchIcon from '@mui/icons-material/Search';
 import {useState} from "react"
 import {Fab} from "@mui/material";
-import SearchBar from "./SearchBar";
 import HelpCenterIcon from '@mui/icons-material/HelpCenter';
-import {Help} from "@mui/icons-material";
+import ReportIcon from '@mui/icons-material/Report';
+import SearchBar from "./SearchBar";
 
 const drawerWidth = 240;
-
-const Main = styled('main', {shouldForwardProp: (prop) => prop !== 'open'})(
-    ({theme, open}) => ({
-        flexGrow: 1,
-        padding: theme.spacing(3),
-        transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-        marginLeft: `-${drawerWidth}px`,
-        ...(open && {
-            transition: theme.transitions.create('margin', {
-                easing: theme.transitions.easing.easeOut,
-                duration: theme.transitions.duration.enteringScreen,
-            }),
-            marginLeft: 0,
-        }),
-    }),
-);
 
 const ButtonsFA = styled('div', {
     shouldForwardProp: (prop) => prop !== 'open',
@@ -74,7 +51,7 @@ const DrawerHeader = styled('div')(({theme}) => ({
     justifyContent: 'flex-end',
 }));
 
-export default function PersistentDrawerLeft() {
+export default function SideNavBar() {
     const theme = useTheme();
     const [open, setOpen] = useState(false);
     // const [extend, setExtend] = useState(false);
@@ -120,15 +97,7 @@ export default function PersistentDrawerLeft() {
                             <MenuIcon/>
                         </IconButton>
                     </Fab>
-                    {/*<Fab color="secondary"*/}
-                    {/*     variant={extend && "extended"}*/}
-                    {/*     aria-label="Search"*/}
-                    {/*     sx={{*/}
-                    {/*         opacity: 0.7,*/}
-                    {/*     }}*/}
-                    {/*>*/}
-                    {/*    <SearchBar/>*/}
-                    {/*</Fab>*/}
+                    <SearchBar />
                 </Toolbar>
             </ButtonsFA>
             <Drawer
@@ -151,13 +120,13 @@ export default function PersistentDrawerLeft() {
                 </DrawerHeader>
                 <Divider/>
                 <List>
-                    {['Home', 'Recents', 'More Stuff'].map((text, index) => (
+                    {['Home', 'Recents', 'Report'].map((text, index) => (
                         <ListItem key={text} disablePadding>
                             <ListItemButton>
                                 <ListItemIcon sx={{color: theme.palette.secondary.main}}>
                                     {text === 'Home' && <HomeIcon />}
                                     {text === 'Recents' && <HistoryIcon />}
-                                    {text === 'More Stuff' && <HelpCenterIcon />}
+                                    {text === 'Report' && <ReportIcon />}
                                 </ListItemIcon>
                                 <ListItemText primary={text}/>
                             </ListItemButton>

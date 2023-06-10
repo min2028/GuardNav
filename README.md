@@ -63,11 +63,14 @@ The Safe Route Planning App is intended for the following user groups:
 ## Prototypes:
 
 ### Landing Page
-<img width="954" alt="Screenshot 2023-05-26 at 8 10 14 PM" src="https://github.com/min2028/GuardNav/assets/93061872/f7d608d0-a44d-4d30-83fd-1925d36325f2">
+<img width="811" alt="Landing Page" src="https://github.com/min2028/GuardNav/assets/93061872/ad754e8c-4457-41bd-8ace-377b06db2620">
 
 ### Main Page
-<img width="949" alt="Screenshot 2023-05-26 at 8 12 44 PM" src="https://github.com/min2028/GuardNav/assets/93061872/c5108a4c-ed24-4b0a-9f66-c74e8843d62c">
+<img width="322" alt="Main / About Page" src="https://github.com/min2028/GuardNav/assets/93061872/b4131b85-6277-458c-a821-07820b8419fd">
 
-### Help Page
-<img width="906" alt="Screenshot 2023-05-26 at 8 13 08 PM" src="https://github.com/min2028/GuardNav/assets/93061872/bc542528-28f3-4af3-852b-011b7a820e1b">
+
+### Map Page
+<img width="556" alt="Map Page (Default)" src="https://github.com/min2028/GuardNav/assets/93061872/ee4a8304-f922-4cdb-a609-20d5c84684a9">
+
+<img width="635" alt="Map Page" src="https://github.com/min2028/GuardNav/assets/93061872/078f2c20-d15d-419f-9949-64d9c5d67200">
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
+import {useTheme} from '@mui/material/styles';
+import styled from 'styled-components'
 
 import { Thunderstorm, WbSunny, WbCloudy, BeachAccess } from '@mui/icons-material';
 
@@ -28,15 +29,14 @@ const InformationContainer = styled.div`
     border-radius: 12px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
     opacity: 0.9;
-    margin: 8px;
-    padding: 8px 12px;
-    position: absolute;
-    top: 0;
-    right: 0;
+    padding: ${({ theme }) => `${theme.buttonPadding.values.paddingSides} ${theme.buttonPadding.values.paddingTopBottom}`};
     cursor: default;
+    align-items: center;
 `;
 
 const WeatherInformation = () => {
+    const theme = useTheme();
+
     const [weatherData, setWeatherData] = useState(null);
     const currentPosition = useSelector(
         (state) => state.location.currentPosition
@@ -57,7 +57,7 @@ const WeatherInformation = () => {
     }, [currentPosition]);
 
     return (
-        <InformationContainer>
+        <InformationContainer theme = {theme}>
             <WeatherIcon weather={weatherData?.weather?.[0]?.main || "Clear"} />
             <div style={{ margin: "auto" }}>
                 {weatherData?.main?.temp

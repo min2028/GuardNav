@@ -30,6 +30,18 @@ export const theme = createTheme({
             main: '#FF5C5C'
         }
     },
+    buttonPadding: {
+        values: {
+            paddingSides: '10px',
+            paddingTopBottom: '15px',
+        },
+    },
+    margins: {
+        values: {
+            marginSides: '12px',
+            marginTopBottom: '18px',
+        },
+    },
     breakpoints: {
         values: {
             xs: 0,

@@ -5,33 +5,29 @@ import { useSelector } from "react-redux";
 
 import { StandaloneSearchBox, LoadScript } from "@react-google-maps/api";
 import SearchIcon from '@mui/icons-material/Search';
-import { theme } from "../styles/theme";
 
 const SearchWrapper = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    position: absolute;
-    top: 0;
-    left: 72px;
-    margin: 8px 24px;
-    padding: 0 24px;
-    height: 48px;
-    width: 35%;
+    padding: ${({ theme }) => `${theme.buttonPadding.values?.paddingSides} ${theme.buttonPadding?.values?.paddingTopBottom}`};
     background-color: #ffffff;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
     opacity: 0.9;
+    width: 100%;
 
     > div {
         width: 100%;
+        text-align: start;
     }
+    
 `;
  
 const SearchInput = styled.input`
-    width: 100%;
     height: 100%;
     border: none;
+    width: 100%;
     font-size: 16px;
     outline: none;
     border-radius: 12px;
@@ -60,6 +56,8 @@ const SearchBar = () => {
     const { currentPosition } = useSelector((state) => state.location);
     const searchInputRef = useRef(null);
 
+    const theme = useTheme();
+
     let locationBounds = {
         north: currentPosition.lat + 0.1,
         south: currentPosition.lat - 0.1,
@@ -73,7 +71,7 @@ const SearchBar = () => {
     };
 
     return (
-        <SearchWrapper>
+        <SearchWrapper theme = {theme}>
             <StandaloneSearchBox
                 onLoad={ref => searchInputRef.current = ref}
                 onPlacesChanged={onPlacesChanged}

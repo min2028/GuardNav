@@ -16,6 +16,7 @@ const SearchWrapper = styled.div`
     border-radius: 12px;
     opacity: 0.9;
     width: 100%;
+    margin-bottom: 0.5rem;
 
     > div {
         width: 100%;

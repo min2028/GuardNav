@@ -1,7 +1,8 @@
 import './App.css';
 import {MapPage} from './pages';
 import styled from 'styled-components';
-import {Switch, ThemeProvider} from '@mui/material';
+import {Switch} from '@mui/material';
+import { ThemeProvider } from "@mui/material/styles";
 import {theme} from "./styles/theme";
 import LandingPage from "./pages/LandingPage";
 import {Route, Router} from "react-router-dom";

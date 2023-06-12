@@ -26,7 +26,6 @@ const drawerWidth = 240;
 const ButtonsFA = styled('div', {
     shouldForwardProp: (prop) => prop !== 'open',
 })(({theme, open}) => ({
-    paddingTop: '5px',
     transition: theme.transitions.create(['margin', 'width'], {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
@@ -48,6 +47,10 @@ const DrawerHeader = styled('div')(({theme}) => ({
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
+}));
+
+const ToolbarCustom = styled('Toolbar')(({theme}) => ({
+    alignItems: 'unset',
 }));
 
 export default function SideNavBar() {
@@ -74,33 +77,30 @@ export default function SideNavBar() {
     return (
         <Box sx={{display: 'flex'}}>
             <CssBaseline/>
-            <ButtonsFA position="fixed" open={open}>
-                <Toolbar sx={{gap: '10px'}}>
+            <ButtonsFA>
+                <ToolbarCustom sx={{gap: '10px'}}>
                     <Fab color="secondary"
                          size={"medium"}
                          aria-label="Menu"
                          sx={{
-                             ...(open && {display: 'none'}),
                              opacity: 0.7,
                          }}
+                         onClick={handleDrawerOpen}
                     >
                         <IconButton
                             color="inherit"
-                            onClick={handleDrawerOpen}
                             edge="start"
                             sx={{
                                 margin: 'auto',
-                                justifyContent: 'center',
                             }}
                         >
                             <MenuIcon/>
                         </IconButton>
                     </Fab>
-                </Toolbar>
+                </ToolbarCustom>
             </ButtonsFA>
             <Drawer
                 sx={{
-                    width: drawerWidth,
                     flexShrink: 0,
                     '& .MuiDrawer-paper': {
                         width: drawerWidth,

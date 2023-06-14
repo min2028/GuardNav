@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 .App-logo {
@@ -43,11 +43,11 @@
 
 .pac-container {
   opacity: 0.9;
-  margin-top: 14px;
+  margin-top: 12px;
   border-radius: 0 0 12px 12px;
   box-shadow: none;
-  width: 35% !important;
-  margin-left: -24px !important;
+  width: 30% !important;
+  margin-left: -14px;
 }
 
 .pac-item {

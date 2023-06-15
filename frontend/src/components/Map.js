@@ -40,6 +40,7 @@ const MapTopContainer = styleComp.div`
 const MapTopLeft = styleComp.div`
     display: flex;
     justify-content: start;
+    width: 50%;
 `;
 
 const MapSearch = styleComp.div`
@@ -49,6 +50,7 @@ const MapSearch = styleComp.div`
     align-items: center;
     justify-content: center;
     margin-left: ${({ theme }) => `${theme.margins.values.marginSides}`};
+    width: 60%;
 `;
 
 const MapTopRight = styleComp.div`

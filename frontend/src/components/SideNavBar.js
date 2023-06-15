@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {styled, useTheme} from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
+import MuiDrawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
@@ -20,25 +20,47 @@ import {useState} from "react"
 import {Fab} from "@mui/material";
 import HelpCenterIcon from '@mui/icons-material/HelpCenter';
 import ReportIcon from '@mui/icons-material/Report';
+import Logo from './Logo';
 
 const drawerWidth = 240;
 
-const ButtonsFA = styled('div', {
-    shouldForwardProp: (prop) => prop !== 'open',
-})(({theme, open}) => ({
-    transition: theme.transitions.create(['margin', 'width'], {
+const openedMixin = (theme) => ({
+    width: drawerWidth,
+    transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+    }),
+    overflowX: 'hidden',
+});
+
+const closedMixin = (theme) => ({
+    transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
     }),
-    ...(open && {
-        width: `calc(100% - ${drawerWidth}px)`,
-        marginLeft: `${drawerWidth}px`,
-        transition: theme.transitions.create(['margin', 'width'], {
-            easing: theme.transitions.easing.easeOut,
-            duration: theme.transitions.duration.enteringScreen,
+    overflowX: 'hidden',
+    width: `calc(${theme.spacing(7)} + 1px)`,
+    [theme.breakpoints.up('sm')]: {
+        width: `calc(${theme.spacing(9)} + 1px)`,
+    },
+});
+
+const Drawer = styled(MuiDrawer, {shouldForwardProp: (prop) => prop !== 'open'})(
+    ({theme, open}) => ({
+        width: drawerWidth,
+        flexShrink: 0,
+        whiteSpace: 'nowrap',
+        position: 'relative',
+        ...(open && {
+            ...openedMixin(theme),
+            '& .MuiDrawer-paper': openedMixin(theme),
+        }),
+        ...(!open && {
+            ...closedMixin(theme),
+            '& .MuiDrawer-paper': closedMixin(theme),
         }),
     }),
-}));
+);
 
 const DrawerHeader = styled('div')(({theme}) => ({
     display: 'flex',
@@ -58,62 +80,24 @@ export default function SideNavBar() {
     const [open, setOpen] = useState(false);
     // const [extend, setExtend] = useState(false);
 
-    const handleDrawerOpen = () => {
-        setOpen(true);
+    const handleDrawer = () => {
+        setOpen(!open);
     };
-
-    const handleDrawerClose = () => {
-        setOpen(false);
-    };
-
-    // const handleExt = () => {
-    //     setExtend(!extend);
-    // }
-    //
-    // const handleExtClose = () => {
-    //     setExtend(!extend);
-    // }
 
     return (
         <Box sx={{display: 'flex'}}>
             <CssBaseline/>
-            <ButtonsFA>
-                <ToolbarCustom sx={{gap: '10px'}}>
-                    <Fab color="secondary"
-                         size={"medium"}
-                         aria-label="Menu"
-                         sx={{
-                             opacity: 0.7,
-                         }}
-                         onClick={handleDrawerOpen}
-                    >
-                        <IconButton
-                            color="inherit"
-                            edge="start"
-                            sx={{
-                                margin: 'auto',
-                            }}
-                        >
-                            <MenuIcon/>
-                        </IconButton>
-                    </Fab>
-                </ToolbarCustom>
-            </ButtonsFA>
             <Drawer
-                sx={{
-                    flexShrink: 0,
-                    '& .MuiDrawer-paper': {
-                        width: drawerWidth,
-                        boxSizing: 'border-box',
-                    },
-                }}
-                variant="persistent"
+                variant="permanent"
                 anchor="left"
                 open={open}
             >
                 <DrawerHeader>
-                    <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === 'ltr' ? <ChevronLeftIcon/> : <ChevronRightIcon/>}
+                    {open && (
+                        <Logo />
+                    )}
+                    <IconButton onClick={handleDrawer} sx={{mr: 1}}>
+                        {open ? <ChevronLeftIcon/> : <MenuIcon/>}
                     </IconButton>
                 </DrawerHeader>
                 <Divider/>
@@ -121,7 +105,7 @@ export default function SideNavBar() {
                     {['Home', 'Recents', 'Report'].map((text, index) => (
                         <ListItem key={text} disablePadding>
                             <ListItemButton>
-                                <ListItemIcon sx={{color: theme.palette.secondary.main}}>
+                                <ListItemIcon sx={{color: theme.palette.secondary.main, ml: 1}}>
                                     {text === 'Home' && <HomeIcon />}
                                     {text === 'Recents' && <HistoryIcon />}
                                     {text === 'Report' && <ReportIcon />}
@@ -136,7 +120,7 @@ export default function SideNavBar() {
                     {['Help'].map((text, index) => (
                         <ListItem key={text} disablePadding>
                             <ListItemButton>
-                                <ListItemIcon sx={{color: theme.palette.secondary.main}}>
+                                <ListItemIcon sx={{color: theme.palette.secondary.main, ml: 1}}>
                                     {text === 'Help' && <HelpCenterIcon />}
                                 </ListItemIcon>
                                 <ListItemText primary={text}/>

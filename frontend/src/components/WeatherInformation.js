@@ -1,24 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
+import {useTheme} from '@mui/material/styles';
+import styled from 'styled-components'
 
-import ThunderstormIcon from '@mui/icons-material/Thunderstorm';
-import WbSunnyIcon from '@mui/icons-material/WbSunny';
-import WbCloudyIcon from '@mui/icons-material/WbCloudy';
-import BeachAccessIcon from '@mui/icons-material/BeachAccess';
+import { Thunderstorm, WbSunny, WbCloudy, BeachAccess } from '@mui/icons-material';
 
 const WeatherIcon = ({ weather }) => {
     switch (weather) {
         case 'Thunderstorm':
-            return <ThunderstormIcon />;
+            return <Thunderstorm />;
         case 'Clear':
-            return <WbSunnyIcon />;
+            return <WbSunny />;
         case 'Clouds':
-            return <WbCloudyIcon />;
+            return <WbCloudy />;
         case 'Rain':
-            return <BeachAccessIcon />;
+            return <BeachAccess />;
         default:
-            return <WbSunnyIcon />;
+            return <WbSunny />;
     }
 };
 
@@ -30,23 +28,19 @@ const InformationContainer = styled.div`
     background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    opacity: 0.8;
-    margin: 8px;
-    padding: 8px 12px;
-    position: absolute;
-    top: 0;
-    right: 0;
+    opacity: 0.9;
+    padding: ${({ theme }) => `${theme.buttonPadding.values.paddingSides} ${theme.buttonPadding.values.paddingTopBottom}`};
     cursor: default;
+    align-items: center;
 `;
 
 const WeatherInformation = () => {
+    const theme = useTheme();
+
     const [weatherData, setWeatherData] = useState(null);
     const currentPosition = useSelector(
         (state) => state.location.currentPosition
     );
-
-    console.log(process.env.REACT_APP_OPEN_WEATHER);
-    console.log(weatherData);
 
     useEffect(() => {
         const getWeatherData = async () => {
@@ -63,13 +57,15 @@ const WeatherInformation = () => {
     }, [currentPosition]);
 
     return (
-        <InformationContainer>
-            <WeatherIcon weather={weatherData?.weather[0].main || 'Clear'} />
-            <div style={{ margin: 'auto' }}>
-                {weatherData ? `${Math.trunc(weatherData.main.temp)}°C` : '- -'}
+        <InformationContainer theme = {theme}>
+            <WeatherIcon weather={weatherData?.weather?.[0]?.main || "Clear"} />
+            <div style={{ margin: "auto" }}>
+                {weatherData?.main?.temp
+                ? `${Math.trunc(weatherData.main.temp)}°C`
+                : "- -"}
             </div>
         </InformationContainer>
-    )
+    );
 };
 
 export default WeatherInformation;

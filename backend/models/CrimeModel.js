@@ -10,6 +10,6 @@ const crimeSchema = new Schema({
     lon: { type: Number, required: true },
 });
 
-const Crime = model('Crime', crimeSchema);
+const CrimeModel = model('Crime', crimeSchema);
 
-export default Crime;
+export default CrimeModel;

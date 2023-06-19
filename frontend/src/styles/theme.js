@@ -9,7 +9,7 @@ To Use:
 export const theme = createTheme({
     palette: {
         primary: {
-            main: '#ffffff',
+            main: '#000000',
             low: '#f0e3ec',
             mid: '#f08f7a',
             high: '#ea6249',
@@ -29,6 +29,18 @@ export const theme = createTheme({
         error: {
             main: '#FF5C5C'
         }
+    },
+    buttonPadding: {
+        values: {
+            paddingSides: '10px',
+            paddingTopBottom: '15px',
+        },
+    },
+    margins: {
+        values: {
+            marginSides: '12px',
+            marginTopBottom: '18px',
+        },
     },
     breakpoints: {
         values: {

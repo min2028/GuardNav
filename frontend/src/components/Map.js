@@ -6,6 +6,7 @@ import PageContainer from './PageContainer';
 import LoadingSpinner from './LoadingSpinner';
 import WeatherInformation from './WeatherInformation';
 import {styled, useTheme} from "@mui/material/styles";
+import styleComp from '@emotion/styled';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
@@ -24,8 +25,38 @@ import HistoryIcon from '@mui/icons-material/History';
 import SearchIcon from '@mui/icons-material/Search';
 import {Fab} from "@mui/material";
 import SideNavBar from "./SideNavBar";
+import SearchBar from "./SearchBar";
+import HistoryCard from './HistoryCard';
 
 const drawerWidth = 240;
+
+const MapTopContainer = styleComp.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    padding: ${({ theme }) => `${theme.margins.values.marginSides} ${theme.margins.values.marginTopBottom}`};
+`;
+
+const MapTopLeft = styleComp.div`
+    display: flex;
+    justify-content: start;
+    width: 50%;
+`;
+
+const MapSearch = styleComp.div`
+    display: flex;
+    flex-flow: column;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    margin-left: ${({ theme }) => `${theme.margins.values.marginSides}`};
+    width: 60%;
+`;
+
+const MapTopRight = styleComp.div`
+    display: flex;
+    justify-content: start;
+`;
 
 const DrawerHeader = styled('div')(({theme}) => ({
     display: 'flex',
@@ -37,7 +68,6 @@ const DrawerHeader = styled('div')(({theme}) => ({
 }));
 
 const Map = () => {
-
     const theme = useTheme();
     const [open, setOpen] = useState(false);
 
@@ -52,6 +82,7 @@ const Map = () => {
     const dispatch = useDispatch();
     const {isLoaded} = useJsApiLoader({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_KEY,
+        libraries: ['places'],
     });
 
     const {currentPosition} = useSelector(
@@ -105,14 +136,27 @@ const Map = () => {
                                 rotateControl: true,
                             }}
                         >
-                            <SideNavBar/>
-                            <WeatherInformation/>
-                            <Marker position={currentPosition}/>
+                            <MapTopContainer>
+                                <MapTopLeft>
+                                    <SideNavBar/>
+                                    <MapSearch>
+                                        <SearchBar />
+                                        <HistoryCard />
+                                        <HistoryCard />
+                                        <HistoryCard />
+                                    </MapSearch>
+                                </MapTopLeft>
+                                <MapTopRight>
+                                    <WeatherInformation/>
+                                </MapTopRight>
+                                <Marker position={currentPosition}/>
+                            </MapTopContainer>
+                            
                         </GoogleMap>
                     )}
                 </div>
             ) : (
-                <LoadingSpinner/>
+                <LoadingSpinner />
             )}
         </PageContainer>
     );

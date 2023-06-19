@@ -8,10 +8,10 @@ const HistoryCardContainer = styled.div`
     grid-template-columns: 100px 1fr;
     background-color: ${(props) => props.risk === 0 ? "#FFE8E8" : "#FF7878"};
     opacity: 0.8;
-    width: 50%;
+    width: 100%;
     border-radius: 5px;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    margin: 1rem 0px;
+    margin: 0.5rem 0px;
     z-index: 4;
 `;
 
@@ -34,6 +34,7 @@ const ContentTitleContainer = styled.div`
     padding: 10px 0px;
     padding-right: 1.5rem;
     justify-content: space-between;
+    gap: 30px;
 `;
 
 const ContentTitle = styled.h3`
@@ -55,7 +56,9 @@ const ContentDesciption = styled.p`
     font-size: 0.75rem;
     margin: 0px;
     font-weight: 500;
-    color: ${props => props.theme.palette.secondary.main};
+    color: ${props => {
+        console.log(props);
+        return props.theme.palette.secondary.main}};
 `;
 
 const HistoryCard = (props) => {

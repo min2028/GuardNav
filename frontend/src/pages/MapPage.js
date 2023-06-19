@@ -1,8 +1,4 @@
-import {
-  Map,
-  PageContainer,
-  SearchTrips
-} from "../components";
+import { Map, PageContainer, SearchTrips } from "../components";
 
 const MapPage = () => {
   return (
@@ -11,5 +7,6 @@ const MapPage = () => {
       <Map />
     </PageContainer>
   );
-  
+};
+
 export default MapPage;

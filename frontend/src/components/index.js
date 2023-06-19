@@ -3,7 +3,7 @@ import PageContainer from "./PageContainer";
 import LoadingSpinner from "./LoadingSpinner";
 import WeatherInformation from "./WeatherInformation";
 import HistoryCard from "./HistoryCard";
-import TripsList from "./TripsList";
+import SearchBar from "./SearchBar";
 
 export {
   Map,
@@ -11,5 +11,5 @@ export {
   LoadingSpinner,
   WeatherInformation,
   HistoryCard,
-  TripsList
+  SearchBar,
 };

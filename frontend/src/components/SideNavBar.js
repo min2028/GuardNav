@@ -47,8 +47,7 @@ const closedMixin = (theme) => ({
 
 const Drawer = styled(MuiDrawer, {shouldForwardProp: (prop) => prop !== 'open'})(
     ({theme, open}) => ({
-        width: drawerWidth,
-        flexShrink: 0,
+        zIndex: 10,
         whiteSpace: 'nowrap',
         position: 'relative',
         ...(open && {

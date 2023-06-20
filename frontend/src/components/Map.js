@@ -7,34 +7,14 @@ import LoadingSpinner from './LoadingSpinner';
 import WeatherInformation from './WeatherInformation';
 import {styled, useTheme} from "@mui/material/styles";
 import styleComp from '@emotion/styled';
-import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import HomeIcon from '@mui/icons-material/Home';
-import HistoryIcon from '@mui/icons-material/History';
-import SearchIcon from '@mui/icons-material/Search';
-import {Fab} from "@mui/material";
-import SideNavBar from "./SideNavBar";
-import SearchBar from "./SearchBar";
-import HistoryCard from './HistoryCard';
+
+import { SideNavBar, SearchBar, HistoryCard, RouteDrawer } from './index';
 
 const drawerWidth = 240;
 
 const MapTopContainer = styleComp.div`
     display: flex;
-    justify-content: space-between;
     align-items: start;
-    padding: ${({ theme }) => `${theme.margins.values.marginSides} ${theme.margins.values.marginTopBottom}`};
 `;
 
 const MapTopLeft = styleComp.div`
@@ -51,11 +31,13 @@ const MapSearch = styleComp.div`
     justify-content: center;
     margin-left: ${({ theme }) => `${theme.margins.values.marginSides}`};
     width: 60%;
+    padding: ${({ theme }) => `${theme.margins.values.marginSides} ${theme.margins.values.marginTopBottom}`};
 `;
 
 const MapTopRight = styleComp.div`
     display: flex;
     justify-content: start;
+    padding: ${({ theme }) => `${theme.margins.values.marginSides} ${theme.margins.values.marginTopBottom}`};
 `;
 
 const DrawerHeader = styled('div')(({theme}) => ({
@@ -69,15 +51,8 @@ const DrawerHeader = styled('div')(({theme}) => ({
 
 const Map = () => {
     const theme = useTheme();
-    const [open, setOpen] = useState(false);
-
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    };
-
-    const handleDrawerClose = () => {
-        setOpen(false);
-    };
+    const [ routeDrawerOpen, setRouteDrawerOpen ] = useState(false);
+    const [ option, setOption ] = useState('safest');
 
     const dispatch = useDispatch();
     const {isLoaded} = useJsApiLoader({
@@ -88,8 +63,6 @@ const Map = () => {
     const {currentPosition} = useSelector(
         (state) => state.location
     );
-
-    console.log(isLoaded, currentPosition)
 
     useEffect(() => {
         const getCurrentPosition = () => {
@@ -112,6 +85,10 @@ const Map = () => {
 
         getCurrentPosition();
     }, [dispatch]);
+
+    const handleRouteHistoryClick = () => {
+        setRouteDrawerOpen(true);
+    };
 
     return (
         <PageContainer>
@@ -137,21 +114,26 @@ const Map = () => {
                             }}
                         >
                             <MapTopContainer>
+                                <SideNavBar/>   
                                 <MapTopLeft>
-                                    <SideNavBar/>
-                                    <MapSearch>
+                                    <MapSearch drawerOpen={true}>
                                         <SearchBar />
-                                        <HistoryCard />
-                                        <HistoryCard />
-                                        <HistoryCard />
+                                        <HistoryCard onClick={handleRouteHistoryClick} />
+                                        <HistoryCard onClick={handleRouteHistoryClick} />
+                                        <HistoryCard onClick={handleRouteHistoryClick} />
                                     </MapSearch>
+                                    <RouteDrawer 
+                                        open={routeDrawerOpen} 
+                                        onClose={() => setRouteDrawerOpen(false)}
+                                        option={option}
+                                        setOption={setOption}
+                                    />
                                 </MapTopLeft>
                                 <MapTopRight>
                                     <WeatherInformation/>
                                 </MapTopRight>
                                 <Marker position={currentPosition}/>
                             </MapTopContainer>
-                            
                         </GoogleMap>
                     )}
                 </div>

@@ -4,7 +4,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var crimeRouter = require('./routes/crime_data');
+var crimeRouter = require('./routes/crimeRoutes');
 
 require('./config/database');
 
@@ -17,6 +17,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/crime-data', crimeRouter);
+app.use('/crime', crimeRouter);
 
 module.exports = app;

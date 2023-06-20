@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 const { Schema, model } = mongoose;
 
 const crimeSchema = new Schema({
@@ -8,8 +8,8 @@ const crimeSchema = new Schema({
     hour: { type: Number, required: true },
     lat: { type: Number, required: true },
     lon: { type: Number, required: true },
-});
+}, {collection: 'crimes'});
 
 const CrimeModel = model('Crime', crimeSchema);
 
-export default CrimeModel;
+module.exports = CrimeModel;

@@ -11,6 +11,7 @@ import TimelineDot from '@mui/lab/TimelineDot';
 import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
 
 import RoomIcon from '@mui/icons-material/Room';
+import SearchBar from './SearchBar';
 
 const RoutePlannerContainer = styled.div`
 display: flex;
@@ -56,7 +57,7 @@ border-radius: 8px;
 border: 1px solid rgba(0, 0, 0, 0.12);
 `;
 
-const RoutePlannerFromTo = () => {
+const RoutePlannerFromTo = ({ from, to, setFrom, setTo }) => {
     const theme = useTheme();
 
     return (
@@ -66,7 +67,7 @@ const RoutePlannerFromTo = () => {
                     <Timeline position={'left'} sx={{color: theme.palette.primary.main, width: '20%'}}>
                         <TimelineItem>
                             <TimelineOppositeContent>
-                                <FromToInput></FromToInput>
+                                <SearchBar style={{marginTop: '-0.75rem'}} placeholder={"From"} value={from?.formatted_address} />
                             </TimelineOppositeContent>
                             <TimelineSeparator>
                                 <TimelineDot sx={{background: theme.palette.primary.main}} />
@@ -76,7 +77,7 @@ const RoutePlannerFromTo = () => {
                         </TimelineItem>
                         <TimelineItem>
                             <TimelineOppositeContent>
-                                <FromToInput></FromToInput>
+                                <SearchBar style={{marginTop: '-0.75rem'}} placeholder={"To"} />
                             </TimelineOppositeContent>
                             <TimelineSeparator>
                             <RoomIcon sx={{marginTop: '6px'}} />

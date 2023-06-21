@@ -11,13 +11,15 @@ const Drawer = styled.div`
     z-index: 5;
     height: 100vh;
     width: 30%;
-    position: fixed;
     background-color: white;
-    transition: transform 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
 
     ${props => !props.open && css`
         transform: translateX(-100%);
+        width: 0;
+        visibility: hidden;
     `}
 `;
 

@@ -8,5 +8,18 @@ import RouteDrawer from "./RouteDrawer";
 import SideNavBar from "./SideNavBar";
 import RoutePlannerFromTo from "./RoutePlannerFromTo";
 import RouteOptions from "./RouteOptions";
+import PageSearchBar from "./PageSearchBar";
 
-export { Map, PageContainer, LoadingSpinner, WeatherInformation, HistoryCard, SearchBar, RouteDrawer, SideNavBar, RoutePlannerFromTo as RoutePlanner, RouteOptions };
+export { 
+    Map, 
+    PageContainer, 
+    LoadingSpinner, 
+    WeatherInformation, 
+    HistoryCard, 
+    SearchBar, 
+    RouteDrawer, 
+    SideNavBar, 
+    RoutePlannerFromTo as RoutePlanner,
+    RouteOptions,
+    PageSearchBar
+};

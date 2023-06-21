@@ -16,17 +16,6 @@ const AppContainer = styled.div`
 
 function App() {
   return (
-    //   <AppContainer className={"App"}>
-    // <Router>
-    //     <ThemeProvider theme={theme}>
-    //         <NavBar/>
-    //         <Switch>
-    //             <Route exact path="/" component={LandingPage} />
-    //             <Route path="/map" component={MapPage} />
-    //         </Switch>
-    //     </ThemeProvider>
-    // </Router>
-    //     </AppContainer>
       <AppContainer className={"App"}>
           <ThemeProvider theme={theme}>
               <MapPage/>

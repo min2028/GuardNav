@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from 'react';
-import {GoogleMap, Marker} from '@react-google-maps/api';
-import {useDispatch, useSelector} from 'react-redux';
-import {setCurrentPosition, resetLocation} from '../reducers/LocationReducer';
+import React, { useEffect, useState, useMemo } from 'react';
+import { GoogleMap, Marker, DirectionsRenderer, DirectionsService } from '@react-google-maps/api';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentPosition, resetLocation } from '../reducers/LocationReducer';
 import PageContainer from './PageContainer';
 import LoadingSpinner from './LoadingSpinner';
 import WeatherInformation from './WeatherInformation';
-import {useTheme} from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
 import styleComp from '@emotion/styled';
-import {css} from '@emotion/react';
+import { css } from '@emotion/react';
 
 import { SideNavBar, PageSearchBar, HistoryCard, RouteDrawer } from './index';
 import { setFrom, setTo } from '../reducers/TripReducer';
@@ -52,7 +52,28 @@ const Map = ({ openRouteDrawer, isRouteDrawerOpen }) => {
     const theme = useTheme();
     const dispatch = useDispatch();
 
-    const {currentPosition} = useSelector(
+    const from = useSelector(state => state.trip.from);
+    const to = useSelector(state => state.trip.to);
+
+    const [directions, setDirections] = useState(null);
+
+    const directionsServiceOptions = useMemo(() => ({
+        destination: to,
+        origin: from,
+        travelMode: 'WALKING',
+    }), [from, to]);
+
+    const directionsCallback = (response) => {
+        if (response !== null) {
+            if (response.status === 'OK') {
+                setDirections(response);
+            } else {
+                // Handle API response errors
+            }
+        }
+    };
+
+    const { currentPosition } = useSelector(
         (state) => state.location
     );
 
@@ -68,43 +89,48 @@ const Map = ({ openRouteDrawer, isRouteDrawerOpen }) => {
 
     return (
         <PageContainer>
-                <div
-                    style={{
-                        width: '100%',
-                        height: '100%',
-                    }}
-                >
-                    {currentPosition && (
-                        <GoogleMap
-                            mapContainerStyle={{
-                                width: '100%',
-                                height: '100%',
-                            }}
-                            zoom={16}
-                            center={currentPosition}
-                            options={{
-                                disableDefaultUI: true,
-                                zoomControl: true,
-                                rotateControl: true,
-                            }}
-                        >
-                            <MapTopContainer>
-                                <MapTopLeft hide={isRouteDrawerOpen}>
-                                    <MapSearch>
-                                        <PageSearchBar onSearch={onSearch} />
-                                        <HistoryCard onClick={onHistoryCardClick} />
-                                        <HistoryCard onClick={onHistoryCardClick} />
-                                        <HistoryCard onClick={onHistoryCardClick} />
-                                    </MapSearch>
-                                </MapTopLeft>
-                                <MapTopRight>
-                                    <WeatherInformation/>
-                                </MapTopRight>
-                                <Marker position={currentPosition}/>
-                            </MapTopContainer>
-                        </GoogleMap>
-                    )}
-                </div>
+            <div
+                style={{
+                    width: '100%',
+                    height: '100%',
+                }}
+            >
+                {currentPosition && (
+                    <GoogleMap
+                        mapContainerStyle={{
+                            width: '100%',
+                            height: '100%',
+                        }}
+                        zoom={16}
+                        center={currentPosition}
+                        options={{
+                            disableDefaultUI: true,
+                            zoomControl: true,
+                            rotateControl: true,
+                        }}
+                    >
+                        <MapTopContainer>
+                            <MapTopLeft hide={isRouteDrawerOpen}>
+                                <MapSearch>
+                                    <PageSearchBar onSearch={onSearch} />
+                                    <HistoryCard onClick={onHistoryCardClick} />
+                                    <HistoryCard onClick={onHistoryCardClick} />
+                                    <HistoryCard onClick={onHistoryCardClick} />
+                                </MapSearch>
+                            </MapTopLeft>
+                            <MapTopRight>
+                                <WeatherInformation />
+                            </MapTopRight>
+                            <DirectionsService
+                                options={directionsServiceOptions}
+                                callback={directionsCallback}
+                            />
+                            {directions && <DirectionsRenderer directions={directions} />}
+                            <Marker position={currentPosition} />
+                        </MapTopContainer>
+                    </GoogleMap>
+                )}
+            </div>
         </PageContainer>
     );
 };

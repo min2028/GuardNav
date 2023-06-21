@@ -48,7 +48,7 @@ const SearchBar = ({ onSearch, ...props }) => {
                 onPlacesChanged={onPlacesChanged}
                 bounds={locationBounds}
             >
-                <SearchInput ref={searchInputRef} placeholder={props?.placeholder} style={props?.style}></SearchInput>
+                <SearchInput defaultValue={props?.value} ref={searchInputRef} placeholder={props?.placeholder} style={props?.style}></SearchInput>
             </StandaloneSearchBox>
     );
 };

@@ -10,6 +10,7 @@ import styleComp from '@emotion/styled';
 import {css} from '@emotion/react';
 
 import { SideNavBar, PageSearchBar, HistoryCard, RouteDrawer } from './index';
+import { setFrom, setTo } from '../reducers/TripReducer';
 
 const drawerWidth = 240;
 
@@ -49,10 +50,21 @@ const MapTopRight = styleComp.div`
 
 const Map = ({ openRouteDrawer, isRouteDrawerOpen }) => {
     const theme = useTheme();
+    const dispatch = useDispatch();
 
     const {currentPosition} = useSelector(
         (state) => state.location
     );
+
+    const onHistoryCardClick = (to) => {
+        dispatch(setTo(to));
+        openRouteDrawer();
+    };
+
+    const onSearch = (to) => {
+        dispatch(setTo(to));
+        openRouteDrawer();
+    };
 
     return (
         <PageContainer>
@@ -78,11 +90,11 @@ const Map = ({ openRouteDrawer, isRouteDrawerOpen }) => {
                         >
                             <MapTopContainer>
                                 <MapTopLeft hide={isRouteDrawerOpen}>
-                                    <MapSearch drawerOpen={true}>
-                                        <PageSearchBar onSearch={openRouteDrawer} />
-                                        <HistoryCard onClick={openRouteDrawer} />
-                                        <HistoryCard onClick={openRouteDrawer} />
-                                        <HistoryCard onClick={openRouteDrawer} />
+                                    <MapSearch>
+                                        <PageSearchBar onSearch={onSearch} />
+                                        <HistoryCard onClick={onHistoryCardClick} />
+                                        <HistoryCard onClick={onHistoryCardClick} />
+                                        <HistoryCard onClick={onHistoryCardClick} />
                                     </MapSearch>
                                 </MapTopLeft>
                                 <MapTopRight>

@@ -4,10 +4,11 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { Map, PageContainer, SideNavBar, RouteDrawer, LoadingSpinner } from "../components";
 import { setCurrentPosition, resetLocation } from "../reducers/LocationReducer";
+import { setFrom } from "../reducers/TripReducer";
 
 const MapPage = () => {
     const dispatch = useDispatch();
-    const [ libraries ] = useState(['places']);
+    const [ libraries ] = useState(['places', 'routes']);
     const {isLoaded} = useJsApiLoader({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_KEY,
         libraries,
@@ -23,6 +24,13 @@ const MapPage = () => {
                     (position) => {
                         const {latitude, longitude} = position.coords;
                         dispatch(setCurrentPosition({lat: latitude, lng: longitude}));
+
+                        const userLocation = {
+                            lat: latitude,
+                            lng: longitude,
+                            formatted_address: "Your Location"
+                        }
+                        dispatch(setFrom(userLocation))
                     },
                     (error) => {
                         console.log(error);

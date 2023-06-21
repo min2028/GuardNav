@@ -12,51 +12,51 @@ import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
 
 import RoomIcon from '@mui/icons-material/Room';
 
-const RoutePlannerFromTo = () => {
-    const RoutePlannerContainer = styled.div`
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-    `;
+const RoutePlannerContainer = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+width: 100%;
+`;
 
-    const RouteSettings = styled.div`
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-    `;
+const RouteSettings = styled.div`
+display: flex;
+flex-direction: column;
+width: 100%;
+`;
 
-    const Nav = styled.div`
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        width: 100%;
-        margin-top: 1rem;
+const Nav = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+width: 100%;
+margin-top: 1rem;
 
-        & > ul {
-            margin-bottom: 0px;
+& > ul {
+    margin-bottom: 0px;
 
-            & > li > div:nth-child(2) {
-                min-width: 24px;
+    & > li > div:nth-child(2) {
+        min-width: 24px;
 
-                & > span {
-                    align-self: center;
-                }
-            }
-            & > li > div:last-child {
-                max-width: 64px;
-            }
+        & > span {
+            align-self: center;
         }
-    `;
+    }
+    & > li > div:last-child {
+        max-width: 64px;
+    }
+}
+`;
 
-    const FromToInput = styled.input`
-        width: 100%;
-        padding: 0.75rem;
-        margin-top: -0.5rem;
-        border-radius: 8px;
-        border: 1px solid rgba(0, 0, 0, 0.12);
-    `;
+const FromToInput = styled.input`
+width: 100%;
+padding: 0.75rem;
+margin-top: -0.5rem;
+border-radius: 8px;
+border: 1px solid rgba(0, 0, 0, 0.12);
+`;
 
+const RoutePlannerFromTo = () => {
     const theme = useTheme();
 
     return (

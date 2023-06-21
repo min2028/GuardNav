@@ -54,10 +54,11 @@ const Map = () => {
     const [ routeDrawerOpen, setRouteDrawerOpen ] = useState(false);
     const [ option, setOption ] = useState('safest');
 
+    const [ libraries ] = useState(['places']);
     const dispatch = useDispatch();
     const {isLoaded} = useJsApiLoader({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_KEY,
-        libraries: ['places'],
+        libraries,
     });
 
     const {currentPosition} = useSelector(

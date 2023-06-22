@@ -30,6 +30,11 @@ export const theme = createTheme({
         },
         error: {
             main: '#FF5C5C'
+        },
+        risk: {
+            low: '#ffcccc',
+            mid: '#ff6666',
+            high: '#ff0000'
         }
     },
     buttonPadding: {

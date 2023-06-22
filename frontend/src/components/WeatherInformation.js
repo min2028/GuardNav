@@ -32,6 +32,8 @@ const InformationContainer = styled.div`
     padding: ${({ theme }) => `${theme.buttonPadding.values.paddingSides} ${theme.buttonPadding.values.paddingTopBottom}`};
     cursor: default;
     align-items: center;
+    position: fixed;
+    right: 1rem;
 `;
 
 const WeatherInformation = () => {

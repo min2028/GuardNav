@@ -18,7 +18,8 @@ function App() {
   return (
       <AppContainer className={"App"}>
           <ThemeProvider theme={theme}>
-              <MapPage/>
+              {/* <MapPage /> */}
+              <LandingPage ></LandingPage>
           </ThemeProvider>
       </AppContainer>
   );

@@ -38,7 +38,7 @@ export const theme = createTheme({
     buttonPadding: {
         values: {
             paddingSides: '10px',
-            paddingTopBottom: '15px',
+            paddingTopBottom: '12px',
         },
     },
     margins: {

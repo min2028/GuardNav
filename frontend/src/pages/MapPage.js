@@ -20,7 +20,7 @@ const MapPage = () => {
     const [ routeDrawerOpen, setRouteDrawerOpen ] = useState(false);
     const [ option, setOption ] = useState('safest');
 
-    const [directions, setDirections] = useState(null);
+    const [ directions, setDirections ] = useState(null);
     let count = React.useRef(0);
 
     const directionsServiceOptions = {
@@ -42,7 +42,6 @@ const MapPage = () => {
                 setDirections(response);
             } else {
                 count.current = 0;
-                console.log('response: ', response);
             }
         }
     };

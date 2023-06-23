@@ -56,11 +56,12 @@ const Map = ({ openRouteDrawer, isRouteDrawerOpen, directions, directionsService
         (state) => state.location
     );
 
-    const { historyList } = useSelector(
-        (state) => state.trip
+    const { history } = useSelector(
+        (state) => state
     );
 
-    const onHistoryCardClick = (to) => {
+    const onHistoryCardClick = (from, to) => {
+        dispatch(setFrom(from));
         dispatch(setTo(to));
         openRouteDrawer();
     };
@@ -96,19 +97,32 @@ const Map = ({ openRouteDrawer, isRouteDrawerOpen, directions, directionsService
                             <MapTopLeft hide={isRouteDrawerOpen}>
                                 <MapSearch>
                                     <PageSearchBar onSearch={onSearch} />
-                                    <HistoryCard onClick={onHistoryCardClick} />
-                                    <HistoryCard onClick={onHistoryCardClick} />
-                                    <HistoryCard onClick={onHistoryCardClick} />
+                                    {
+                                        history.items.map((item, index) => (
+                                            <HistoryCard
+                                                key={index}
+                                                from={item.from}
+                                                to={item.to}
+                                                time={item.time}
+                                                risk={item.risk}
+                                                onClick={() => onHistoryCardClick(item.from, item.to)}
+                                            />
+                                        ))
+                                    }
                                 </MapSearch>
                             </MapTopLeft>
                             <MapTopRight>
                                 <WeatherInformation />
                             </MapTopRight>
-                            <DirectionsService
-                                options={directionsServiceOptions}
-                                callback={directionsCallback}
-                            />
-                            <DirectionsRenderer directions={directions} preserveViewport={true} />
+                            {isRouteDrawerOpen && (
+                                <>
+                                    <DirectionsService
+                                        options={directionsServiceOptions}
+                                        callback={directionsCallback}
+                                    />
+                                    <DirectionsRenderer directions={directions} preserveViewport={true} />
+                                </>
+                            )}
                             <Marker position={currentPosition} />
                         </MapTopContainer>
                     </GoogleMap>

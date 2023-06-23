@@ -10,9 +10,9 @@ const Drawer = styled.div`
     justify-content: flex-start;
     z-index: 5;
     height: 100vh;
-    width: 30%;
+    width: 50%;
     background-color: white;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.3s ease-in-out;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
     white-space: nowrap;
 

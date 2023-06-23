@@ -42,11 +42,10 @@
 }
 
 .pac-container {
-  margin-top: 10px;
   border-radius: 0 0 12px 12px;
   box-shadow: none;
   width: 28% !important;
-  margin-left: -14px;
+  margin-left: -12px;
 }
 
 .pac-item {

@@ -48,33 +48,16 @@ const MapTopRight = styleComp.div`
     padding: ${({ theme }) => `${theme.margins.values.marginSides} ${theme.margins.values.marginTopBottom}`};
 `;
 
-const Map = ({ openRouteDrawer, isRouteDrawerOpen }) => {
+const Map = ({ openRouteDrawer, isRouteDrawerOpen, directions, directionsServiceOptions, directionsCallback }) => {
     const theme = useTheme();
     const dispatch = useDispatch();
 
-    const from = useSelector(state => state.trip.from);
-    const to = useSelector(state => state.trip.to);
-
-    const [directions, setDirections] = useState(null);
-
-    const directionsServiceOptions = useMemo(() => ({
-        destination: to,
-        origin: from,
-        travelMode: 'WALKING',
-    }), [from, to]);
-
-    const directionsCallback = (response) => {
-        if (response !== null) {
-            if (response.status === 'OK') {
-                setDirections(response);
-            } else {
-                // Handle API response errors
-            }
-        }
-    };
-
     const { currentPosition } = useSelector(
         (state) => state.location
+    );
+
+    const { historyList } = useSelector(
+        (state) => state.trip
     );
 
     const onHistoryCardClick = (to) => {
@@ -125,7 +108,7 @@ const Map = ({ openRouteDrawer, isRouteDrawerOpen }) => {
                                 options={directionsServiceOptions}
                                 callback={directionsCallback}
                             />
-                            {directions && <DirectionsRenderer directions={directions} />}
+                            <DirectionsRenderer directions={directions} preserveViewport={true} />
                             <Marker position={currentPosition} />
                         </MapTopContainer>
                     </GoogleMap>

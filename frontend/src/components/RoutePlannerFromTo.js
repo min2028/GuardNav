@@ -58,8 +58,6 @@ const RoutePlannerFromTo = ({ }) => {
     const from = useSelector(state => state.trip.from);
     const to = useSelector(state => state.trip.to);
 
-    console.log(from);
-
     return (
         <RoutePlannerContainer>
             <RouteSettings>

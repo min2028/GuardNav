@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useJsApiLoader } from "@react-google-maps/api";
 import { useSelector, useDispatch } from "react-redux";
 
 import { Map, PageContainer, SideNavBar, RouteDrawer, LoadingSpinner } from "../components";
 import { setCurrentPosition, resetLocation } from "../reducers/LocationReducer";
-import { setFrom } from "../reducers/TripReducer";
+import { setFrom, setTo } from "../reducers/TripReducer";
 
 const MapPage = () => {
     const dispatch = useDispatch();
@@ -14,8 +14,38 @@ const MapPage = () => {
         libraries,
     });
 
+    const from = useSelector(state => state.trip.from);
+    const to = useSelector(state => state.trip.to);
+
     const [ routeDrawerOpen, setRouteDrawerOpen ] = useState(false);
     const [ option, setOption ] = useState('safest');
+
+    const [directions, setDirections] = useState(null);
+    let count = React.useRef(0);
+
+    const directionsServiceOptions = {
+        destination: { 
+            lat: to?.lat || 0,
+            lng: to?.lng || 0
+        },
+        origin: {
+            lat: from?.lat,
+            lng: from?.lng
+        },
+        travelMode: 'WALKING',
+    }
+
+    const directionsCallback = (response) => {
+        if (response !== null) {
+            if (response.status === 'OK' && count.current < 2) {
+                count.current++;
+                setDirections(response);
+            } else {
+                count.current = 0;
+                console.log('response: ', response);
+            }
+        }
+    };
 
     useEffect(() => {
         const getCurrentPosition = () => {
@@ -61,12 +91,22 @@ const MapPage = () => {
                     <SideNavBar/>   
                     <RouteDrawer 
                         open={routeDrawerOpen} 
-                        onClose={() => setRouteDrawerOpen(false)}
+                        onClose={() => {
+                            setTo(null)
+                            setRouteDrawerOpen(false)
+                        }}
                         option={option}
                         setOption={setOption}
                         isLoaded={isLoaded}
                     />
-                    <Map openRouteDrawer={openRouteDrawer} isLoaded={isLoaded} isRouteDrawerOpen={routeDrawerOpen} />
+                    <Map 
+                        openRouteDrawer={openRouteDrawer} 
+                        isLoaded={isLoaded} 
+                        isRouteDrawerOpen={routeDrawerOpen} 
+                        directions={directions}
+                        directionsServiceOptions={directionsServiceOptions}
+                        directionsCallback={directionsCallback}
+                    />
                 </>
             )}
         </PageContainer>

@@ -12,6 +12,7 @@ const tripReducer = createSlice({
     }, 
     setTo: (state, action) => {
         state.to = action.payload;
+        console.log(state.to);
     }
   },
 });

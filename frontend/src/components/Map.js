@@ -131,14 +131,20 @@ const Map = () => {
         data = data.filter(
           (row) => !(parseFloat(row.X) === 0.0 || parseFloat(row.Y) === 0.0)
         );
+        let minWeight = Infinity;
+        let maxWeight = -Infinity;
         let newData = data.map((row) => {
           let x = parseFloat(row.X);
           let y = parseFloat(row.Y);
           if (isFinite(x) && isFinite(y)) {
             let weight = calculateWeight(row);
+            if (weight < minWeight) {
+              minWeight = weight;
+            }
+            if (weight > maxWeight) {
+              maxWeight = weight;
+            }
             let [lng, lat] = proj4(utmZone10).inverse([x, y]);
-            // console.log("Google:", google);
-            // console.log("Is Loaded:", isLoaded);
             return {
               location: new window.google.maps.LatLng(lat, lng),
               weight: weight,
@@ -147,9 +153,27 @@ const Map = () => {
           return null;
         });
         newData = newData.filter((item) => item !== null);
+
+        // Normalize the weights
+        newData = newData.map((item) => {
+          return {
+            ...item,
+            weight:
+              ((item.weight - minWeight) / (maxWeight - minWeight)) * 10 + 1,
+          };
+        });
+        let weights = newData.map((item) => item.weight);
+
+        let nullWeightsCount = weights.filter((w) => isNaN(w)).length;
+
+        // count null objects
+        let nullObjectsCount = newData.filter((item) => item === null).length;
+
+        console.log("Null Weights Count:", nullWeightsCount);
+        console.log("Null Objects Count:", nullObjectsCount);
+        console.log(weights);
         console.log("blehhhh");
-        console.log(newData[0].location.lng());
-        console.log(typeof newData);
+        console.log(newData);
         console.log("blehhhh");
         setCrimeData(newData);
       });
@@ -184,7 +208,9 @@ const Map = () => {
                   location: item.location,
                   weight: item.weight,
                 }))}
-                options={{ radius: 20 }}
+                options={{
+                  radius: 50,
+                }}
               />
 
               <MapTopContainer>

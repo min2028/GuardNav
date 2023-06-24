@@ -5,6 +5,7 @@ import MeetTeam from "../components/MeetTeam";
 import NavBar from "../components/NavBar";
 import { Element } from "react-scroll";
 
+
 export default function LandingPage() {
     return (
         <>

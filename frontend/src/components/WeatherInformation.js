@@ -53,10 +53,10 @@ const WeatherInformation = () => {
             setWeatherData(data);
         };
 
-        if (currentPosition) {
-            getWeatherData();
-        }
-    }, [currentPosition]);
+    if (currentPosition) {
+      getWeatherData();
+    }
+  }, [currentPosition]);
 
     return (
         <InformationContainer theme = {theme}>

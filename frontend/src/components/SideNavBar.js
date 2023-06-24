@@ -127,7 +127,6 @@ export default function SideNavBar() {
                                 <ListItemText primary={text}/>
                             </ListItemButton>
                         </ListItem>
-                        </a>
                     ))}
                 </List>
                 <Divider/>

@@ -127,6 +127,7 @@ export default function SideNavBar() {
                                 <ListItemText primary={text}/>
                             </ListItemButton>
                         </ListItem>
+                        </a>
                     ))}
                 </List>
                 <Divider/>
@@ -134,7 +135,7 @@ export default function SideNavBar() {
                     {['Help'].map((text, index) => (
                         <ListItem key={text} disablePadding>
                             <ListItemButton>
-                                <ListItemIcon sx={{color: theme.palette.secondary.main, ml: 1}}>
+                                <ListItemIcon sx={{color: theme.palette.primary.main, ml: 1}}>
                                     {text === 'Help' && <HelpCenterIcon />}
                                 </ListItemIcon>
                                 <ListItemText primary={text}/>

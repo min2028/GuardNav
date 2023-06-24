@@ -1,10 +1,11 @@
 import './App.css';
-import {MapPage} from './pages';
+import { MapPage } from './pages';
 import styled from 'styled-components';
-import {Switch, ThemeProvider} from '@mui/material';
-import {theme} from "./styles/theme";
+import {ThemeProvider } from '@mui/material';
+import { theme } from "./styles/theme";
 import LandingPage from "./pages/LandingPage";
-import {Route, Router} from "react-router-dom";
+import {Route, BrowserRouter as Router, Routes} from "react-router-dom";
+import Requirements from "./components/Requirements";
 
 const AppContainer = styled.div`
   display: flex;
@@ -15,13 +16,18 @@ const AppContainer = styled.div`
 `;
 
 function App() {
-  return (
-      <AppContainer className={"App"}>
-          <ThemeProvider theme={theme}>
-              <MapPage/>
-          </ThemeProvider>
-      </AppContainer>
-  );
+    return (
+        <AppContainer className={"App"}>
+            <Router>
+                <ThemeProvider theme={theme}>
+                    <Routes>
+                        <Route exact path="/" element={<LandingPage/>} />
+                        <Route path="/map" element={<MapPage/> } />
+                    </Routes>
+                </ThemeProvider>
+            </Router>
+        </AppContainer>
+    );
 }
 
 export default App;

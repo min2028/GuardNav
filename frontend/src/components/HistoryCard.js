@@ -50,7 +50,7 @@ const ContentTitle = styled.h3`
     font-size: 1.5rem;
     margin: 0px;
     font-weight: 600;
-    color: ${props => props.theme.palette.secondary.main};
+    color: ${props => props.theme.palette.primary.main};
 `;
 
 const ContentDesciptionContainer = styled.div`
@@ -66,6 +66,7 @@ const ContentDesciption = styled.p`
     margin: 0px;
     font-weight: 500;
     color: ${props => props.theme.palette.secondary.main};
+
 `;
 
 const riskMap = {

@@ -102,9 +102,10 @@ export default function SideNavBar() {
                 <Divider/>
                 <List>
                     {['Home', 'Recents', 'Report'].map((text, index) => (
+                        <a href='/' sx={{ textDecoration: 'none' }}>
                         <ListItem key={text} disablePadding>
                             <ListItemButton>
-                                <ListItemIcon sx={{color: theme.palette.secondary.main, ml: 1}}>
+                                <ListItemIcon sx={{color: theme.palette.primary.main, ml: 1}}>
                                     {text === 'Home' && <HomeIcon />}
                                     {text === 'Recents' && <HistoryIcon />}
                                     {text === 'Report' && <ReportIcon />}
@@ -112,6 +113,7 @@ export default function SideNavBar() {
                                 <ListItemText primary={text}/>
                             </ListItemButton>
                         </ListItem>
+                        </a>
                     ))}
                 </List>
                 <Divider/>
@@ -119,7 +121,7 @@ export default function SideNavBar() {
                     {['Help'].map((text, index) => (
                         <ListItem key={text} disablePadding>
                             <ListItemButton>
-                                <ListItemIcon sx={{color: theme.palette.secondary.main, ml: 1}}>
+                                <ListItemIcon sx={{color: theme.palette.primary.main, ml: 1}}>
                                     {text === 'Help' && <HelpCenterIcon />}
                                 </ListItemIcon>
                                 <ListItemText primary={text}/>

@@ -1,4 +1,4 @@
-import logo from '../logo.png';
+import logo from '../resources/logo.png';
 import styled from 'styled-components';
 
 const LogoContainer = styled.div`

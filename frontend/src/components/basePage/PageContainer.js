@@ -6,6 +6,7 @@ const PageContainer = styled.div`
     width: 100%;
     height: 100%;
     background-color: white;
+    font-family: 'Josefin Sans', sans-serif;
 `;
 
 export default PageContainer;

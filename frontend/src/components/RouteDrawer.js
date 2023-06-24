@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import CloseIcon from '@mui/icons-material/Close';
+import { useTheme } from '@mui/material/styles';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { RoutePlanner, RouteOptions } from './index.js';
+import { RoutePlanner, RouteOptions, RouteInformation, RouteDirections } from './index.js';
+import { addHistoryItem } from '../reducers/HistoryReducer.js';
 
 const Drawer = styled.div`
     display: flex;
@@ -66,7 +69,31 @@ const Divider = styled.hr`
     border-bottom-width: thin;
 `;
 
-const RouteDrawer = ({ open, onClose, option, setOption }) => {
+const RouteDrawer = ({ open, onClose, option, setOption, directions, openSuccessMessage }) => {
+    const theme = useTheme();
+    const dispatch = useDispatch();
+
+    const onAddRouteToHistory = () => {
+        let route = {
+            risk: "low", // TODO: calculate risk
+            distance: directions.routes[0].legs[0].distance.value,
+            time: directions.routes[0].legs[0].duration.value,
+            from: {
+                lat: directions.routes[0].legs[0].start_location.lat(),
+                lng: directions.routes[0].legs[0].start_location.lng(),
+                formatted_address: directions.routes[0].legs[0].start_address,
+            },
+            to: {
+                lat: directions.routes[0].legs[0].end_location.lat(),
+                lng: directions.routes[0].legs[0].end_location.lng(),
+                formatted_address: directions.routes[0].legs[0].end_address,
+            },
+        }
+
+        dispatch(addHistoryItem(route));
+        openSuccessMessage();
+    }
+
     return (
         <Drawer
             open={open}
@@ -78,9 +105,12 @@ const RouteDrawer = ({ open, onClose, option, setOption }) => {
                 </CloseButton>
             </DrawerHeader>
             <Divider />
-            <RoutePlanner />
+            <RoutePlanner directions={directions} />
             <RouteOptions option={option} setOption={setOption} />
             <Divider />
+            <RouteInformation directions={directions} onAddRouteToHistory={onAddRouteToHistory} />
+            <Divider />
+            <RouteDirections directions={directions} />
         </Drawer>
     )
 };

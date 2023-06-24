@@ -9,7 +9,6 @@ const tripReducer = createSlice({
   reducers: {
     setFrom: (state, action) => {
         state.from = action.payload;
-        console.log(state.from)
     }, 
     setTo: (state, action) => {
         state.to = action.payload;

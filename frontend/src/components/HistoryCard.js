@@ -91,11 +91,11 @@ const HistoryCard = (props) => {
                 </ContentTitleContainer>
                 <ContentDesciptionContainer>
                     <ContentDesciption>
-                        {from?.formatted_address.split(',')[0]}
+                        {from?.formatted_address?.split(',')[0]}
                     </ContentDesciption>
                     <EastIcon style={{ color: 'black', width: "0.75rem", height: "0.75rem" }}/>
                     <ContentDesciption>
-                        {to?.formatted_address.split(',')[0]}
+                        {to?.formatted_address?.split(',')[0]}
                     </ContentDesciption>
                 </ContentDesciptionContainer>
             </ContentContainer>

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useJsApiLoader } from "@react-google-maps/api";
 import { useSelector, useDispatch } from "react-redux";
 
+import { Snackbar, Alert } from '@mui/material';
 import { Map, PageContainer, SideNavBar, RouteDrawer, LoadingSpinner } from "../components";
 import { setCurrentPosition, resetLocation } from "../reducers/LocationReducer";
 import { setFrom, setTo } from "../reducers/TripReducer";
@@ -19,6 +20,7 @@ const MapPage = () => {
 
     const [ routeDrawerOpen, setRouteDrawerOpen ] = useState(false);
     const [ option, setOption ] = useState('safest');
+    const [ successOpen, setSuccessOpen ] = useState(false);
 
     const [ directions, setDirections ] = useState(null);
     let count = React.useRef(0);
@@ -54,12 +56,7 @@ const MapPage = () => {
                         const {latitude, longitude} = position.coords;
                         dispatch(setCurrentPosition({lat: latitude, lng: longitude}));
 
-                        const userLocation = {
-                            lat: latitude,
-                            lng: longitude,
-                            formatted_address: "Your Location"
-                        }
-                        dispatch(setFrom(userLocation))
+                        dispatch(setFrom({lat: latitude, lng: longitude}));
                     },
                     (error) => {
                         console.log(error);
@@ -83,6 +80,14 @@ const MapPage = () => {
         (state) => state.location
     );
 
+    const handleSuccessClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setSuccessOpen(false);
+    };
+
     return (
         <PageContainer>
             {!isLoaded || !currentPosition ? <LoadingSpinner /> : (
@@ -97,6 +102,8 @@ const MapPage = () => {
                         option={option}
                         setOption={setOption}
                         isLoaded={isLoaded}
+                        directions={directions}
+                        openSuccessMessage={() => setSuccessOpen(true)}
                     />
                     <Map 
                         openRouteDrawer={openRouteDrawer} 
@@ -108,6 +115,16 @@ const MapPage = () => {
                     />
                 </>
             )}
+            <Snackbar 
+                open={successOpen} 
+                autoHideDuration={1000} 
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                onClose={handleSuccessClose}
+            >
+                <Alert onClose={handleSuccessClose} severity="success" sx={{ width: '100%' }}>
+                    Your route has been saved!
+                </Alert>
+            </Snackbar>
         </PageContainer>
     );
 };

@@ -14,6 +14,7 @@ import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
 import RoomIcon from '@mui/icons-material/Room';
 import SearchBar from './SearchBar';
 import { setTo, setFrom } from '../reducers/TripReducer';
+import { addHistoryItem } from '../reducers/HistoryReducer';
 
 const RoutePlannerContainer = styled.div`
     display: flex;
@@ -51,12 +52,9 @@ const Nav = styled.div`
     }
 `;
 
-const RoutePlannerFromTo = ({ }) => {
+const RoutePlannerFromTo = ({ directions }) => {
     const theme = useTheme();
     const dispatch = useDispatch();
-
-    const from = useSelector(state => state.trip.from);
-    const to = useSelector(state => state.trip.to);
 
     return (
         <RoutePlannerContainer>
@@ -68,7 +66,7 @@ const RoutePlannerFromTo = ({ }) => {
                                 <SearchBar 
                                     style={{marginTop: '-0.75rem'}} 
                                     placeholder={"From"} 
-                                    value={from?.formatted_address} 
+                                    value={directions?.routes[0]?.legs[0]?.start_address} 
                                     onSearch={(from) => {
                                         dispatch(setFrom(from));
                                     }}
@@ -85,7 +83,7 @@ const RoutePlannerFromTo = ({ }) => {
                                 <SearchBar 
                                     style={{marginTop: '-0.75rem'}} 
                                     placeholder={"To"} 
-                                    value={to?.formatted_address}
+                                    value={directions?.routes[0]?.legs[0]?.end_address}
                                     onSearch={(to) => {
                                         dispatch(setTo(to));
                                     }}

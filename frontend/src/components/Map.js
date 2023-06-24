@@ -11,6 +11,7 @@ import { css } from '@emotion/react';
 
 import { SideNavBar, PageSearchBar, HistoryCard, RouteDrawer } from './index';
 import { setFrom, setTo } from '../reducers/TripReducer';
+import { addHistoryItem } from '../reducers/HistoryReducer';
 
 const drawerWidth = 240;
 

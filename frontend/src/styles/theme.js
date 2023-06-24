@@ -30,9 +30,9 @@ export const theme = createTheme({
             main: '#FF5C5C'
         },
         risk: {
-            low: '#7BB662',
-            mid: '#FFD301',
-            high: '#E03C32'
+            low: '#82E0AA',
+            mid: '#F8C471',
+            high: '#EC7063'
         }
     },
     buttonPadding: {

@@ -32,15 +32,15 @@ export const theme = createTheme({
             main: '#FF5C5C'
         },
         risk: {
-            low: '#ffcccc',
-            mid: '#ff6666',
-            high: '#ff0000'
+            low: '#82E0AA',
+            mid: '#F8C471',
+            high: '#EC7063'
         }
     },
     buttonPadding: {
         values: {
             paddingSides: '10px',
-            paddingTopBottom: '15px',
+            paddingTopBottom: '12px',
         },
     },
     margins: {

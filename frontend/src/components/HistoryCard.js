@@ -2,11 +2,13 @@ import RestoreIcon from '@mui/icons-material/Restore';
 import styled from '@emotion/styled';
 import EastIcon from '@mui/icons-material/East';
 
+import { formatTime } from '../utility/TimeUtil';
+
 const HistoryCardContainer = styled.div`
     display: grid;
     grid-template-areas: 'logo content';
     grid-template-columns: 100px 1fr;
-    background-color: ${(props) => props.risk === 0 ? "#FFE8E8" : "#FF7878"};
+    background-color: ${props => props.theme.palette.risk[props.risk]};
     opacity: 0.9;
     width: 100%;
     border-radius: 5px;
@@ -67,8 +69,16 @@ const ContentDesciption = styled.p`
 
 `;
 
+const riskMap = {
+    'low': 'Low',
+    'mid': 'Medium',
+    'high': 'High',
+    'veryhigh': 'Very High',
+    'extreme': 'Extreme'
+}
+
 const HistoryCard = (props) => {
-    const { risk = 0, duration, origin, destination, onClick } = props;
+    const { risk = 0, time, from, to, onClick } = props;
 
     return (
         <HistoryCardContainer risk = {risk} onClick = {onClick}>
@@ -77,16 +87,16 @@ const HistoryCard = (props) => {
             </LogoContainer>
             <ContentContainer>
                 <ContentTitleContainer>
-                    <ContentTitle> { risk === 0 ? "Low Risk" : "High Risk"} </ContentTitle>
-                    <ContentTitle> 15 minutes </ContentTitle>
+                    <ContentTitle> { riskMap[risk] } </ContentTitle>
+                    <ContentTitle> { formatTime(time) } </ContentTitle>
                 </ContentTitleContainer>
                 <ContentDesciptionContainer>
                     <ContentDesciption>
-                        Home
+                        {from?.formatted_address?.split(',')[0]}
                     </ContentDesciption>
                     <EastIcon style={{ color: 'black', width: "0.75rem", height: "0.75rem" }}/>
                     <ContentDesciption>
-                        Downtown
+                        {to?.formatted_address?.split(',')[0]}
                     </ContentDesciption>
                 </ContentDesciptionContainer>
             </ContentContainer>

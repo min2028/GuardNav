@@ -71,27 +71,11 @@ const MapTopRight = styleComp.div`
     justify-content: start;
 `;
 
-const DrawerHeader = styled("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-  justifyContent: "flex-end",
-}));
 
 const Map = () => {
   const theme = useTheme();
-  const [open, setOpen] = useState(false);
   const [crimeData, setCrimeData] = useState([]);
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
 
   const dispatch = useDispatch();
   const { isLoaded, google } = useJsApiLoader({
@@ -152,9 +136,9 @@ const Map = () => {
           }
           return null;
         });
+
         newData = newData.filter((item) => item !== null);
 
-        // Normalize the weights
         newData = newData.map((item) => {
           return {
             ...item,
@@ -164,17 +148,15 @@ const Map = () => {
         });
         let weights = newData.map((item) => item.weight);
 
-        let nullWeightsCount = weights.filter((w) => isNaN(w)).length;
+        // let nullWeightsCount = weights.filter((w) => isNaN(w)).length;
+        // let nullObjectsCount = newData.filter((item) => item === null).length;
 
-        // count null objects
-        let nullObjectsCount = newData.filter((item) => item === null).length;
-
-        console.log("Null Weights Count:", nullWeightsCount);
-        console.log("Null Objects Count:", nullObjectsCount);
-        console.log(weights);
-        console.log("blehhhh");
-        console.log(newData);
-        console.log("blehhhh");
+        // console.log("Null Weights Count:", nullWeightsCount);
+        // console.log("Null Objects Count:", nullObjectsCount);
+        // console.log(weights);
+        // console.log("blehhhh");
+        // console.log(newData);
+        // console.log("blehhhh");
         setCrimeData(newData);
       });
     }

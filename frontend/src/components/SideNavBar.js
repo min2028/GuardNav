@@ -89,7 +89,9 @@ export default function SideNavBar() {
     };
 
     const navigationTextAndAction = [
-        {text: 'Home', action: () => console.log('Home')},
+        {text: 'Home', action: () => {
+            window.location.href = '/';
+        }},
         {text: 'Clear History', action: () => window.confirm(
             'Are you sure you wish to clear your history? There will be no going back!') && dispatch(clearHistory(),
         )},

@@ -65,8 +65,7 @@ const ContentDesciption = styled.p`
     font-size: 0.75rem;
     margin: 0px;
     font-weight: 500;
-    color: ${props => props.theme.palette.secondary.main};
-
+    color: ${props => props.theme.palette.primary.main};
 `;
 
 const riskMap = {

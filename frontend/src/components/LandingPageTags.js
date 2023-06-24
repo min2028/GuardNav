@@ -1,30 +1,22 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const TitleTag = styled.h1`
-    color: ${(props) => props.theme.palette.secondary.main};
-    font-family: ${(props) => props.theme.palette.primary.family};
+    color: ${props => props.theme.palette.secondary.main}; 
+    font-family: ${props => props.theme.palette.primary.family}; 
     margin-top: 0px;
     font-size: 3.5rem;
-    ${(props) => {
+    ${props => {
         console.log(props);
-        return "";
+        return '';
     }}
 `;
 
-
 const DescriptionTag = styled.p`
-    color: ${(props) => props.theme.palette.secondary.main};
-    font-family: ${(props) => props.theme.palette.primary.family};
+    color: ${props => props.theme.palette.secondary.main}; 
+    font-family: ${props => props.theme.palette.primary.family}; 
     margin-top: 0px;
-    ${(props) => (props.size ? "font-size:" + props.size : "")};
+    ${props => props.size ? 'font-size:' + props.size : ''};
 `;
-
-// const LadingPageInnerContainer = styled.div`
-//     display: flex;
-//     justify-content: space-between;
-//     padding: 3.5rem 3rem;
-//     height: 600px;
-// `;
 
 const LadingPageInnerContainer = styled.div`
     display: flex;
@@ -34,13 +26,13 @@ const LadingPageInnerContainer = styled.div`
 `;
 
 const LadingPageOuterContainer = styled.div`
-    width: 100%;
-    background-color: #1a191a;
+   width: 100%;
+   background-color: #1A191A;
 `;
 
-export {
+export  { 
     TitleTag,
     DescriptionTag,
     LadingPageInnerContainer,
-    LadingPageOuterContainer,
-};
+    LadingPageOuterContainer
+ };

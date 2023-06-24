@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import Image from '../resources/GuyUsingComp.png';
 import { TitleTag, DescriptionTag, LadingPageInnerContainer, LadingPageOuterContainer } from './LandingPageTags';
 import { useTheme } from '@emotion/react';
+import { SdRounded } from '@mui/icons-material';
 
 
 const ContentContainer = styled.div`

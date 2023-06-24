@@ -18,6 +18,7 @@ const LogoText = styled.div`
     font-size: 24px;
     color: black;
     margin-left: 8px;
+    font-family: 'Josefin Sans', sans-serif;
 `
 
 

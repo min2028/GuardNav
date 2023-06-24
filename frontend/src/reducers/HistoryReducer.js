@@ -61,6 +61,10 @@ const historyReducer = createSlice({
   reducers: {
     addHistoryItem: (state, action) => {
         state.items.unshift(action.payload);
+
+        if (state.items.length > 3) {
+            state.items.pop();
+        }
     },
     clearHistory: (state) => {
         state.items = [];

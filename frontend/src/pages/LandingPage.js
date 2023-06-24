@@ -1,19 +1,18 @@
 import React from "react";
-import MainSection from "../components/MainSection";
 import GoalComponent from "../components/GoalComponent";
 import Requirements from "../components/Requirements";
 import MeetTeam from "../components/MeetTeam";
+import NavBar from "../components/NavBar";
+import { Element } from "react-scroll";
 
 export default function LandingPage() {
     return (
         <>
-            <head>
-                <title>GuardNav</title>
-                <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-            </head>
-            <MainSection />
+            <NavBar/>
             <GoalComponent />
-            <Requirements />
+            <Element name="requirements">
+                <Requirements />
+            </Element>
             <MeetTeam />
         </>
     );

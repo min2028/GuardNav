@@ -1,13 +1,17 @@
 import React from "react";
 import styled from "styled-components";
+import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
 
 const NavBarContainer = styled.div`
-    background-color: #333;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    height: 70px;
-    width: 100%;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  height: 70px;
+  width: 100%;
+  padding: 1.5em;
+  font-size: 17px;
+  text-align: center;
+  font-weight: bold;
 `;
 
 const LeftNav = styled.div`
@@ -15,11 +19,8 @@ const LeftNav = styled.div`
 
   a {
     color: #f2f2f2;
-    font-family: "Rubik";
-    text-align: center;
-    text-decoration: none;
-    font-size: 17px;
     margin: 10px;
+    text-decoration: none;
   }
 `;
 
@@ -28,12 +29,9 @@ const MidNav = styled.div`
   align-self: center;
 
   a {
-    font-family: "Anek Tamil";
     letter-spacing: 0.245em;
     color: #f2f2f2;
-    text-align: center;
     text-decoration: none;
-    font-size: 17px;
   }
 `;
 
@@ -43,38 +41,49 @@ const RightNav = styled.div`
 
   a {
     color: #f2f2f2;
-    text-align: center;
     text-decoration: none;
-    font-size: 17px;
   }
 `;
 
 const NavBar = (props) => {
-  return (
-    <NavBarContainer>
-      <LeftNav>
-        <a className="nav-item" href="../pages/index.js">
-          Home
-        </a>
-        <a className="nav-item" href="../pages/MapPage.js">
-          Map
-        </a>
-        <a className="nav-item" href="../pages/about.js">
-          About
-        </a>
-      </LeftNav>
-      <MidNav>
-        <a className="nav-item" href="../pages/MapPage.js">
-          GuardNav
-        </a>
-      </MidNav>
-      <RightNav>
-        <a className="nav-item" href="../index.html">
-          Help
-        </a>
-      </RightNav>
-    </NavBarContainer>
-  );
+    const scrollToRequirements = (event) => {
+        scroll.scrollTo("requirements", {
+            smooth: true,
+            offset: -70,
+        });
+    };
+    return (
+        <NavBarContainer>
+            <LeftNav>
+                <a className="nav-item" href="/">
+                    Home
+                </a>
+                <a className="nav-item" href="/Map">
+                    Map
+                </a>
+                <ScrollLink
+                    className="nav-item"
+                    to="requirements"
+                    smooth={true}
+                    offset={-70}
+                    duration={500}
+                    onClick={scrollToRequirements}
+                >
+                    About
+                </ScrollLink>
+            </LeftNav>
+            <MidNav>
+                <a className="nav-item" href="/Map">
+                    GuardNav
+                </a>
+            </MidNav>
+            <RightNav>
+                <a className="nav-item" href="../index.html">
+                    Help
+                </a>
+            </RightNav>
+        </NavBarContainer>
+    );
 };
 
 export default NavBar;

@@ -89,7 +89,9 @@ export default function SideNavBar() {
     };
 
     const navigationTextAndAction = [
-        {text: 'Home', action: () => console.log('Home')},
+        {text: 'Home', action: () => {
+            window.location.href = '/';
+        }},
         {text: 'Clear History', action: () => window.confirm(
             'Are you sure you wish to clear your history? There will be no going back!') && dispatch(clearHistory(),
         )},
@@ -118,7 +120,7 @@ export default function SideNavBar() {
                     {navigationTextAndAction.map(({ text, action }) => (
                         <ListItem key={text} disablePadding>
                             <ListItemButton onClick={action}>
-                                <ListItemIcon sx={{color: theme.palette.secondary.main, ml: 1}}>
+                                <ListItemIcon sx={{color: theme.palette.primary.main, ml: 1}}>
                                     {text === 'Home' && <HomeIcon />}
                                     {text === 'Recents' && <HistoryIcon />}
                                     {text === 'Report' && <ReportIcon />}

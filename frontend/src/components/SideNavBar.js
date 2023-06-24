@@ -47,8 +47,7 @@ const closedMixin = (theme) => ({
 
 const Drawer = styled(MuiDrawer, {shouldForwardProp: (prop) => prop !== 'open'})(
     ({theme, open}) => ({
-        width: drawerWidth,
-        flexShrink: 0,
+        zIndex: 10,
         whiteSpace: 'nowrap',
         position: 'relative',
         ...(open && {
@@ -85,7 +84,7 @@ export default function SideNavBar() {
     };
 
     return (
-        <Box sx={{display: 'flex'}}>
+        <Box sx={{display: 'flex', height: '100%'}}>
             <CssBaseline/>
             <Drawer
                 variant="permanent"

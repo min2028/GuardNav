@@ -13,14 +13,16 @@ export const theme = createTheme({
             low: '#f0e3ec',
             mid: '#f08f7a',
             high: '#ea6249',
-            hover: '#fcbd71'
+            hover: '#fcbd71',
+            family: 'rubik'
         },
         secondary: {
-            main: '#000000',
+            main: '#FFFFFF',
             light: '#405169',
             lighter: '#556b87',
             dark: '#1d2633',
             contrastText: '#f5f5f5',
+            family: 'rubik'
         },
         background: {
             nav: '#000000',
@@ -28,6 +30,11 @@ export const theme = createTheme({
         },
         error: {
             main: '#FF5C5C'
+        },
+        risk: {
+            low: '#ffcccc',
+            mid: '#ff6666',
+            high: '#ff0000'
         }
     },
     buttonPadding: {

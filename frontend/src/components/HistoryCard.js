@@ -7,12 +7,19 @@ const HistoryCardContainer = styled.div`
     grid-template-areas: 'logo content';
     grid-template-columns: 100px 1fr;
     background-color: ${(props) => props.risk === 0 ? "#FFE8E8" : "#FF7878"};
-    opacity: 0.8;
+    opacity: 0.9;
     width: 100%;
     border-radius: 5px;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     margin: 0.5rem 0px;
     z-index: 4;
+    cursor: pointer;
+    transition: 0.1s;
+
+    &:hover {
+        opacity: 1;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.5);
+    }
 `;
 
 const LogoContainer = styled.div`
@@ -41,7 +48,7 @@ const ContentTitle = styled.h3`
     font-size: 1.5rem;
     margin: 0px;
     font-weight: 600;
-    color: ${props => props.theme.palette.secondary.main};
+    color: ${props => props.theme.palette.primary.main};
 `;
 
 const ContentDesciptionContainer = styled.div`
@@ -56,16 +63,15 @@ const ContentDesciption = styled.p`
     font-size: 0.75rem;
     margin: 0px;
     font-weight: 500;
-    color: ${props => {
-        console.log(props);
-        return props.theme.palette.secondary.main}};
+    color: ${props => props.theme.palette.secondary.main};
+
 `;
 
 const HistoryCard = (props) => {
-    const { risk = 0, duration, origin, destination } = props;
+    const { risk = 0, duration, origin, destination, onClick } = props;
 
     return (
-        <HistoryCardContainer risk = {risk}>
+        <HistoryCardContainer risk = {risk} onClick = {onClick}>
             <LogoContainer>
                 <RestoreIcon style={{ color: 'black', width: "2rem", height: "2rem" }}  />
             </LogoContainer>

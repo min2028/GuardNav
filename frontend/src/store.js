@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import LocationReducer from "./reducers/LocationReducer";
-import TripsReducer from "./reducers/TripsReducer";
+import TripReducer from "./reducers/TripReducer";
 
 const store = configureStore({
-  reducer: {
-    location: LocationReducer,
-    trips: TripsReducer,
-  },
+    reducer: {
+        location: LocationReducer,
+        trip: TripReducer,
+    },
 });
 
 export default store;

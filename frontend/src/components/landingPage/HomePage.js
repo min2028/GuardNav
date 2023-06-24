@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
-import Image from "../resources/walk-in-city.png";
+import Image from "../../resources/walk-in-city.png";
 import {
     TitleTag,
     LadingPageInnerContainer,

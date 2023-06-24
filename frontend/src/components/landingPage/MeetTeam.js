@@ -1,8 +1,7 @@
-import Image from '../resources/Programming-amico.png';
+import Image from '../../resources/Programming-amico.png';
 import styled from 'styled-components';
 import { TitleTag, DescriptionTag, LadingPageInnerContainer, LadingPageOuterContainer } from './LandingPageTags';
 import { useTheme } from '@emotion/react';
-import { SdRounded } from '@mui/icons-material';
 
 
 const ContentContainer = styled.div`

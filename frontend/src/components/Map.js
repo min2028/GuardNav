@@ -17,7 +17,7 @@ import { css } from "@emotion/react";
 
 import { SideNavBar, PageSearchBar, HistoryCard, RouteDrawer } from "./index";
 import { setFrom, setTo } from "../reducers/TripReducer";
-
+import { addHistoryItem } from "../reducers/HistoryReducer";
 
 const MapTopContainer = styleComp.div`
     display: flex;
@@ -57,37 +57,23 @@ const MapTopRight = styleComp.div`
       `${theme.margins.values.marginSides} ${theme.margins.values.marginTopBottom}`};
 `;
 
-const Map = ({ openRouteDrawer, isRouteDrawerOpen, crimeData }) => {
+const Map = ({
+  openRouteDrawer,
+  isRouteDrawerOpen,
+  directions,
+  directionsServiceOptions,
+  directionsCallback,
+  crimeData
+}) => {
   const theme = useTheme();
   const dispatch = useDispatch();
 
-  const from = useSelector((state) => state.trip.from);
-  const to = useSelector((state) => state.trip.to);
-
-  const [directions, setDirections] = useState(null);
-
-  const directionsServiceOptions = useMemo(
-    () => ({
-      destination: to,
-      origin: from,
-      travelMode: "WALKING",
-    }),
-    [from, to]
-  );
-
-  const directionsCallback = (response) => {
-    if (response !== null) {
-      if (response.status === "OK") {
-        setDirections(response);
-      } else {
-        // Handle API response errors
-      }
-    }
-  };
-
   const { currentPosition } = useSelector((state) => state.location);
 
-  const onHistoryCardClick = (to) => {
+  const { history } = useSelector((state) => state);
+
+  const onHistoryCardClick = (from, to) => {
+    dispatch(setFrom(from));
     dispatch(setTo(to));
     openRouteDrawer();
   };
@@ -132,19 +118,33 @@ const Map = ({ openRouteDrawer, isRouteDrawerOpen, crimeData }) => {
               <MapTopLeft hide={isRouteDrawerOpen}>
                 <MapSearch>
                   <PageSearchBar onSearch={onSearch} />
-                  <HistoryCard onClick={onHistoryCardClick} />
-                  <HistoryCard onClick={onHistoryCardClick} />
-                  <HistoryCard onClick={onHistoryCardClick} />
+                  {history.items.map((item, index) => (
+                    <HistoryCard
+                      key={index}
+                      from={item.from}
+                      to={item.to}
+                      time={item.time}
+                      risk={item.risk}
+                      onClick={() => onHistoryCardClick(item.from, item.to)}
+                    />
+                  ))}
                 </MapSearch>
               </MapTopLeft>
               <MapTopRight>
                 <WeatherInformation />
               </MapTopRight>
-              <DirectionsService
-                options={directionsServiceOptions}
-                callback={directionsCallback}
-              />
-              {directions && <DirectionsRenderer directions={directions} />}
+              {isRouteDrawerOpen && (
+                <>
+                  <DirectionsService
+                    options={directionsServiceOptions}
+                    callback={directionsCallback}
+                  />
+                  <DirectionsRenderer
+                    directions={directions}
+                    preserveViewport={true}
+                  />
+                </>
+              )}
               <Marker position={currentPosition} />
             </MapTopContainer>
           </GoogleMap>

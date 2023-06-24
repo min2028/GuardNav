@@ -9,6 +9,8 @@ import SideNavBar from "./SideNavBar";
 import RoutePlannerFromTo from "./RoutePlannerFromTo";
 import RouteOptions from "./RouteOptions";
 import PageSearchBar from "./PageSearchBar";
+import RouteInformation from "./RouteInformation";
+import RouteDirections from "./RouteDirections";
 
 export { 
     Map, 
@@ -21,5 +23,7 @@ export {
     SideNavBar, 
     RoutePlannerFromTo as RoutePlanner,
     RouteOptions,
-    PageSearchBar
+    PageSearchBar,
+    RouteInformation,
+    RouteDirections
 };

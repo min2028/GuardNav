@@ -21,6 +21,10 @@ import {Fab} from "@mui/material";
 import HelpCenterIcon from '@mui/icons-material/HelpCenter';
 import ReportIcon from '@mui/icons-material/Report';
 import Logo from './Logo';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+
+import {useDispatch, useSelector} from "react-redux";
+import {clearHistory} from "../reducers/HistoryReducer";
 
 const drawerWidth = 240;
 
@@ -75,6 +79,7 @@ const ToolbarCustom = styled('Toolbar')(({theme}) => ({
 }));
 
 export default function SideNavBar() {
+    const dispatch = useDispatch();
     const theme = useTheme();
     const [open, setOpen] = useState(false);
     // const [extend, setExtend] = useState(false);
@@ -82,6 +87,24 @@ export default function SideNavBar() {
     const handleDrawer = () => {
         setOpen(!open);
     };
+
+    const navigationTextAndAction = [
+        {text: 'Home', action: () => console.log('Home')},
+        {
+            text: 'Clear History', action: () => window.confirm(
+                'Are you sure you wish to clear your history? There will be no going back!') && dispatch(clearHistory(),
+            )
+        },
+        {text: 'Recents', action: () => console.log('Recents')},
+        {text: 'Report', action: () => console.log('Report')},
+    ]
+
+    const linkUrls = {
+        'Home': '/',
+        'Clear History': '/map',
+        'Recents': '/map',
+        'Report': '/map',
+    }
 
     return (
         <Box sx={{display: 'flex', height: '100%'}}>
@@ -93,7 +116,7 @@ export default function SideNavBar() {
             >
                 <DrawerHeader>
                     {open && (
-                        <Logo />
+                        <Logo/>
                     )}
                     <IconButton onClick={handleDrawer} sx={{mr: 1}}>
                         {open ? <ChevronLeftIcon/> : <MenuIcon/>}
@@ -101,18 +124,19 @@ export default function SideNavBar() {
                 </DrawerHeader>
                 <Divider/>
                 <List>
-                    {['Home', 'Recents', 'Report'].map((text, index) => (
-                        <a href='/' sx={{ textDecoration: 'none' }}>
-                        <ListItem key={text} disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon sx={{color: theme.palette.primary.main, ml: 1}}>
-                                    {text === 'Home' && <HomeIcon />}
-                                    {text === 'Recents' && <HistoryIcon />}
-                                    {text === 'Report' && <ReportIcon />}
-                                </ListItemIcon>
-                                <ListItemText primary={text}/>
-                            </ListItemButton>
-                        </ListItem>
+                    {navigationTextAndAction.map(({text, action}) => (
+                        <a href={linkUrls[text]} style={{textDecoration: 'none', color: theme.palette.primary.main}}>
+                            <ListItem key={text} disablePadding>
+                                <ListItemButton onClick={action}>
+                                    <ListItemIcon sx={{color: theme.palette.primary.main, ml: 1}}>
+                                        {text === 'Home' && <HomeIcon/>}
+                                        {text === 'Recents' && <HistoryIcon/>}
+                                        {text === 'Report' && <ReportIcon/>}
+                                        {text === 'Clear History' && <DeleteForeverIcon />}
+                                    </ListItemIcon>
+                                    <ListItemText primary={text}/>
+                                </ListItemButton>
+                            </ListItem>
                         </a>
                     ))}
                 </List>
@@ -122,7 +146,7 @@ export default function SideNavBar() {
                         <ListItem key={text} disablePadding>
                             <ListItemButton>
                                 <ListItemIcon sx={{color: theme.palette.primary.main, ml: 1}}>
-                                    {text === 'Help' && <HelpCenterIcon />}
+                                    {text === 'Help' && <HelpCenterIcon/>}
                                 </ListItemIcon>
                                 <ListItemText primary={text}/>
                             </ListItemButton>

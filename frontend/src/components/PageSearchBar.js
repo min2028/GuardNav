@@ -9,7 +9,7 @@ const SearchWrapper = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: ${({ theme }) => `${theme.buttonPadding.values?.paddingSides} ${theme.buttonPadding?.values?.paddingTopBottom}`};
+    padding: 2px 12px;
     background-color: #ffffff;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
     border-radius: 12px;

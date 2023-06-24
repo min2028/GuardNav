@@ -120,7 +120,7 @@ export default function SideNavBar() {
                     {navigationTextAndAction.map(({ text, action }) => (
                         <ListItem key={text} disablePadding>
                             <ListItemButton onClick={action}>
-                                <ListItemIcon sx={{color: theme.palette.primary.main, ml: 1}}>
+                                <ListItemIcon sx={{color: theme.palette.secondary.main, ml: 1}}>
                                     {text === 'Home' && <HomeIcon />}
                                     {text === 'Recents' && <HistoryIcon />}
                                     {text === 'Report' && <ReportIcon />}

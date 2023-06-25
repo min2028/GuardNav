@@ -11,20 +11,12 @@ const TitleTag = styled.h1`
     }}
 `;
 
-
 const DescriptionTag = styled.p`
     color: ${(props) => props.theme.palette.secondary.main};
     font-family: ${(props) => props.theme.palette.primary.family};
     margin-top: 0px;
     ${(props) => (props.size ? "font-size:" + props.size : "")};
 `;
-
-// const LadingPageInnerContainer = styled.div`
-//     display: flex;
-//     justify-content: space-between;
-//     padding: 3.5rem 3rem;
-//     height: 600px;
-// `;
 
 const LadingPageInnerContainer = styled.div`
     display: flex;

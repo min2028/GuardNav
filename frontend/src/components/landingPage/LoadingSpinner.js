@@ -1,6 +1,5 @@
 import CircularProgress from '@mui/material/CircularProgress';
 import styled from '@emotion/styled';
-import { useTheme } from '@mui/material/styles';
 
 const LoadingContainer = styled.div`
     display: flex;

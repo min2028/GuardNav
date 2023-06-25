@@ -1,9 +1,9 @@
-import styled from 'styled-components';
-import { useTheme } from '@mui/material';
+import styled from "styled-components";
+import { useTheme } from "@mui/material";
 
-import SearchIcon from '@mui/icons-material/Search';
+import SearchIcon from "@mui/icons-material/Search";
 
-import { SearchBar } from "./index";
+import { SearchBar } from "../index";
 
 const SearchWrapper = styled.div`
     display: flex;
@@ -45,13 +45,17 @@ const PageSearchBar = ({ search, onSearch }) => {
     const theme = useTheme();
 
     return (
-        <SearchWrapper theme = {theme}>
-            <SearchBar placeholder = "Where are you going today?" style={{border: 'none', outline: 'none'}} onSearch={onSearch} />
-            <SearchButton theme = {theme}>
+        <SearchWrapper theme={theme}>
+            <SearchBar
+                placeholder="Where are you going today?"
+                style={{ border: "none", outline: "none" }}
+                onSearch={onSearch}
+            />
+            <SearchButton theme={theme}>
                 <SearchIcon />
             </SearchButton>
         </SearchWrapper>
-    )
-}
+    );
+};
 
 export default PageSearchBar;

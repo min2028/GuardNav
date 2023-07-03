@@ -28,6 +28,7 @@ const ImageContainer = styled.div`
         width: 125px;
         height: auto;
         border-radius: 50%;
+        z-index: 0;
     }
 `;
 

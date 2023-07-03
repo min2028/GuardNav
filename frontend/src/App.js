@@ -5,7 +5,7 @@ import {ThemeProvider } from '@mui/material';
 import { theme } from "./styles/theme";
 import LandingPage from "./pages/LandingPage";
 import {Route, BrowserRouter as Router, Routes} from "react-router-dom";
-import Requirements from "./components/Requirements";
+import SettingPage from './pages/settingPage';
 
 const AppContainer = styled.div`
   display: flex;
@@ -23,6 +23,7 @@ function App() {
                     <Routes>
                         <Route exact path="/" element={<LandingPage/>} />
                         <Route path="/map" element={<MapPage/> } />
+                        <Route path="/setting" element={<SettingPage/> } />
                     </Routes>
                 </ThemeProvider>
             </Router>

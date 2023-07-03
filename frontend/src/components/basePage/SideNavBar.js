@@ -15,11 +15,11 @@ import ListItemText from "@mui/material/ListItemText";
 import HomeIcon from "@mui/icons-material/Home";
 import HistoryIcon from "@mui/icons-material/History";
 import { useState } from "react";
-import HelpCenterIcon from "@mui/icons-material/HelpCenter";
+import SettingsIcon from "@mui/icons-material/Settings";
 import ReportIcon from "@mui/icons-material/Report";
 import Logo from "../Logo";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { clearHistory } from "../../reducers/HistoryReducer";
 
@@ -71,9 +71,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
     justifyContent: "flex-end",
 }));
 
-const ToolbarCustom = styled("Toolbar")(({ theme }) => ({
-    alignItems: "unset",
-}));
 
 export default function SideNavBar() {
     const dispatch = useDispatch();
@@ -115,7 +112,7 @@ export default function SideNavBar() {
                             <ListItemButton onClick={action}>
                                 <ListItemIcon
                                     sx={{
-                                        color: theme.palette.secondary.main,
+                                        color: theme.palette.primary.main,
                                         ml: 1,
                                     }}
                                 >
@@ -133,8 +130,11 @@ export default function SideNavBar() {
                 </List>
                 <Divider />
                 <List>
-                    {["Help"].map((text, index) => (
-                        <ListItem key={text} disablePadding>
+                    {["Settings"].map((text, index) => (
+                        <Link
+                            to="/setting"
+                            style={{ textDecoration: "none", color: "inherit" }}
+                        >
                             <ListItemButton>
                                 <ListItemIcon
                                     sx={{
@@ -142,11 +142,11 @@ export default function SideNavBar() {
                                         ml: 1,
                                     }}
                                 >
-                                    {text === "Help" && <HelpCenterIcon />}
+                                    {text === "Settings" && <SettingsIcon />}
                                 </ListItemIcon>
                                 <ListItemText primary={text} />
                             </ListItemButton>
-                        </ListItem>
+                        </Link>
                     ))}
                 </List>
             </Drawer>

@@ -63,7 +63,7 @@ const Map = ({
   directions,
   directionsServiceOptions,
   directionsCallback,
-  crimeData
+  crimeData,
 }) => {
   const theme = useTheme();
   const dispatch = useDispatch();
@@ -111,7 +111,7 @@ const Map = ({
                 weight: item.weight,
               }))}
               options={{
-                radius: 50,
+                radius: 10,
               }}
             />
             <MapTopContainer>

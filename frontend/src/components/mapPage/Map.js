@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React from "react";
 import {
     GoogleMap,
     Marker,
@@ -7,12 +7,7 @@ import {
     HeatmapLayer,
 } from "@react-google-maps/api";
 import { useDispatch, useSelector } from "react-redux";
-import {
-    setCurrentPosition,
-    resetLocation,
-} from "../../reducers/LocationReducer";
 import PageContainer from "../basePage/PageContainer";
-import LoadingSpinner from "../landingPage/LoadingSpinner";
 import WeatherInformation from "./WeatherInformation";
 import { useTheme } from "@mui/material/styles";
 import styleComp from "@emotion/styled";

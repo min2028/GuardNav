@@ -13,6 +13,7 @@ const ContentContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     flex: 1;
+    z-index: 1;
 `;
 
 const ImageContainer = styled.div`
@@ -24,6 +25,7 @@ const ImageContainer = styled.div`
         position: absolute;
         right: 0;
         bottom: 0;
+        z-index: 0;
     }
 `;
 

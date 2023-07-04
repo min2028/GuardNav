@@ -1,8 +1,8 @@
 import './App.css';
-import { MapPage } from './pages';
+import {MapPage} from './pages';
 import styled from 'styled-components';
-import {ThemeProvider } from '@mui/material';
-import { theme } from "./styles/theme";
+import {ThemeProvider} from '@mui/material';
+import {theme} from "./styles/theme";
 import LandingPage from "./pages/LandingPage";
 import {Route, BrowserRouter as Router, Routes} from "react-router-dom";
 import SettingPage from './pages/settingPage';
@@ -21,9 +21,9 @@ function App() {
             <Router>
                 <ThemeProvider theme={theme}>
                     <Routes>
-                        <Route exact path="/" element={<LandingPage/>} />
-                        <Route path="/map" element={<MapPage/> } />
-                        <Route path="/setting" element={<SettingPage/> } />
+                        <Route exact path="/" element={<LandingPage/>}/>
+                        <Route path="/map" element={<MapPage/>}/>
+                        <Route path="/setting" element={<SettingPage/>}/>
                     </Routes>
                 </ThemeProvider>
             </Router>

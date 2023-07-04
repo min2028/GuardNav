@@ -8,6 +8,7 @@ import {
 } from "./LandingPageTags";
 import { useTheme } from "@emotion/react";
 import PlanTripButton from "./PlanTripButton";
+import AuthButton from "./AuthButton";
 
 const ContentContainer = styled.div`
     display: flex;
@@ -35,36 +36,18 @@ const TimeComponent = styled.div`
     color: white;
 `;
 
-const HomePage = () => {
+const Home = () => {
     const theme = useTheme();
-    const [showTime, setShowTime] = useState(getCurrentTime());
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setShowTime(getCurrentTime());
-        }, 1000);
-
-        return () => {
-            clearInterval(interval);
-        };
-    }, []);
-    function getCurrentTime() {
-        const date = new Date();
-        return date.toLocaleTimeString();
-    }
 
     return (
         <LadingPageOuterContainer>
             <LadingPageInnerContainer>
-                <TimeComponent>
-                    <h1 align="center">Current Time</h1>
-                    <h2 align="center"> {showTime}</h2>
-                </TimeComponent>
                 <ContentContainer>
                     <TitleTag theme={theme}>
                         Plan a safe trip in Vancouver
                     </TitleTag>
                     <PlanTripButton />
+                    <AuthButton />
                 </ContentContainer>
                 <ImageContainer>
                     <img src={Image} />
@@ -74,4 +57,4 @@ const HomePage = () => {
     );
 };
 
-export default HomePage;
+export default Home;

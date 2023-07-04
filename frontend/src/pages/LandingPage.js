@@ -3,7 +3,7 @@ import GoalComponent from "../components/landingPage/GoalComponent";
 import Requirements from "../components/Requirements";
 import MeetTeam from "../components/landingPage/MeetTeam";
 import NavBar from "../components/basePage/NavBar";
-import HomePage from "../components/landingPage/HomePage";
+import Home from "../components/landingPage/Home";
 import { Element } from "react-scroll";
 
 
@@ -11,7 +11,7 @@ export default function LandingPage() {
     return (
         <>
             <NavBar />
-            <HomePage />
+            <Home />
             <GoalComponent />
             <Element name="requirements">
                 <Requirements />

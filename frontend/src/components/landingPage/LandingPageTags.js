@@ -27,6 +27,7 @@ const LadingPageInnerContainer = styled.div`
 
 const LadingPageOuterContainer = styled.div`
     width: 100%;
+    height: 100%;
     background-color: #1a191a;
 `;
 

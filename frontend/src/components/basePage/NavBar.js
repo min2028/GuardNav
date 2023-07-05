@@ -1,89 +1,97 @@
-import React from "react";
-import styled from "styled-components";
-import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+import Logo from '../../resources/logo.png';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 
-const NavBarContainer = styled.div`
-  background-color: black;
-  display: flex;
-  align-items: center;
-  height: 70px;
-  width: 100%;
-  padding: 1.5em;
-  font-size: 17px;
-  text-align: center;
-  font-weight: bold;
-`;
+const pages = ['map', 'about'];
+const settings = ['Dashboard', 'Logout'];
 
-const LeftNav = styled.div`
-  margin-left: auto;
+function NavBar() {
+    const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  a {
-    color: #f2f2f2;
-    margin: 10px;
-    text-decoration: none;
-  }
-`;
-
-const MidNav = styled.div`
-  margin: auto;
-  align-self: center;
-
-  a {
-    letter-spacing: 0.245em;
-    color: #f2f2f2;
-    text-decoration: none;
-  }
-`;
-
-const RightNav = styled.div`
-  margin: auto;
-  align-self: center;
-
-  a {
-    color: #f2f2f2;
-    text-decoration: none;
-  }
-`;
-
-const NavBar = (props) => {
-    const scrollToRequirements = (event) => {
-        scroll.scrollTo("requirements", {
-            smooth: true,
-            offset: -70,
-        });
+    const handleOpenUserMenu = (event) => {
+        setAnchorElUser(event.currentTarget);
     };
-    return (
-        <NavBarContainer>
-            <LeftNav>
-                <a className="nav-item" href="/">
-                    Home
-                </a>
-                <a className="nav-item" href="/Map">
-                    Map
-                </a>
-                <ScrollLink
-                    className="nav-item"
-                    to="requirements"
-                    smooth={true}
-                    offset={-70}
-                    duration={500}
-                    onClick={scrollToRequirements}
-                >
-                    About
-                </ScrollLink>
-            </LeftNav>
-            <MidNav>
-                <a className="nav-item" href="/Map">
-                    GuardNav
-                </a>
-            </MidNav>
-            <RightNav>
-                <a className="nav-item" href="../index.html">
-                    Help
-                </a>
-            </RightNav>
-        </NavBarContainer>
-    );
-};
 
+    const handleCloseUserMenu = () => {
+        setAnchorElUser(null);
+    };
+
+    return (
+        <AppBar position="fixed">
+            <Container maxWidth="xl">
+                <Toolbar disableGutters>
+                    <Avatar alt="Logo" src={Logo} />
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        component="a"
+                        href="/"
+                        sx={{
+                            mr: 2,
+                            display: { xs: 'none', md: 'flex' },
+                            fontFamily: 'monospace',
+                            fontWeight: 700,
+                            letterSpacing: '.3rem',
+                            color: 'inherit',
+                            textDecoration: 'none',
+                        }}
+                    >
+                        GuardNav
+                    </Typography>
+                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                        {pages.map((page) => (
+                            <Button
+                                key={page}
+                                sx={{ my: 2, color: 'white', display: 'block', textAlign: 'center'}}
+                                href={`/${page}`}
+                            >
+                                {page}
+                            </Button>
+                        ))}
+                    </Box>
+                    <Box sx={{ flexGrow: 0 }}>
+                        <Tooltip title="Open settings">
+                            <AccountCircleOutlinedIcon
+                                onClick={handleOpenUserMenu}
+                                sx={{fontSize: '2rem'}}
+                            />
+                        </Tooltip>
+                        <Menu
+                            sx={{ mt: '45px' }}
+                            id="menu-appbar"
+                            anchorEl={anchorElUser}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            open={Boolean(anchorElUser)}
+                            onClose={handleCloseUserMenu}
+                        >
+                            {settings.map((setting) => (
+                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                                    <Typography textAlign="center">{setting}</Typography>
+                                </MenuItem>
+                            ))}
+                        </Menu>
+                    </Box>
+                </Toolbar>
+            </Container>
+        </AppBar>
+    );
+}
 export default NavBar;

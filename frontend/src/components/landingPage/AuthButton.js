@@ -13,18 +13,14 @@ export default function AuthButton() {
         const {credential} = credentialResponse;
         const payload = credential ? decodeJwt(credential) : undefined;
         if (payload) {
-            console.log("Decoded JWT ID token payload: " + JSON.stringify(payload));
-            dispatch(getUserAsync(credential)).then(() => {
-                console.log('User after dispatch:', user);
+            // console.log("Decoded JWT ID token payload: " + JSON.stringify(payload));
+            dispatch(getUserAsync(credential))
             });
         }
     };
-    useEffect(() => {
-        console.log('User in useEffect:', user);
-    }, [user]);
-
-    console.log('User before rendering:', user);
-
+    // useEffect(() => {
+    //     console.log('User in useEffect:', user);
+    // }, [user]);
 
     // const oneTapLogin = useGoogleOneTapLogin(
     //     {

@@ -1,6 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
+import {getUserAsync} from "../thunks/userThunk";
 
-const authSlice = createSlice({
+const userSlice = createSlice({
     name: 'auth',
     initialState: {
         user: null,
@@ -8,15 +9,12 @@ const authSlice = createSlice({
     reducers: {},
     extraReducers(builder) {
         builder
-            .addCase('auth/login', (state, action) => {
+            .addCase(getUserAsync.fulfilled, (state, action) => {
                 state.user = action.payload;
-            })
-            .addCase('auth/logout', (state) => {
-                state.user = null;
             })
     }
 });
 
 
 
-export default authSlice.reducer;
+export default userSlice.reducer;

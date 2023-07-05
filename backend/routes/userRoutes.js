@@ -5,6 +5,6 @@ var UserController = require('../controllers/userController');
 
 
 /* GET crime data. */
-router.get('/', UserController.getAllUsers);
+router.get('/', UserController.getUser);
 
 module.exports = router;

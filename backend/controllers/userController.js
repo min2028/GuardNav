@@ -1,6 +1,13 @@
 const UserModel = require('../models/UserModel');
 
 const userController = {
+    getUser: async function (req, res, next) {
+        if (req.user) {
+            res.status(200).send(req.user);
+        } else {
+            res.status(404).send("User not found");
+        }
+    },
     getAllUsers: async function (req, res, next) {
         try {
             const users = await UserModel.find()

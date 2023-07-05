@@ -14,13 +14,12 @@ async function verifyUser (req, res, next) {
         const payload = ticket.getPayload();
         if (payload) {
             const user = await UserModel.findOne({ _id: payload.sub });
-            req.userId = payload.sub;
-            next();
 
             console.log("User Email: ", payload.email);
 
             if (user) {
                 req.user = user;
+                next();
             } else {
                 req.user = await UserModel.create({
                     _id: payload.sub,
@@ -28,6 +27,7 @@ async function verifyUser (req, res, next) {
                     email: payload.email,
                     picture: payload.picture,
                 });
+                next();
             }
         } else {
             const error = new Error("Forbidden Error");

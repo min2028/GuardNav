@@ -3,6 +3,7 @@ import LocationReducer from "./reducers/LocationReducer";
 import TripReducer from "./reducers/TripReducer";
 import HistoryReducer from "./reducers/HistoryReducer";
 import SavedPlaceReducer from "./reducers/SavedPlaceReducer";
+import UserReducer from "./reducers/UserReducer";
 
 const store = configureStore({
     reducer: {
@@ -10,7 +11,9 @@ const store = configureStore({
         trip: TripReducer,
         history: HistoryReducer,
         places: SavedPlaceReducer,
+        user: UserReducer
     },
+    devTools: true,
 });
 
 export default store;

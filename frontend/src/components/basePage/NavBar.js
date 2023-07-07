@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useSelector } from "react-redux";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -10,12 +11,15 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Logo from '../../resources/logo.png';
+import SignInButton from '../landingPage/SignInButton';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 
 const pages = ['map', 'about'];
 const settings = ['Dashboard', 'Logout'];
 
 function NavBar() {
+    const userState = useSelector(state => state.user);
+    
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
     const handleOpenUserMenu = (event) => {
@@ -60,34 +64,40 @@ function NavBar() {
                         ))}
                     </Box>
                     <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title="Open settings">
-                            <AccountCircleOutlinedIcon
-                                onClick={handleOpenUserMenu}
-                                sx={{fontSize: '2rem'}}
-                            />
-                        </Tooltip>
-                        <Menu
-                            sx={{ mt: '45px' }}
-                            id="menu-appbar"
-                            anchorEl={anchorElUser}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={Boolean(anchorElUser)}
-                            onClose={handleCloseUserMenu}
-                        >
-                            {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">{setting}</Typography>
-                                </MenuItem>
-                            ))}
-                        </Menu>
+                        {
+                            userState ? 
+                            <SignInButton /> :
+                            <React.Fragment>
+                                <Tooltip title="Open settings">
+                                <AccountCircleOutlinedIcon
+                                    onClick={handleOpenUserMenu}
+                                    sx={{fontSize: '2rem'}}
+                                />
+                                </Tooltip>
+                                <Menu
+                                    sx={{ mt: '45px' }}
+                                    id="menu-appbar"
+                                    anchorEl={anchorElUser}
+                                    anchorOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                    keepMounted
+                                    transformOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                    open={Boolean(anchorElUser)}
+                                    onClose={handleCloseUserMenu}
+                                >
+                                    {settings.map((setting) => (
+                                        <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                                            <Typography textAlign="center">{setting}</Typography>
+                                        </MenuItem>
+                                    ))}
+                                </Menu>
+                            </React.Fragment>
+                        }
                     </Box>
                 </Toolbar>
             </Container>

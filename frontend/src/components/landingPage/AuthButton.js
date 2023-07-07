@@ -14,9 +14,8 @@ export default function AuthButton() {
         const payload = credential ? decodeJwt(credential) : undefined;
         if (payload) {
             // console.log("Decoded JWT ID token payload: " + JSON.stringify(payload));
-            dispatch(getUserAsync(credential))
-            });
-        }
+            dispatch(getUserAsync(credential));
+        };
     };
     // useEffect(() => {
     //     console.log('User in useEffect:', user);

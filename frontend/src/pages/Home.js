@@ -9,6 +9,7 @@ import {
 import {useTheme} from "@emotion/react";
 import PlanTripButton from "../components/landingPage/PlanTripButton";
 import AuthButton from "../components/landingPage/AuthButton";
+import SignInButton from "../components/landingPage/SignInButton";
 import NavBar from "../components/basePage/NavBar";
 
 const ContentContainer = styled.div`
@@ -51,7 +52,7 @@ const Home = () => {
                             Plan a safe trip in Vancouver
                         </TitleTag>
                         <PlanTripButton/>
-                        <AuthButton/>
+                        <SignInButton />
                     </ContentContainer>
                     <ImageContainer>
                         <img src={Image}/>

@@ -92,6 +92,7 @@ const MapPage = () => {
     const { currentPosition } = useSelector((state) => state.location);
 
     useEffect(() => {
+        console.log("hey");
         if (isLoaded) {
             csv("/data/crimedata_csv_AllNeighbourhoods_AllYears.csv").then(
                 (data) => {

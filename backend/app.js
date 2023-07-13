@@ -8,6 +8,7 @@ const cors = require('cors');
 var indexRouter = require('./routes/index');
 var crimeRouter = require('./routes/crimeRoutes');
 var userRouter = require('./routes/userRoutes');
+var historyRouter = require('./routes/historyRoutes');
 var {verifyUser, authErrorHandler} = require('./middleware/auth');
 
 require('./config/database');
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/public/crime', crimeRouter);
+app.use('/protected/history', historyRouter);
 app.use('/protected/user', verifyUser, authErrorHandler, userRouter)
 
 module.exports = app;

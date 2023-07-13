@@ -13,12 +13,15 @@ const HistoryController = {
     },
     addData: async function (req, res, next) {
         try {
-            const users = await UserModel.find({_id: req.body.owner_id});
-            if (users.length < 1) {
-                res.status(500).send("user not found");
+            const users = UserModel.find({_id: req.body.owner_id});
+            const validation = HistoryModel.validate(req.body);
+            const results = await Promise.all([users, validation]);
+            if (results[0].length < 1 && results[1].error) {
+                res.status(400).send("user not found or wrong request");
             }
-            const item = await HistoryModel.create(req.body);
-            res.status(201).send(item)
+            const historyInstance = new HistoryModel(req.body);
+            const savedModel = await historyInstance.save();
+            res.status(201).json(savedModel);
         } catch (err) {
                 res.status(500).send(err.message);
         }

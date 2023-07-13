@@ -3,10 +3,8 @@ var router = express.Router();
 var HistoryController = require('../controllers/historyController');
 
 
-/* GET crime data. */
-router.get('/', HistoryController.getData);
-
-/* Add crime data */
-router.post('/', HistoryController.addData);
+router.post('/', HistoryController.addHistoryItem);
+router.delete('/', HistoryController.clearHistory);
+router.put('/:id/favourite', HistoryController.updateHistoryFavourite);
 
 module.exports = router;

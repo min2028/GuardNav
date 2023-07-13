@@ -8,14 +8,6 @@ const userController = {
             res.status(404).send("User not found");
         }
     },
-    getAllUsers: async function (req, res, next) {
-        try {
-            const users = await UserModel.find()
-            res.status(200).send(users)
-        } catch (err) {
-            res.status(500).send(err.message);
-        }
-    },
     getUserById: async function (req, res, next) {
         try {
             const user = await UserModel.find({_id: req.userId});

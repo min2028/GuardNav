@@ -1,31 +1,65 @@
 const HistoryModel = require("../models/HistoryModel");
 const UserModel = require('../models/UserModel');
+const mongoose = require("mongoose");
+const { Types } = mongoose;
 
-const HistoryController = {
+const historyController = {
 
-    getData: async function (req, res, next) {
+    addHistoryItem: async function (req, res, next) {
         try {
-            const item = await HistoryModel.find()
-            res.status(200).send(item)
-        } catch (err) {
-                res.status(500).send(err.message);
-        }
-    },
-    addData: async function (req, res, next) {
-        try {
-            const users = UserModel.find({_id: req.body.owner_id});
-            const validation = HistoryModel.validate(req.body);
-            const results = await Promise.all([users, validation]);
-            if (results[0].length < 1 && results[1].error) {
-                res.status(400).send("user not found or wrong request");
+            const user = await UserModel.findById(req.user._id);
+            // If this occurs, the something is wrong with the middleware
+            if (!user) {
+                res.status(404).send("User not found");
             }
-            const historyInstance = new HistoryModel(req.body);
-            const savedModel = await historyInstance.save();
+            console.log(req.body);
+            const historyDocument = new HistoryModel(req.body);
+            const savedModel = await historyDocument.save();
+
+            user.history.push(new Types.ObjectId(savedModel._id));
+            await user.save();
+
             res.status(201).json(savedModel);
         } catch (err) {
-                res.status(500).send(err.message);
+            if (err.name === "ValidationError") {
+                return res.status(400).json({ error: "Invalid Request" });
+            }
+            res.status(500).send(err.message);
+        }
+    },
+
+    updateHistoryFavourite: async function (req, res, next) {
+        try {
+            const historyId = req.params.id;
+            const history = await HistoryModel.findById(historyId);
+            if (!history) {
+                return res.status(404).send("History Item not found");
+            }
+            history.favourite = req.body.favourite;
+            const savedModel = await history.save();
+            res.status(200).json(savedModel);
+        } catch (err) {
+            res.status(500).send(err.message);
+        }
+    },
+
+    clearHistory: async function (req, res, next) {
+        try {
+            const user = await UserModel.findById(req.user._id);
+            if (!user) {
+                return res.status(404).send("User not found");
+            }
+            const historyIds = user.history;
+            user.history = [];
+            await user.save();
+
+            await HistoryModel.deleteMany({ _id: { $in: historyIds } });
+
+            res.status(204).send("History cleared");
+        } catch (err) {
+            res.status(500).send(err.message);
         }
     }
-}
+};
 
-module.exports = HistoryController;
+module.exports = historyController;

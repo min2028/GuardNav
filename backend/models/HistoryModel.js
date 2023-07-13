@@ -36,9 +36,6 @@ const historySchema = new Schema({
     favourite: {
         type: Boolean,
         default: false
-    },
-    owner_id: {
-        type: String
     }
 } , {collection: 'history'});
 

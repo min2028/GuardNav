@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/public/crime', crimeRouter);
-app.use('/protected/history', historyRouter);
+app.use('/protected/history', verifyUser, authErrorHandler, historyRouter);
 app.use('/protected/user', verifyUser, authErrorHandler, userRouter)
 
 module.exports = app;

@@ -6,10 +6,7 @@ const userSchema = new Schema({
     name: { type: String, required: true },
     email: { type: String, required: true },
     history: [
-        {
-            from: { type: String, required: true },
-            to: { type: String, required: true },
-        } ,
+        { type: Schema.Types.ObjectId, ref: 'History' },
     ],
 }, {collection: 'users'});
 

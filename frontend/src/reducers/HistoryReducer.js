@@ -9,7 +9,7 @@ const historyReducer = createSlice({
             risk: "low",
             time: "3780",
             distance: "28300",
-            favorite: false,
+            favourite: false,
             id: uuidv4(),
             from: {
                 formatted_address: "UBC, Vancouver, BC, Canada",
@@ -26,7 +26,7 @@ const historyReducer = createSlice({
             risk: "high",
             time: "2580",
             distance: "19300",
-            favorite: false,
+            favourite: false,
             id: uuidv4(),
             from: {
                 formatted_address: "Downtown Vancouver, Vancouver, BC, Canada",
@@ -43,7 +43,7 @@ const historyReducer = createSlice({
             risk: "mid",
             time: "1380",
             distance: "10300",
-            favorite: true,
+            favourite: true,
             id: uuidv4(),
             from: {
                 formatted_address: "Metropolis at Metrotown, Kingsway, Burnaby, BC, Canada",
@@ -60,33 +60,21 @@ const historyReducer = createSlice({
   },
   reducers: {
     addHistoryItem: (state, action) => {
-        state.items.unshift(action.payload);
-
-        if (state.items.length > 3) {
+        if (state.items.length >= 50) {
             state.items.pop();
         }
+        state.items.unshift(action.payload);
     },
     clearHistory: (state) => {
         state.items = [];
     },
-    setFavorite: (state, action) => {
-        const {id, favorite} = action.payload;
+    setFavourite: (state, action) => {
+        const id = action.payload;
         const item = state.items.find(item => item.id === id);
-        item.favorite = favorite;
-
-        // sort by favorite
-        state.items.sort((a, b) => {
-            if (a.favorite && !b.favorite) {
-                return -1;
-            } else if (!a.favorite && b.favorite) {
-                return 1;
-            } else {
-                return 0;
-            }
-        });
+        item.favourite = !item.favourite;
     }
   },
 });
 
-export const { addHistoryItem, clearHistory } = historyReducer.actions;
+export const { addHistoryItem, clearHistory, setFavourite } = historyReducer.actions;
 export default historyReducer.reducer;

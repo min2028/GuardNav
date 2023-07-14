@@ -1,10 +1,21 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
+import { v4 as uuidv4 } from 'uuid';
+
 import CloseIcon from '@mui/icons-material/Close';
 import { useTheme } from '@mui/material/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { RoutePlanner, RouteOptions, RouteInformation, RouteDirections } from '../index.js';
 import { addHistoryItem } from '../../reducers/HistoryReducer.js';
+
+const FlowHolder = styled.div`
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: all 0.3s ease-in-out;
+    
+    width: ${({ open }) => open ? '30%' : '0%'};
+`;
 
 const Drawer = styled.div`
     display: flex;
@@ -12,15 +23,14 @@ const Drawer = styled.div`
     justify-content: flex-start;
     z-index: 5;
     height: 100vh;
-    width: 50%;
+    width: 30%;
     background-color: white;
     transition: all 0.3s ease-in-out;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    white-space: nowrap;
+    position: absolute;
 
     ${props => !props.open && css`
         transform: translateX(-100%);
-        width: 0;
         visibility: hidden;
     `}
 `;
@@ -87,6 +97,7 @@ const RouteDrawer = ({ open, onClose, option, setOption, directions, openSuccess
                 lng: directions.routes[0].legs[0].end_location.lng(),
                 formatted_address: directions.routes[0].legs[0].end_address,
             },
+            id: uuidv4(),
         }
 
         dispatch(addHistoryItem(route));
@@ -94,23 +105,26 @@ const RouteDrawer = ({ open, onClose, option, setOption, directions, openSuccess
     }
 
     return (
-        <Drawer
-            open={open}
-        >
-            <DrawerHeader>
-                <h2>Trip Planner</h2>
-                <CloseButton onClick={onClose}>
-                    <CloseIcon fontSize='medium' />
-                </CloseButton>
-            </DrawerHeader>
-            <Divider />
-            <RoutePlanner directions={directions} />
-            <RouteOptions option={option} setOption={setOption} />
-            <Divider />
-            <RouteInformation directions={directions} onAddRouteToHistory={onAddRouteToHistory} />
-            <Divider />
-            <RouteDirections directions={directions} />
-        </Drawer>
+        <>
+            <FlowHolder open={open} />
+            <Drawer
+                open={open}
+            >
+                <DrawerHeader>
+                    <h2>Trip Planner</h2>
+                    <CloseButton onClick={onClose}>
+                        <CloseIcon fontSize='medium' />
+                    </CloseButton>
+                </DrawerHeader>
+                <Divider />
+                <RoutePlanner directions={directions} />
+                <RouteOptions option={option} setOption={setOption} />
+                <Divider />
+                <RouteInformation directions={directions} onAddRouteToHistory={onAddRouteToHistory} />
+                <Divider />
+                <RouteDirections directions={directions} />
+            </Drawer>
+        </>
     )
 };
 

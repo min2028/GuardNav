@@ -11,6 +11,7 @@ import RouteOptions from "./mapPage/RouteOptions";
 import PageSearchBar from "./mapPage/PageSearchBar";
 import RouteInformation from "./mapPage/RouteInformation";
 import RouteDirections from "./mapPage/RouteDirections";
+import HistoryList from "./mapPage/HistoryList";
 
 export {
     Map,
@@ -26,4 +27,5 @@ export {
     PageSearchBar,
     RouteInformation,
     RouteDirections,
+    HistoryList,
 };

@@ -14,6 +14,14 @@ import { setFrom, setTo } from "../reducers/TripReducer";
 import { csv } from "d3";
 import { calculateWeight } from "../utilities/DangerScoreCalculator";
 import proj4 from "proj4";
+import styled from "styled-components";
+
+const Content = styled.div`
+    display: flex;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+`;
 
 const MapPage = () => {
     const dispatch = useDispatch();
@@ -30,6 +38,7 @@ const MapPage = () => {
     const [option, setOption] = useState("safest");
     const [successOpen, setSuccessOpen] = useState(false);
     const [crimeData, setCrimeData] = useState([]);
+    const [showAllHistory, setShowAllHistory] = useState(false);
 
     const [directions, setDirections] = useState(null);
     let count = React.useRef(0);
@@ -92,7 +101,6 @@ const MapPage = () => {
     const { currentPosition } = useSelector((state) => state.location);
 
     useEffect(() => {
-        console.log("hey");
         if (isLoaded) {
             csv("/data/crimedata_csv_AllNeighbourhoods_AllYears.csv").then(
                 (data) => {
@@ -163,28 +171,41 @@ const MapPage = () => {
                 <LoadingSpinner />
             ) : (
                 <>
-                    <SideNavBar />
-                    <RouteDrawer
-                        open={routeDrawerOpen}
-                        onClose={() => {
-                            setTo(null);
-                            setRouteDrawerOpen(false);
-                        }}
-                        option={option}
-                        setOption={setOption}
-                        isLoaded={isLoaded}
-                        directions={directions}
-                        openSuccessMessage={() => setSuccessOpen(true)}
+                    <SideNavBar 
+                        setShowAllHistory={(value) => {
+                            setShowAllHistory(value)
+
+                            const historyList = document.getElementsByClassName("history-list");
+                            if (historyList.length > 0) {
+                                historyList[0].scrollTop = 0;
+                            }
+                        }} 
+                        showAllHistory={showAllHistory}
                     />
-                    <Map
-                        openRouteDrawer={openRouteDrawer}
-                        isLoaded={isLoaded}
-                        isRouteDrawerOpen={routeDrawerOpen}
-                        directions={directions}
-                        directionsServiceOptions={directionsServiceOptions}
-                        directionsCallback={directionsCallback}
-                        crimeData={crimeData}
-                    />
+                    <Content>
+                        <RouteDrawer
+                            open={routeDrawerOpen}
+                            onClose={() => {
+                                setTo(null);
+                                setRouteDrawerOpen(false);
+                            }}
+                            option={option}
+                            setOption={setOption}
+                            isLoaded={isLoaded}
+                            directions={directions}
+                            openSuccessMessage={() => setSuccessOpen(true)}
+                        />
+                        <Map
+                            openRouteDrawer={openRouteDrawer}
+                            isLoaded={isLoaded}
+                            isRouteDrawerOpen={routeDrawerOpen}
+                            directions={directions}
+                            directionsServiceOptions={directionsServiceOptions}
+                            directionsCallback={directionsCallback}
+                            crimeData={crimeData}
+                            showAllHistory={showAllHistory}
+                        />
+                    </Content>
                 </>
             )}
             <Snackbar
@@ -198,7 +219,7 @@ const MapPage = () => {
                     severity="success"
                     sx={{ width: "100%" }}
                 >
-                    Your route has been saved!
+                    Route saved successfully! Only the 50 most recent routes are saved.
                 </Alert>
             </Snackbar>
         </PageContainer>

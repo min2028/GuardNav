@@ -58,15 +58,16 @@ const ExpandedView = styled.div`
     z-index: 5;
     margin: 0;
     visibility: hidden;
-    transform: translateY(-0.5%);
     opacity: 0;
     position: relative;
 
     ${props => props.open ? css`
         animation: ${appear} 0.2s ease-in-out forwards;
         pointer-events: auto;
+        transform: translateY(0);
     ` : css`
         animation: ${disappear} 0.2s ease-in-out forwards;
+        transform: translateY(-1%);
     `}
 `;
 

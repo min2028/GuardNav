@@ -1,11 +1,11 @@
 import RestoreIcon from "@mui/icons-material/Restore";
 import styled from "@emotion/styled";
 import EastIcon from "@mui/icons-material/East";
+import StarIcon from '@mui/icons-material/Star';
 
 import { formatTime } from "../../utility/TimeUtil";
 
 const HistoryCardContainer = styled.div`
-    display: grid;
     grid-template-areas: "logo content";
     grid-template-columns: 100px 1fr;
     background-color: ${(props) => props.theme.palette.risk[props.risk]};
@@ -17,11 +17,14 @@ const HistoryCardContainer = styled.div`
     z-index: 4;
     cursor: pointer;
     transition: 0.1s;
+    display: grid;
+    white-space: nowrap;
 
     &:hover {
         opacity: 1;
         box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.5);
     }
+
 `;
 
 const LogoContainer = styled.div`
@@ -30,6 +33,16 @@ const LogoContainer = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: center;
+
+    & > svg {
+        color: black;
+        font-size: 2rem;
+        transition: 0.1s;
+
+        &:hover {
+            color: white;
+        }
+    }
 `;
 
 const ContentContainer = styled.div`
@@ -65,7 +78,7 @@ const ContentDesciption = styled.p`
     font-size: 0.75rem;
     margin: 0px;
     font-weight: 500;
-    color: ${(props) => props.theme.palette.secondary.main};
+    color: ${(props) => props.theme.palette.primary.main};
 `;
 
 const riskMap = {
@@ -76,15 +89,25 @@ const riskMap = {
     extreme: "Extreme",
 };
 
+
 const HistoryCard = (props) => {
-    const { risk = 0, time, from, to, onClick } = props;
+    const { risk = 0, time, from, to, onClick, favourite, onFavouriteClick} = props;
+
+    console.log("HistoryCard", props)
 
     return (
         <HistoryCardContainer risk={risk} onClick={onClick}>
-            <LogoContainer>
-                <RestoreIcon
-                    style={{ color: "black", width: "2rem", height: "2rem" }}
-                />
+            <LogoContainer onClick={
+                (e) => {
+                    e.stopPropagation();
+                    onFavouriteClick();
+                }
+            }>
+                {favourite ? (
+                    <StarIcon />
+                ) : (
+                    <RestoreIcon />
+                )}
             </LogoContainer>
             <ContentContainer>
                 <ContentTitleContainer>

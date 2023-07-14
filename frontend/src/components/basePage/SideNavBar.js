@@ -72,7 +72,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 
-export default function SideNavBar() {
+export default function SideNavBar({ setShowAllHistory, showAllHistory }) {
     const dispatch = useDispatch();
     const theme = useTheme();
     const [open, setOpen] = useState(false);
@@ -91,7 +91,10 @@ export default function SideNavBar() {
                     "Are you sure you wish to clear your history? There will be no going back!"
                 ) && dispatch(clearHistory()),
         },
-        { text: "Recents", action: () => console.log("Recents") },
+        { text: showAllHistory ? "Hide All History" : "Show All History" ,action: () => {
+            setShowAllHistory(!showAllHistory);
+            console.log(showAllHistory);
+        }},
         { text: "Report", action: () => console.log("Report") },
     ];
 
@@ -117,7 +120,7 @@ export default function SideNavBar() {
                                     }}
                                 >
                                     {text === "Home" && <HomeIcon />}
-                                    {text === "Recents" && <HistoryIcon />}
+                                    {text.includes("All History") && <HistoryIcon />}
                                     {text === "Report" && <ReportIcon />}
                                     {text === "Clear History" && (
                                         <DeleteForeverIcon />

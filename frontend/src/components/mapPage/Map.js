@@ -13,18 +13,21 @@ import { useTheme } from "@mui/material/styles";
 import styleComp from "@emotion/styled";
 import { css } from "@emotion/react";
 
-import { PageSearchBar, HistoryCard } from "../index";
+import { PageSearchBar, HistoryCard, HistoryList } from "../index";
 import { setFrom, setTo } from "../../reducers/TripReducer";
 
 const MapTopContainer = styleComp.div`
     display: flex;
     align-items: start;
+    height: 100%;
+    justify-content: space-between;
 `;
 
 const MapTopLeft = styleComp.div`
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     width: 50vw;
+    height: 100%;
 
     & > div {
         transition: all 0.4s ease-in-out;
@@ -40,9 +43,10 @@ const MapSearch = styleComp.div`
     flex-flow: column;
     align-content: center;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     margin-left: ${({ theme }) => `${theme.margins.values.marginSides}`};
     width: 60%;
+    height: 100%;
     padding: ${({ theme }) =>
         `${theme.margins.values.marginSides} ${theme.margins.values.marginTopBottom}`};
 `;
@@ -60,11 +64,11 @@ const Map = ({
     directions,
     directionsServiceOptions,
     directionsCallback,
+    showAllHistory,
     crimeData,
 }) => {
     const theme = useTheme();
     const dispatch = useDispatch();
-
     const { currentPosition } = useSelector((state) => state.location);
 
     const { history } = useSelector((state) => state);
@@ -81,7 +85,7 @@ const Map = ({
     };
 
     return (
-        <PageContainer>
+        <PageContainer style={{ flexGrow: 1 }}>
             <div
                 style={{
                     width: "100%",
@@ -94,15 +98,15 @@ const Map = ({
                             width: "100%",
                             height: "100%",
                         }}
-                        zoom={16}
                         center={currentPosition}
+                        zoom={15}
                         options={{
                             disableDefaultUI: true,
                             zoomControl: true,
                             rotateControl: true,
                         }}
                     >
-                        <HeatmapLayer
+                        {/* <HeatmapLayer
                             data={crimeData.map((item) => ({
                                 location: item.location,
                                 weight: item.weight,
@@ -110,26 +114,12 @@ const Map = ({
                             options={{
                                 radius: 50,
                             }}
-                        />
+                        /> */}
                         <MapTopContainer>
                             <MapTopLeft hide={isRouteDrawerOpen}>
                                 <MapSearch>
                                     <PageSearchBar onSearch={onSearch} />
-                                    {history.items.map((item, index) => (
-                                        <HistoryCard
-                                            key={index}
-                                            from={item.from}
-                                            to={item.to}
-                                            time={item.time}
-                                            risk={item.risk}
-                                            onClick={() =>
-                                                onHistoryCardClick(
-                                                    item.from,
-                                                    item.to
-                                                )
-                                            }
-                                        />
-                                    ))}
+                                    <HistoryList onClick={onHistoryCardClick} history={history} expanded={showAllHistory} />
                                 </MapSearch>
                             </MapTopLeft>
                             <MapTopRight>

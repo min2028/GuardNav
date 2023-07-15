@@ -97,7 +97,7 @@ const RouteDrawer = ({ open, onClose, option, setOption, directions, openSuccess
                 formatted_address: directions.routes[0].legs[0].end_address,
             },
             // convert uuidv4 to mongodb ObjectId, again very hacky
-            _id: uuidv4().replace(/-/g, '').slice(0, 12),
+            _id: uuidv4().replace(/-/g, '').slice(0, 24),
             favourite: false,
         }
 

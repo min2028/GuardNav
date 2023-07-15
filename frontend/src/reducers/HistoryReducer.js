@@ -8,14 +8,19 @@ const historyReducer = createSlice({
   initialState: {
     items: []
   },
-  reducers: {},
+  reducers: {
+    setHistory: (state, action) => {
+      state.items = action.payload;
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(addHistoryItemAsync.fulfilled, (state, action) => {
       state.items = [...state.items, action.payload];
     });
     builder.addCase(changeFavouriteAsync.fulfilled, (state, action) => {
-      const index = state.items.findIndex(item => item.id === action.payload.id);
-      state.items[index] = action.payload;
+      console.log(action.payload);
+      const index = state.items.findIndex(item => item._id === action.payload._id);
+      state.items[index].favourite = !state.items[index].favourite || false;
     });
     builder.addCase(clearHistoryAsync.fulfilled, (state, action) => {
       state.items = [];
@@ -23,4 +28,5 @@ const historyReducer = createSlice({
   }
 });
 
+export const { setHistory } = historyReducer.actions;
 export default historyReducer.reducer;

@@ -22,6 +22,7 @@ const loadState = () => {
         console.log("State is being loaded");
         const serialisedState = localStorage.getItem('app_state');
         if (!serialisedState) return undefined;
+        console.log(serialisedState)
         return JSON.parse(serialisedState)
     } catch (err) {
         console.log("Error when loading state from local storage");

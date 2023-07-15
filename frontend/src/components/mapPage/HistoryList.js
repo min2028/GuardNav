@@ -77,11 +77,11 @@ const sortByFavourite = (history) => {
     return [...favourite, ...notFavourite];
 };
 
-
 const HistoryList = ({ history, onClick, expanded }) => {
     const dispatch = useDispatch();
 
     const sortedHistory = sortByFavourite(history.items);
+    console.log(sortedHistory);
 
     return (
         <HistoryListContainer expanded={expanded} className={"history-list"}>
@@ -95,7 +95,7 @@ const HistoryList = ({ history, onClick, expanded }) => {
                             to={trip.to}
                             favourite={trip.favourite}
                             onClick={() => onClick(trip.from, trip.to)}
-                            onFavouriteClick={() => dispatch(changeFavouriteAsync(trip.id))}
+                            onFavouriteClick={() => dispatch(changeFavouriteAsync(trip._id, !trip.favourite))}
                         />
                     ))
                 }
@@ -110,7 +110,7 @@ const HistoryList = ({ history, onClick, expanded }) => {
                             to={trip.to}
                             favourite={trip.favourite}
                             onClick={() => onClick(trip.from, trip.to)}
-                            onFavouriteClick={() => dispatch(changeFavouriteAsync(trip.id))}
+                            onFavouriteClick={() => dispatch(changeFavouriteAsync(trip._id, !trip.favourite))}
                         />
                     ))
                 }

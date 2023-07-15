@@ -7,6 +7,7 @@ import { useTheme } from '@mui/material/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { RoutePlanner, RouteOptions, RouteInformation, RouteDirections } from '../index.js';
 import { addHistoryItemAsync } from '../../thunks/historyThunk.js';
+import { ContactlessOutlined } from '@mui/icons-material';
 
 const FlowHolder = styled.div`
     display: flex;
@@ -85,8 +86,6 @@ const RouteDrawer = ({ open, onClose, option, setOption, directions, openSuccess
     const onAddRouteToHistory = () => {
         let route = {
             risk: "low", // TODO: calculate risk
-            distance: directions.routes[0].legs[0].distance.value,
-            time: directions.routes[0].legs[0].duration.value,
             from: {
                 lat: directions.routes[0].legs[0].start_location.lat(),
                 lng: directions.routes[0].legs[0].start_location.lng(),
@@ -97,8 +96,12 @@ const RouteDrawer = ({ open, onClose, option, setOption, directions, openSuccess
                 lng: directions.routes[0].legs[0].end_location.lng(),
                 formatted_address: directions.routes[0].legs[0].end_address,
             },
-            id: uuidv4(),
+            // convert uuidv4 to mongodb ObjectId, again very hacky
+            _id: uuidv4().replace(/-/g, '').slice(0, 12),
+            favourite: false,
         }
+
+        console.log(route._id)
 
         dispatch(addHistoryItemAsync(route));
         openSuccessMessage();

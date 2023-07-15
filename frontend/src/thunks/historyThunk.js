@@ -5,8 +5,12 @@ import { addHistoryItem, changeFavourite, clearHistory } from "../services/histo
 export const addHistoryItemAsync = createAsyncThunk(
     historyTypes.ADD_HISTORY,
     async (item, thunkAPI) => {
-        console.log(item)
-        const token = thunkAPI.getState().user.token;
+        // this is a really dumb way to get the token, but it works
+        let user = thunkAPI.getState().user;
+        while (user.user) {
+            user = user.user;
+        }
+        const token = user.token;
         return await addHistoryItem(token, item);
     }
 );
@@ -14,7 +18,11 @@ export const addHistoryItemAsync = createAsyncThunk(
 export const changeFavouriteAsync = createAsyncThunk(
     historyTypes.CHANGE_FAVOURITE,
     async (id, thunkAPI) => {
-        const token = thunkAPI.getState().user.token;
+        let user = thunkAPI.getState().user;
+        while (user.user) {
+            user = user.user;
+        }
+        const token = user.token;
         return await changeFavourite(token, id);
     }
 );
@@ -22,7 +30,11 @@ export const changeFavouriteAsync = createAsyncThunk(
 export const clearHistoryAsync = createAsyncThunk(
     historyTypes.CLEAR_HISTORY,
     async (_, thunkAPI) => {
-        const token = thunkAPI.getState().user.token;
+        let user = thunkAPI.getState().user;
+        while (user.user) {
+            user = user.user;
+        }
+        const token = user.token;
         return await clearHistory(token);
     }
 );

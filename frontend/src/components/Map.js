@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import {
   GoogleMap,
   Marker,
@@ -7,27 +7,27 @@ import {
   HeatmapLayer,
 } from "@react-google-maps/api";
 import { useDispatch, useSelector } from "react-redux";
-import PageContainer from "../basePage/PageContainer";
+import { setCurrentPosition, resetLocation } from "../reducers/LocationReducer";
+import PageContainer from "./PageContainer";
+import LoadingSpinner from "./LoadingSpinner";
 import WeatherInformation from "./WeatherInformation";
 import { useTheme } from "@mui/material/styles";
 import styleComp from "@emotion/styled";
 import { css } from "@emotion/react";
 
-import { PageSearchBar, HistoryCard, HistoryList } from "../index";
-import { setFrom, setTo } from "../../reducers/TripReducer";
+import { SideNavBar, PageSearchBar, HistoryCard, RouteDrawer } from "./index";
+import { setFrom, setTo } from "../reducers/TripReducer";
+import { addHistoryItem } from "../reducers/HistoryReducer";
 
 const MapTopContainer = styleComp.div`
     display: flex;
     align-items: start;
-    height: 100%;
-    justify-content: space-between;
 `;
 
 const MapTopLeft = styleComp.div`
     display: flex;
-    justify-content: flex-start;
+    justify-content: start;
     width: 50vw;
-    height: 100%;
 
     & > div {
         transition: all 0.4s ease-in-out;
@@ -43,10 +43,9 @@ const MapSearch = styleComp.div`
     flex-flow: column;
     align-content: center;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     margin-left: ${({ theme }) => `${theme.margins.values.marginSides}`};
     width: 60%;
-    height: 100%;
     padding: ${({ theme }) =>
       `${theme.margins.values.marginSides} ${theme.margins.values.marginTopBottom}`};
 `;
@@ -64,11 +63,11 @@ const Map = ({
   directions,
   directionsServiceOptions,
   directionsCallback,
-  showAllHistory,
   crimeData,
 }) => {
   const theme = useTheme();
   const dispatch = useDispatch();
+
   const { currentPosition } = useSelector((state) => state.location);
 
   const { history } = useSelector((state) => state);
@@ -84,25 +83,8 @@ const Map = ({
     openRouteDrawer();
   };
 
-  const UserMarker = {
-    path: window.google.maps.SymbolPath.CIRCLE,
-    fillColor: '#4285F4',
-    fillOpacity: 1,
-    scale: 8,
-    strokeColor: 'white',
-    strokeWeight: 2,
-};
-
-const BorderMarker = {
-    path: window.google.maps.SymbolPath.CIRCLE,
-    fillColor: '#4285F4',
-    fillOpacity: 0.3,
-    scale: 16,
-    strokeWeight: 0,
-};
-
   return (
-    <PageContainer style={{ flexGrow: 1 }}>
+    <PageContainer>
       <div
         style={{
           width: "100%",
@@ -115,8 +97,8 @@ const BorderMarker = {
               width: "100%",
               height: "100%",
             }}
+            zoom={16}
             center={currentPosition}
-            zoom={15}
             options={{
               disableDefaultUI: true,
               zoomControl: true,
@@ -136,11 +118,16 @@ const BorderMarker = {
               <MapTopLeft hide={isRouteDrawerOpen}>
                 <MapSearch>
                   <PageSearchBar onSearch={onSearch} />
-                  <HistoryList
-                    onClick={onHistoryCardClick}
-                    history={history}
-                    expanded={showAllHistory}
-                  />
+                  {history.items.map((item, index) => (
+                    <HistoryCard
+                      key={index}
+                      from={item.from}
+                      to={item.to}
+                      time={item.time}
+                      risk={item.risk}
+                      onClick={() => onHistoryCardClick(item.from, item.to)}
+                    />
+                  ))}
                 </MapSearch>
               </MapTopLeft>
               <MapTopRight>
@@ -158,8 +145,7 @@ const BorderMarker = {
                   />
                 </>
               )}
-              <Marker position={currentPosition} icon={UserMarker} />
-              <Marker position={currentPosition} icon={BorderMarker} />
+              <Marker position={currentPosition} />
             </MapTopContainer>
           </GoogleMap>
         )}

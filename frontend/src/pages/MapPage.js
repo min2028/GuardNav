@@ -12,6 +12,7 @@ import {
 import { setCurrentPosition, resetLocation } from "../reducers/LocationReducer";
 import { setFrom, setTo } from "../reducers/TripReducer";
 import { csv } from "d3";
+import { filterCrimeData } from "../utilities/RouteSafePointsProvider";
 import { calculateWeight } from "../utilities/DangerScoreCalculator";
 import proj4 from "proj4";
 
@@ -34,6 +35,16 @@ const MapPage = () => {
   const [directions, setDirections] = useState(null);
   let count = React.useRef(0);
 
+  const [filteredCrimeData, setFilteredCrimeData] = useState([]);
+  const weightLimit = 6.0;
+  useEffect(() => {
+    if (from && to && weightLimit < 10.0 && crimeData.length > 0) {
+      const newFilteredData = filterCrimeData(from, to, weightLimit, crimeData);
+      console.log(newFilteredData);
+      setFilteredCrimeData(newFilteredData);
+    }
+  }, [from, to, weightLimit, crimeData]);
+
   const directionsServiceOptions = {
     destination: {
       lat: to?.lat || 0,
@@ -44,6 +55,8 @@ const MapPage = () => {
       lng: from?.lng,
     },
     travelMode: "WALKING",
+    waypoints: filteredCrimeData.map((item) => ({ location: item.location })),
+    optimizeWaypoints: true,
   };
 
   const directionsCallback = (response) => {

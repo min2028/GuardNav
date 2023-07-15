@@ -3,7 +3,7 @@ import React from 'react';
 import { HistoryCard } from '../index';
 
 import { useDispatch } from 'react-redux';
-import { setFavourite } from '../../reducers/HistoryReducer';
+import { changeFavouriteAsync } from '../../thunks/historyThunk';
 
 const HistoryListContainer = styled.div`
     display: flex;
@@ -77,11 +77,11 @@ const sortByFavourite = (history) => {
     return [...favourite, ...notFavourite];
 };
 
-
 const HistoryList = ({ history, onClick, expanded }) => {
     const dispatch = useDispatch();
 
     const sortedHistory = sortByFavourite(history.items);
+    console.log(sortedHistory);
 
     return (
         <HistoryListContainer expanded={expanded} className={"history-list"}>
@@ -95,7 +95,7 @@ const HistoryList = ({ history, onClick, expanded }) => {
                             to={trip.to}
                             favourite={trip.favourite}
                             onClick={() => onClick(trip.from, trip.to)}
-                            onFavouriteClick={() => dispatch(setFavourite(trip.id))}
+                            onFavouriteClick={() => dispatch(changeFavouriteAsync(trip._id, !trip.favourite))}
                         />
                     ))
                 }
@@ -110,7 +110,7 @@ const HistoryList = ({ history, onClick, expanded }) => {
                             to={trip.to}
                             favourite={trip.favourite}
                             onClick={() => onClick(trip.from, trip.to)}
-                            onFavouriteClick={() => dispatch(setFavourite(trip.id))}
+                            onFavouriteClick={() => dispatch(changeFavouriteAsync(trip._id, !trip.favourite))}
                         />
                     ))
                 }

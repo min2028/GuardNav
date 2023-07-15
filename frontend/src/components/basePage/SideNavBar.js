@@ -21,7 +21,7 @@ import Logo from "../Logo";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { clearHistory } from "../../reducers/HistoryReducer";
+import { clearHistoryAsync } from "../../thunks/historyThunk";
 
 const drawerWidth = 240;
 
@@ -83,13 +83,13 @@ export default function SideNavBar({ setShowAllHistory, showAllHistory }) {
     };
 
     const navigationTextAndAction = [
-        { text: "Home", action: () => console.log("Home") },
+        { text: "Home", action: () => window.location.replace("/") },
         {
             text: "Clear History",
             action: () =>
                 window.confirm(
                     "Are you sure you wish to clear your history? There will be no going back!"
-                ) && dispatch(clearHistory()),
+                ) && dispatch(clearHistoryAsync()),
         },
         { text: showAllHistory ? "Hide All History" : "Show All History" ,action: () => {
             setShowAllHistory(!showAllHistory);

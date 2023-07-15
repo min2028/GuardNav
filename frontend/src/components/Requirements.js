@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
-import Image from '../resources/GuyUsingComp.png';
-import { TitleTag, DescriptionTag, LadingPageInnerContainer, LadingPageOuterContainer } from './LandingPageTags';
+import { DescriptionTag, LadingPageInnerContainer, LadingPageOuterContainer } from './landingPage/LandingPageTags';
 import { useTheme } from '@emotion/react';
 
 

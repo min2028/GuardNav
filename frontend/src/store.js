@@ -1,4 +1,5 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import thunk from "redux-thunk";
 import LocationReducer from "./reducers/LocationReducer";
 import TripReducer from "./reducers/TripReducer";
 import HistoryReducer from "./reducers/HistoryReducer";
@@ -36,8 +37,10 @@ const store = configureStore({
         places: SavedPlaceReducer,
         user: UserReducer
     },
+    middleware: [thunk, ...getDefaultMiddleware()],
     preloadedState: {
         user: loadState(),
+        history: loadState()?.history,
     },
     devTools: true,
 });
@@ -45,8 +48,6 @@ const store = configureStore({
 store.subscribe(() => {
     const currentState = store.getState();
     saveState(currentState);
-    console.log('Store changed (State)', currentState);
-    console.log('LocalStorage change', localStorage.getItem('app_state'));
 });
 
 export default store;

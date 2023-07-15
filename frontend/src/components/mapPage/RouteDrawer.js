@@ -6,7 +6,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useTheme } from '@mui/material/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { RoutePlanner, RouteOptions, RouteInformation, RouteDirections } from '../index.js';
-import { addHistoryItem } from '../../reducers/HistoryReducer.js';
+import { addHistoryItemAsync } from '../../thunks/historyThunk.js';
 
 const FlowHolder = styled.div`
     display: flex;
@@ -100,7 +100,7 @@ const RouteDrawer = ({ open, onClose, option, setOption, directions, openSuccess
             id: uuidv4(),
         }
 
-        dispatch(addHistoryItem(route));
+        dispatch(addHistoryItemAsync(route));
         openSuccessMessage();
     }
 

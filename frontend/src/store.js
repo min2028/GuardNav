@@ -1,4 +1,5 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import thunk from "redux-thunk";
 import LocationReducer from "./reducers/LocationReducer";
 import TripReducer from "./reducers/TripReducer";
 import HistoryReducer from "./reducers/HistoryReducer";
@@ -21,6 +22,7 @@ const loadState = () => {
         console.log("State is being loaded");
         const serialisedState = localStorage.getItem('app_state');
         if (!serialisedState) return undefined;
+        console.log(serialisedState)
         return JSON.parse(serialisedState)
     } catch (err) {
         console.log("Error when loading state from local storage");
@@ -36,8 +38,10 @@ const store = configureStore({
         places: SavedPlaceReducer,
         user: UserReducer
     },
+    middleware: [thunk, ...getDefaultMiddleware()],
     preloadedState: {
         user: loadState(),
+        history: loadState()?.history,
     },
     devTools: true,
 });
@@ -45,8 +49,6 @@ const store = configureStore({
 store.subscribe(() => {
     const currentState = store.getState();
     saveState(currentState);
-    console.log('Store changed (State)', currentState);
-    console.log('LocalStorage change', localStorage.getItem('app_state'));
 });
 
 export default store;

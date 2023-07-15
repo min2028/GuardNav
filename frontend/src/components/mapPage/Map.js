@@ -84,6 +84,23 @@ const Map = ({
     openRouteDrawer();
   };
 
+  const UserMarker = {
+    path: window.google.maps.SymbolPath.CIRCLE,
+    fillColor: '#4285F4',
+    fillOpacity: 1,
+    scale: 8,
+    strokeColor: 'white',
+    strokeWeight: 2,
+};
+
+const BorderMarker = {
+    path: window.google.maps.SymbolPath.CIRCLE,
+    fillColor: '#4285F4',
+    fillOpacity: 0.3,
+    scale: 16,
+    strokeWeight: 0,
+};
+
   return (
     <PageContainer style={{ flexGrow: 1 }}>
       <div
@@ -141,7 +158,8 @@ const Map = ({
                   />
                 </>
               )}
-              <Marker position={currentPosition} />
+              <Marker position={currentPosition} icon={UserMarker} />
+              <Marker position={currentPosition} icon={BorderMarker} />
             </MapTopContainer>
           </GoogleMap>
         )}

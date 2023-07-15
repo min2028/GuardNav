@@ -9,6 +9,7 @@ const getUser = async (token) => {
                     Authorization: `Bearer ${token}`,
                 }
             });
+        response.data.token = token;
         return response.data;
     } catch (err) {
         console.log(err.message)

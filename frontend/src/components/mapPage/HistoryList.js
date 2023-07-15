@@ -95,7 +95,7 @@ const HistoryList = ({ history, onClick, expanded }) => {
                             to={trip.to}
                             favourite={trip.favourite}
                             onClick={() => onClick(trip.from, trip.to)}
-                            onFavouriteClick={() => dispatch(changeFavouriteAsync(trip._id, !trip.favourite))}
+                            onFavouriteClick={() => dispatch(changeFavouriteAsync({ id: trip._id, favourite: !trip.favourite}))}
                         />
                     ))
                 }
@@ -110,7 +110,7 @@ const HistoryList = ({ history, onClick, expanded }) => {
                             to={trip.to}
                             favourite={trip.favourite}
                             onClick={() => onClick(trip.from, trip.to)}
-                            onFavouriteClick={() => dispatch(changeFavouriteAsync(trip._id, !trip.favourite))}
+                            onFavouriteClick={() => dispatch(changeFavouriteAsync({ id: trip._id, favourite: !trip.favourite}))}
                         />
                     ))
                 }

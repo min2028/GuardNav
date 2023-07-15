@@ -17,13 +17,15 @@ export const addHistoryItemAsync = createAsyncThunk(
 
 export const changeFavouriteAsync = createAsyncThunk(
     historyTypes.CHANGE_FAVOURITE,
-    async (id, thunkAPI) => {
+    async ({ id, favourite }, thunkAPI) => {
+        console.log(id, favourite);
+        
         let user = thunkAPI.getState().user;
         while (user.user) {
             user = user.user;
         }
         const token = user.token;
-        return await changeFavourite(token, id);
+        return await changeFavourite(token, id, favourite);
     }
 );
 

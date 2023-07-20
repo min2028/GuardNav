@@ -10,6 +10,7 @@ const saveState = (state) => {
     try {
         console.log("State is being saved");
         const serialisedState = JSON.stringify(state);
+        console.log(serialisedState);
         localStorage.setItem('app_state', serialisedState);
     } catch (err) {
         console.log("Something went wrong when saving the state");
@@ -38,9 +39,9 @@ const store = configureStore({
         places: SavedPlaceReducer,
         user: UserReducer
     },
-    middleware: [thunk, ...getDefaultMiddleware()],
+    // middleware: [thunk, ...getDefaultMiddleware()],
     preloadedState: {
-        user: loadState(),
+        user: loadState()?.user,
         history: loadState()?.history,
     },
     devTools: true,

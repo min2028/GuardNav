@@ -22,7 +22,6 @@ const loadState = () => {
         console.log("State is being loaded");
         const serialisedState = localStorage.getItem('app_state');
         if (!serialisedState) return undefined;
-        console.log(serialisedState)
         return JSON.parse(serialisedState)
     } catch (err) {
         console.log("Error when loading state from local storage");
@@ -38,9 +37,9 @@ const store = configureStore({
         places: SavedPlaceReducer,
         user: UserReducer
     },
-    middleware: [thunk, ...getDefaultMiddleware()],
+    // middleware: [thunk, ...getDefaultMiddleware()],
     preloadedState: {
-        user: loadState(),
+        user: loadState()?.user,
         history: loadState()?.history,
     },
     devTools: true,

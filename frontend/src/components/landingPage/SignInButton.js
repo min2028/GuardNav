@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { useTheme } from "@mui/material/styles";
 import AuthButton from "./AuthButton";
+import {useSelector} from "react-redux";
 
 const Text = styled.div`
     margin-right: 8px;
@@ -38,6 +39,8 @@ const StyledBox = styled(Box)`
 `;
 
 const SignInButton = () => {
+    const user = useSelector((state) => state.user)
+
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -46,12 +49,14 @@ const SignInButton = () => {
 
     return (
         <SignInButtonContainer>
-            <ButtonContainer onClick={handleOpen}>
-                <Text>Log in</Text>
-                <LoginIcon />
-            </ButtonContainer>
+            {user.token == "" && 
+                <ButtonContainer onClick={handleOpen}>
+                    <Text>Log in</Text>
+                    <LoginIcon />
+                </ButtonContainer>
+            }
             <Modal
-                open={open}
+                open={open && user.token == ""}
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"

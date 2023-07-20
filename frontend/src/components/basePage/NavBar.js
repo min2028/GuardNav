@@ -18,7 +18,9 @@ const pages = ['map', 'about'];
 const settings = ['Dashboard', 'Logout'];
 
 function NavBar() {
+
     const userState = useSelector(state => state.user);
+
     
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -65,7 +67,7 @@ function NavBar() {
                     </Box>
                     <Box sx={{ flexGrow: 0 }}>
                         {
-                            userState ? 
+                            userState.token == "" ? 
                             <SignInButton /> :
                             <React.Fragment>
                                 <Tooltip title="Open settings">

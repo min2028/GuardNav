@@ -10,7 +10,6 @@ const saveState = (state) => {
     try {
         console.log("State is being saved");
         const serialisedState = JSON.stringify(state);
-        console.log(serialisedState);
         localStorage.setItem('app_state', serialisedState);
     } catch (err) {
         console.log("Something went wrong when saving the state");
@@ -23,7 +22,6 @@ const loadState = () => {
         console.log("State is being loaded");
         const serialisedState = localStorage.getItem('app_state');
         if (!serialisedState) return undefined;
-        console.log(serialisedState)
         return JSON.parse(serialisedState)
     } catch (err) {
         console.log("Error when loading state from local storage");

@@ -39,11 +39,7 @@ const StyledBox = styled(Box)`
 `;
 
 const SignInButton = () => {
-    const user = useSelector((state) => {
-        console.log("state user");
-        console.log(state);
-        return state.user;
-    })
+    const user = useSelector((state) => state.user)
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);

@@ -18,7 +18,6 @@ const historyReducer = createSlice({
       state.items = [...state.items, action.payload];
     });
     builder.addCase(changeFavouriteAsync.fulfilled, (state, action) => {
-      console.log(action.payload);
       const index = state.items.findIndex(item => item._id === action.payload._id);
       state.items[index].favourite = !state.items[index].favourite || false;
     });

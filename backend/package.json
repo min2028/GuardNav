@@ -6,7 +6,8 @@
     "node": ">=20.2.0"
   },
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "deploy": "node ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -21,6 +22,7 @@
   "devDependencies": {
     "nodemon": "^2.0.22"
   },
+  "main": "./bin/www",
   "repository": "https://github.com/min2028/GuardNav",
   "license": "MIT"
 }

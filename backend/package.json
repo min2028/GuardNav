@@ -21,7 +21,6 @@
   "devDependencies": {
     "nodemon": "^2.0.22"
   },
-  "main": "index.js",
   "repository": "https://github.com/min2028/GuardNav",
   "license": "MIT"
 }

@@ -8,6 +8,7 @@ const userSchema = new Schema({
     history: [
         { type: Schema.Types.ObjectId, ref: 'History' },
     ],
+    refreshToken: { type: String, required: true },
 }, {collection: 'users'});
 
 const UserModel = model('User', userSchema);

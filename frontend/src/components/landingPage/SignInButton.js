@@ -6,7 +6,7 @@ import ButtonContainer from "./ButtonContainer";
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { useTheme } from "@mui/material/styles";
-import AuthButton from "./AuthButton";
+import AuthButton from "../../auth/AuthButton";
 import {useSelector} from "react-redux";
 
 const Text = styled.div`

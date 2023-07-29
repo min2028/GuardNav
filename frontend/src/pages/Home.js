@@ -8,7 +8,7 @@ import {
 } from "../components/landingPage/LandingPageTags";
 import {useTheme} from "@emotion/react";
 import PlanTripButton from "../components/landingPage/PlanTripButton";
-import AuthButton from "../components/landingPage/AuthButton";
+import AuthButton from "../auth/AuthButton";
 import SignInButton from "../components/landingPage/SignInButton";
 import NavBar from "../components/basePage/NavBar";
 

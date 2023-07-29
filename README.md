@@ -55,6 +55,7 @@ The Safe Route Planning App is intended for the following user groups:
 - CRUD to enable users to add, update, and delete their own reports of hazards and risks to be added to the database.
 - Enhance manual crime entry functionality with entry validation.
 - Real-time alerts of new hazards along the route.
+- Send directions to user via SMS.
 - (friendly design for mobile users)
 
 ## Prototypes:

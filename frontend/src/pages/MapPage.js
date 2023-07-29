@@ -18,10 +18,10 @@ import proj4 from "proj4";
 import styled from "styled-components";
 
 const Content = styled.div`
-    display: flex;
-    height: 100%;
-    width: 100%;
-    overflow-x: hidden;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
 `;
 
 const MapPage = () => {
@@ -35,11 +35,11 @@ const MapPage = () => {
   const from = useSelector((state) => state.trip.from);
   const to = useSelector((state) => state.trip.to);
 
-    const [routeDrawerOpen, setRouteDrawerOpen] = useState(false);
-    const [option, setOption] = useState("safest");
-    const [successOpen, setSuccessOpen] = useState(false);
-    const [crimeData, setCrimeData] = useState([]);
-    const [showAllHistory, setShowAllHistory] = useState(false);
+  const [routeDrawerOpen, setRouteDrawerOpen] = useState(false);
+  const [option, setOption] = useState("safest");
+  const [successOpen, setSuccessOpen] = useState(false);
+  const [crimeData, setCrimeData] = useState([]);
+  const [showAllHistory, setShowAllHistory] = useState(false);
 
   const [directions, setDirections] = useState(null);
   let count = React.useRef(0);
@@ -64,9 +64,14 @@ const MapPage = () => {
       lng: from?.lng,
     },
     travelMode: "WALKING",
-    waypoints: filteredCrimeData.map((item) => ({ location: item.location })),
     optimizeWaypoints: true,
   };
+
+  if (weightLimit < 10.0) {
+    directionsServiceOptions.waypoints = filteredCrimeData.map((item) => ({
+      location: item.location,
+    }));
+  }
 
   const directionsCallback = (response) => {
     if (response !== null) {
@@ -173,65 +178,66 @@ const MapPage = () => {
     setSuccessOpen(false);
   };
 
-    return (
-        <PageContainer>
-            {!isLoaded || !currentPosition ? (
-                <LoadingSpinner />
-            ) : (
-                <>
-                    <SideNavBar 
-                        setShowAllHistory={(value) => {
-                            setShowAllHistory(value)
+  return (
+    <PageContainer>
+      {!isLoaded || !currentPosition ? (
+        <LoadingSpinner />
+      ) : (
+        <>
+          <SideNavBar
+            setShowAllHistory={(value) => {
+              setShowAllHistory(value);
 
-                            const historyList = document.getElementsByClassName("history-list");
-                            if (historyList.length > 0) {
-                                historyList[0].scrollTop = 0;
-                            }
-                        }} 
-                        showAllHistory={showAllHistory}
-                    />
-                    <Content>
-                        <RouteDrawer
-                            open={routeDrawerOpen}
-                            onClose={() => {
-                                setTo(null);
-                                setRouteDrawerOpen(false);
-                            }}
-                            option={option}
-                            setOption={setOption}
-                            isLoaded={isLoaded}
-                            directions={directions}
-                            openSuccessMessage={() => setSuccessOpen(true)}
-                        />
-                        <Map
-                            openRouteDrawer={openRouteDrawer}
-                            isLoaded={isLoaded}
-                            isRouteDrawerOpen={routeDrawerOpen}
-                            directions={directions}
-                            directionsServiceOptions={directionsServiceOptions}
-                            directionsCallback={directionsCallback}
-                            crimeData={crimeData}
-                            showAllHistory={showAllHistory}
-                        />
-                    </Content>
-                </>
-            )}
-            <Snackbar
-                open={successOpen}
-                autoHideDuration={1000}
-                anchorOrigin={{ vertical: "top", horizontal: "center" }}
-                onClose={handleSuccessClose}
-            >
-                <Alert
-                    onClose={handleSuccessClose}
-                    severity="success"
-                    sx={{ width: "100%" }}
-                >
-                    Route saved successfully! Only the 50 most recent routes are saved.
-                </Alert>
-            </Snackbar>
-        </PageContainer>
-    );
+              const historyList =
+                document.getElementsByClassName("history-list");
+              if (historyList.length > 0) {
+                historyList[0].scrollTop = 0;
+              }
+            }}
+            showAllHistory={showAllHistory}
+          />
+          <Content>
+            <RouteDrawer
+              open={routeDrawerOpen}
+              onClose={() => {
+                setTo(null);
+                setRouteDrawerOpen(false);
+              }}
+              option={option}
+              setOption={setOption}
+              isLoaded={isLoaded}
+              directions={directions}
+              openSuccessMessage={() => setSuccessOpen(true)}
+            />
+            <Map
+              openRouteDrawer={openRouteDrawer}
+              isLoaded={isLoaded}
+              isRouteDrawerOpen={routeDrawerOpen}
+              directions={directions}
+              directionsServiceOptions={directionsServiceOptions}
+              directionsCallback={directionsCallback}
+              crimeData={crimeData}
+              showAllHistory={showAllHistory}
+            />
+          </Content>
+        </>
+      )}
+      <Snackbar
+        open={successOpen}
+        autoHideDuration={1000}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        onClose={handleSuccessClose}
+      >
+        <Alert
+          onClose={handleSuccessClose}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          Route saved successfully! Only the 50 most recent routes are saved.
+        </Alert>
+      </Snackbar>
+    </PageContainer>
+  );
 };
 
 export default MapPage;

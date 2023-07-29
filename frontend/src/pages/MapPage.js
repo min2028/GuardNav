@@ -16,6 +16,7 @@ import { filterCrimeData } from "../utilities/RouteSafePointsProvider";
 import { calculateWeight } from "../utilities/DangerScoreCalculator";
 import proj4 from "proj4";
 import styled from "styled-components";
+import { formatTime } from "../utility/TimeUtil";
 
 const Content = styled.div`
     display: flex;
@@ -77,8 +78,12 @@ const MapPage = () => {
           const route = response.routes[0];
           const legs = route.legs;
           let combinedLegs = [];
+          let totalDistance = 0;
+          let totalDuration = 0;
           legs.forEach((leg) => {
             combinedLegs = combinedLegs.concat(leg.steps);
+            totalDistance += leg.distance.value;
+            totalDuration += leg.duration.value;
           });
           const newRoute = {
             ...route,
@@ -88,11 +93,21 @@ const MapPage = () => {
                 steps: combinedLegs,
                 end_address: legs[legs.length - 1].end_address,
                 end_location: legs[legs.length - 1].end_location,
+                distance: {
+                  text: (totalDistance / 1000).toFixed(2) + " km",
+                  value: totalDistance,
+                },
+                duration: {
+                  text: formatTime(totalDuration),
+                  value: totalDuration,
+                },
               },
             ],
           };
           response.routes[0] = newRoute;
         }
+
+        console.log(response);
 
         setDirections(response);
       } else {

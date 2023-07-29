@@ -17,6 +17,10 @@ import { calculateWeight } from "../utilities/DangerScoreCalculator";
 import proj4 from "proj4";
 import styled from "styled-components";
 import { formatTime } from "../utility/TimeUtil";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
 
 const Content = styled.div`
   display: flex;
@@ -46,7 +50,7 @@ const MapPage = () => {
   let count = React.useRef(0);
 
   const [filteredCrimeData, setFilteredCrimeData] = useState([]);
-  const weightLimit = 6.0;
+  const [weightLimit, setWeightLimit] = useState(6.0);
   useEffect(() => {
     if (from && to && weightLimit < 10.0 && crimeData.length > 0) {
       const newFilteredData = filterCrimeData(from, to, weightLimit, crimeData);
@@ -77,7 +81,7 @@ const MapPage = () => {
     if (response !== null) {
       if (response.status === "OK" && count.current < 2) {
         count.current++;
-        
+
         // combine the legs of the route
         if (response) {
           const route = response.routes[0];
@@ -205,6 +209,16 @@ const MapPage = () => {
     }
   }, [isLoaded, google]);
 
+  const handleOptionChange = (option) => {
+    if (option === "safest") {
+      setWeightLimit(3.0);
+    } else if (option === "balanced") {
+      setWeightLimit(6.0);
+    } else if (option === "fastest") {
+      setWeightLimit(10.0);
+    }
+  };
+
   const handleSuccessClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -243,6 +257,7 @@ const MapPage = () => {
               isLoaded={isLoaded}
               directions={directions}
               openSuccessMessage={() => setSuccessOpen(true)}
+              handleOptionChange={handleOptionChange}
             />
             <Map
               openRouteDrawer={openRouteDrawer}

@@ -79,7 +79,7 @@ const Divider = styled.hr`
     border-bottom-width: thin;
 `;
 
-const RouteDrawer = ({ open, onClose, option, setOption, directions, openSuccessMessage }) => {
+const RouteDrawer = ({ open, onClose, option, setOption, directions, openSuccessMessage, handleOptionChange }) => {
     const theme = useTheme();
     const dispatch = useDispatch();
 
@@ -121,7 +121,7 @@ const RouteDrawer = ({ open, onClose, option, setOption, directions, openSuccess
                 </DrawerHeader>
                 <Divider />
                 <RoutePlanner directions={directions} />
-                <RouteOptions option={option} setOption={setOption} />
+                <RouteOptions option={option} setOption={setOption} handleOptionChange={handleOptionChange} />
                 <Divider />
                 <RouteInformation directions={directions} onAddRouteToHistory={onAddRouteToHistory} />
                 <Divider />

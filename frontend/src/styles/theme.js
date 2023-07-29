@@ -13,7 +13,7 @@ export const theme = createTheme({
             low: '#f0e3ec',
             mid: '#f08f7a',
             high: '#ea6249',
-            hover: '#528AAE',
+            hover: '#3a3a3a',
             family: 'rubik'
         },
         secondary: {

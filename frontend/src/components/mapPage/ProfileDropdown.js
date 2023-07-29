@@ -30,6 +30,7 @@ const AccountButton = styled.button`
     &:hover {
         > svg {
             color: ${({ theme }) => theme.palette.primary.hover};
+            drop-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
         }
     }
 `;
@@ -42,7 +43,7 @@ const ProfileDropdown = () => {
     return (
         <ProfileDropdownContainer theme={theme} >
             <AccountButton onClick={(e) => setAnchorEl(e.currentTarget)} theme={theme}>
-                <AccountCircleIcon style={{ fontSize: '36px' }} />
+                <AccountCircleIcon style={{ fontSize: '40px' }} />
             </AccountButton>
             <Menu
                 id="profile-menu"

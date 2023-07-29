@@ -10,7 +10,7 @@ var crimeRouter = require('./routes/crimeRoutes');
 var userRouter = require('./routes/userRoutes');
 var historyRouter = require('./routes/historyRoutes');
 var authRouter = require('./routes/authRoutes');
-var {verifyUser, authErrorHandler} = require('./middleware/auth');
+var {verifyUser} = require('./middleware/auth');
 
 require('./config/database');
 
@@ -26,7 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/public/crime', crimeRouter);
 app.use('/google/auth', authRouter);
-app.use('/protected/history', verifyUser, authErrorHandler, historyRouter);
-app.use('/protected/user', verifyUser, authErrorHandler, userRouter)
+app.use('/protected/history', verifyUser, historyRouter);
+app.use('/protected/user', verifyUser, userRouter)
 
 module.exports = app;

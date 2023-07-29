@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {getUserAsync} from "../thunks/userThunk";
+import { getUserAsync } from "../thunks/userThunk";
 
 const initialUser = {
     email: "",

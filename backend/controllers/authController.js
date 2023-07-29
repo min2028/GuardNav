@@ -1,5 +1,4 @@
 const client = require('../config/auth');
-const jwt = require('jose');
 const UserModel = require('../models/UserModel');
 
 const authController = {
@@ -22,7 +21,7 @@ const authController = {
                 if (user) {
                     user.refreshToken = refreshToken;
                     await user.save();
-                    res.status(200).send("Refresh token saved successfully!");
+                    return res.status(200).send("Refresh token saved successfully!");
                 } else {
                     req.user = await UserModel.create({
                         _id: payload.sub,
@@ -31,13 +30,21 @@ const authController = {
                         picture: payload.picture,
                         refreshToken: refreshToken,
                     });
-                    res.status(200).send("Refresh token of a new user saved successfully!");
+                    return res.status(200).send("Refresh token of a new user saved successfully!");
                 }
             } else {
-                res.status(403).send("Forbidden Error");
+                return res.status(403).send("Forbidden Error");
             }
         } catch (error) {
-            res.status(500).send('Error handling OAuth callback');
+            return res.status(500).send('Error handling OAuth callback');
+        }
+    },
+    refreshToken: async function (req, res) {
+        try {
+            const accessToken = req.accessToken;
+            return res.status(200).json({ accessToken });
+        } catch (error) {
+            return res.status(500).json({ message: 'Internal server error.' });
         }
     }
 }

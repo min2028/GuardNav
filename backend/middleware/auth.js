@@ -16,29 +16,43 @@ async function verifyUser (req, res, next) {
                 req.user = user;
                 next();
             } else {
-                const error = new Error("Please Sign In with Google and allow access to this app.");
-                error.status = 401;
-                console.log("Error thrown:", error);
-                next(error);
+                return res.status(401).json({ message: 'Please Sign In with Google and allow access to this app.' });
             }
         } else {
-            const error = new Error("Forbidden Error");
-            error.status = 403;
-            next(error);
+            return res.status(403).json({ message: 'Forbidden Error' });
         }
     } catch (error) {
-        console.log("Error caught:", error);
-        next(error)
+        return res.status(401).json({ message: 'Unauthorized Error' });
     }
 }
 
-function authErrorHandler (err, req, res, next) {
-    console.error(err);
-    const status = err.status || 500;
-    res.status(status).json({ error: err.message });
-}
+async function refreshTokenMiddleware(req, res) {
+    try {
+        const refreshToken = req.body.refreshToken;
 
+        if (!refreshToken) {
+            return res.status(400).json({ message: 'Refresh token not provided.' });
+        }
+        const { tokens } = await client.refreshToken(refreshToken);
+
+        if (!tokens || !tokens.access_token) {
+            return res.status(401).json({ message: 'Invalid refresh token.' });
+        }
+
+        const user = await UserModel.findOne({ refreshToken });
+
+        if (!user) {
+            return res.status(401).json({ message: 'User not found.' });
+        }
+
+        req.accessToken = tokens.access_token;
+
+        next();
+    } catch (error) {
+        return res.status(500).json({ message: 'Internal server error.' });
+    }
+}
 module.exports = {
     verifyUser: verifyUser,
-    authErrorHandler: authErrorHandler,
+    refreshTokenMiddleware: refreshTokenMiddleware,
 };

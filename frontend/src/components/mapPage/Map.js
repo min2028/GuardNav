@@ -13,7 +13,7 @@ import { useTheme } from "@mui/material/styles";
 import styleComp from "@emotion/styled";
 import { css } from "@emotion/react";
 
-import { PageSearchBar, HistoryCard, HistoryList } from "../index";
+import { PageSearchBar, HistoryCard, HistoryList, ProfileDropdown } from "../index";
 import { setFrom, setTo } from "../../reducers/TripReducer";
 
 const MapTopContainer = styleComp.div`
@@ -29,12 +29,11 @@ const MapTopLeft = styleComp.div`
     width: 50vw;
     height: 100%;
 
-    & > div {
-        transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
     ${({ hide }) =>
       hide &&
       css`
-        transform: translateX(-100%);
+        transform: translateX(-47%);
       `}
 `;
 
@@ -44,16 +43,17 @@ const MapSearch = styleComp.div`
     align-content: center;
     align-items: center;
     justify-content: flex-start;
-    margin-left: ${({ theme }) => `${theme.margins.values.marginSides}`};
     width: 60%;
     height: 100%;
-    padding: ${({ theme }) =>
+    margin: ${({ theme }) =>
       `${theme.margins.values.marginSides} ${theme.margins.values.marginTopBottom}`};
 `;
 
 const MapTopRight = styleComp.div`
+    z-index: 2;
     display: flex;
     justify-content: start;
+    gap: 1.5rem;
     padding: ${({ theme }) =>
       `${theme.margins.values.marginSides} ${theme.margins.values.marginTopBottom}`};
 `;
@@ -142,9 +142,10 @@ const BorderMarker = {
                     expanded={showAllHistory}
                   />
                 </MapSearch>
+                <WeatherInformation />
               </MapTopLeft>
               <MapTopRight>
-                <WeatherInformation />
+                <ProfileDropdown />
               </MapTopRight>
               {isRouteDrawerOpen && (
                 <>

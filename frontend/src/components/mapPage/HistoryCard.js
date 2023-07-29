@@ -93,8 +93,6 @@ const riskMap = {
 const HistoryCard = (props) => {
     const { risk = 0, time, from, to, onClick, favourite, onFavouriteClick} = props;
 
-    console.log("HistoryCard", props)
-
     return (
         <HistoryCardContainer risk={risk} onClick={onClick}>
             <LogoContainer onClick={

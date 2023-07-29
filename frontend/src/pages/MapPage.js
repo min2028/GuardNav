@@ -35,11 +35,11 @@ const MapPage = () => {
   const from = useSelector((state) => state.trip.from);
   const to = useSelector((state) => state.trip.to);
 
-    const [routeDrawerOpen, setRouteDrawerOpen] = useState(false);
-    const [option, setOption] = useState("safest");
-    const [successOpen, setSuccessOpen] = useState(false);
-    const [crimeData, setCrimeData] = useState([]);
-    const [showAllHistory, setShowAllHistory] = useState(false);
+  const [routeDrawerOpen, setRouteDrawerOpen] = useState(false);
+  const [option, setOption] = useState("safest");
+  const [successOpen, setSuccessOpen] = useState(false);
+  const [crimeData, setCrimeData] = useState([]);
+  const [showAllHistory, setShowAllHistory] = useState(false);
 
   const [directions, setDirections] = useState(null);
   let count = React.useRef(0);
@@ -49,7 +49,6 @@ const MapPage = () => {
   useEffect(() => {
     if (from && to && weightLimit < 10.0 && crimeData.length > 0) {
       const newFilteredData = filterCrimeData(from, to, weightLimit, crimeData);
-      console.log(newFilteredData);
       setFilteredCrimeData(newFilteredData);
     }
   }, [from, to, weightLimit, crimeData]);
@@ -72,6 +71,31 @@ const MapPage = () => {
     if (response !== null) {
       if (response.status === "OK" && count.current < 2) {
         count.current++;
+        
+        // combine the legs of the route
+        if (response) {
+          const route = response.routes[0];
+          const legs = route.legs;
+          let combinedLegs = [];
+          legs.forEach((leg) => {
+            combinedLegs = combinedLegs.concat(leg.steps);
+          });
+          const newRoute = {
+            ...route,
+            legs: [
+              {
+                ...legs[0],
+                steps: combinedLegs,
+                end_address: legs[legs.length - 1].end_address,
+                end_location: legs[legs.length - 1].end_location,
+              },
+            ],
+          };
+          response.routes[0] = newRoute;
+        }
+
+        console.log(response);
+
         setDirections(response);
       } else {
         count.current = 0;

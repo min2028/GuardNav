@@ -16,6 +16,7 @@ const SearchWrapper = styled.div`
     opacity: 0.9;
     width: 100%;
     margin-bottom: 0.5rem;
+    height: 48px;
 
     > div {
         width: 100%;

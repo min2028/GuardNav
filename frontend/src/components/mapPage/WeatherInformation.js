@@ -36,7 +36,7 @@ const InformationContainer = styled.div`
     margin: 12px 0;
 `;
 
-const WeatherInformation = () => {
+const WeatherInformation = (drawerOpen) => {
     const theme = useTheme();
 
     const [weatherData, setWeatherData] = useState(null);

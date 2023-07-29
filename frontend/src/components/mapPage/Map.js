@@ -29,12 +29,11 @@ const MapTopLeft = styleComp.div`
     width: 50vw;
     height: 100%;
 
-    & > div {
-        transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
     ${({ hide }) =>
       hide &&
       css`
-        transform: translateX(-100%);
+        transform: translateX(-47%);
       `}
 `;
 

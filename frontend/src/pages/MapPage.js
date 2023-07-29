@@ -107,8 +107,6 @@ const MapPage = () => {
           response.routes[0] = newRoute;
         }
 
-        console.log(response);
-
         setDirections(response);
       } else {
         count.current = 0;

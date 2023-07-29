@@ -12,6 +12,7 @@ import PageSearchBar from "./mapPage/PageSearchBar";
 import RouteInformation from "./mapPage/RouteInformation";
 import RouteDirections from "./mapPage/RouteDirections";
 import HistoryList from "./mapPage/HistoryList";
+import ProfileDropdown from "./mapPage/ProfileDropdown";
 
 export {
     Map,
@@ -28,4 +29,5 @@ export {
     RouteInformation,
     RouteDirections,
     HistoryList,
+    ProfileDropdown
 };

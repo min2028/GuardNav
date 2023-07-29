@@ -16,6 +16,7 @@ import { filterCrimeData } from "../utilities/RouteSafePointsProvider";
 import { calculateWeight } from "../utilities/DangerScoreCalculator";
 import proj4 from "proj4";
 import styled from "styled-components";
+import { formatTime } from "../utility/TimeUtil";
 
 const Content = styled.div`
     display: flex;
@@ -35,11 +36,11 @@ const MapPage = () => {
   const from = useSelector((state) => state.trip.from);
   const to = useSelector((state) => state.trip.to);
 
-    const [routeDrawerOpen, setRouteDrawerOpen] = useState(false);
-    const [option, setOption] = useState("safest");
-    const [successOpen, setSuccessOpen] = useState(false);
-    const [crimeData, setCrimeData] = useState([]);
-    const [showAllHistory, setShowAllHistory] = useState(false);
+  const [routeDrawerOpen, setRouteDrawerOpen] = useState(false);
+  const [option, setOption] = useState("safest");
+  const [successOpen, setSuccessOpen] = useState(false);
+  const [crimeData, setCrimeData] = useState([]);
+  const [showAllHistory, setShowAllHistory] = useState(false);
 
   const [directions, setDirections] = useState(null);
   let count = React.useRef(0);
@@ -49,7 +50,6 @@ const MapPage = () => {
   useEffect(() => {
     if (from && to && weightLimit < 10.0 && crimeData.length > 0) {
       const newFilteredData = filterCrimeData(from, to, weightLimit, crimeData);
-      console.log(newFilteredData);
       setFilteredCrimeData(newFilteredData);
     }
   }, [from, to, weightLimit, crimeData]);
@@ -72,6 +72,41 @@ const MapPage = () => {
     if (response !== null) {
       if (response.status === "OK" && count.current < 2) {
         count.current++;
+        
+        // combine the legs of the route
+        if (response) {
+          const route = response.routes[0];
+          const legs = route.legs;
+          let combinedLegs = [];
+          let totalDistance = 0;
+          let totalDuration = 0;
+          legs.forEach((leg) => {
+            combinedLegs = combinedLegs.concat(leg.steps);
+            totalDistance += leg.distance.value;
+            totalDuration += leg.duration.value;
+          });
+          const newRoute = {
+            ...route,
+            legs: [
+              {
+                ...legs[0],
+                steps: combinedLegs,
+                end_address: legs[legs.length - 1].end_address,
+                end_location: legs[legs.length - 1].end_location,
+                distance: {
+                  text: (totalDistance / 1000).toFixed(2) + " km",
+                  value: totalDistance,
+                },
+                duration: {
+                  text: formatTime(totalDuration),
+                  value: totalDuration,
+                },
+              },
+            ],
+          };
+          response.routes[0] = newRoute;
+        }
+
         setDirections(response);
       } else {
         count.current = 0;

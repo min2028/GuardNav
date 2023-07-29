@@ -32,11 +32,11 @@ const InformationContainer = styled.div`
     padding: ${({ theme }) => `${theme.buttonPadding.values.paddingSides} ${theme.buttonPadding.values.paddingTopBottom}`};
     cursor: default;
     align-items: center;
-    position: fixed;
-    right: 1rem;
+    right: 1rem; 
+    margin: 12px 0;
 `;
 
-const WeatherInformation = () => {
+const WeatherInformation = (drawerOpen) => {
     const theme = useTheme();
 
     const [weatherData, setWeatherData] = useState(null);

@@ -19,11 +19,11 @@ const addHistoryItem = async (token, item) => {
     }
 }
 
-const changeFavourite = async (token, id) => {
+const changeFavourite = async (token, id, favourite) => {
     try {
         const response = await axios.put(
             `${process.env.REACT_APP_API_URL}/protected/history/${id}/favourite`,
-            {},
+            { favourite },
             {
                 headers: {
                     Authorization: `Bearer ${token}`,

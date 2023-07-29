@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,13 +12,17 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Logo from '../../resources/logo.png';
 import SignInButton from '../landingPage/SignInButton';
+import { Logout } from '../../reducers/UserReducer';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 
 const pages = ['map', 'about'];
 const settings = ['Dashboard', 'Logout'];
 
 function NavBar() {
+
     const userState = useSelector(state => state.user);
+    const dispatch = useDispatch();
+
     
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -26,7 +30,10 @@ function NavBar() {
         setAnchorElUser(event.currentTarget);
     };
 
-    const handleCloseUserMenu = () => {
+    const handleCloseUserMenu = (setting) => {
+        if (setting == "Logout") {
+            dispatch(Logout());
+        }
         setAnchorElUser(null);
     };
 
@@ -65,7 +72,7 @@ function NavBar() {
                     </Box>
                     <Box sx={{ flexGrow: 0 }}>
                         {
-                            userState ? 
+                            userState.token == "" ? 
                             <SignInButton /> :
                             <React.Fragment>
                                 <Tooltip title="Open settings">
@@ -91,7 +98,7 @@ function NavBar() {
                                     onClose={handleCloseUserMenu}
                                 >
                                     {settings.map((setting) => (
-                                        <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                                        <MenuItem key={setting} onClick={() => handleCloseUserMenu(setting)}>
                                             <Typography textAlign="center">{setting}</Typography>
                                         </MenuItem>
                                     ))}

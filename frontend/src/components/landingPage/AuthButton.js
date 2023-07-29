@@ -8,12 +8,10 @@ import { setHistory } from '../../reducers/HistoryReducer';
 export default function AuthButton() {
 
     const dispatch = useDispatch();
-    const user = useSelector((state) => state.user)
 
     const handleCredentialResponse = (credentialResponse) => {
         const {credential} = credentialResponse;
         const payload = credential ? decodeJwt(credential) : undefined;
-        console.log(payload)
         if (payload) {
             // console.log("Decoded JWT ID token payload: " + JSON.stringify(payload));
             let temp = dispatch(getUserAsync(credential)).then((res) => {

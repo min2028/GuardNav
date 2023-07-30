@@ -79,7 +79,7 @@ const Divider = styled.hr`
     border-bottom-width: thin;
 `;
 
-const RouteDrawer = ({ open, onClose, option, setOption, directions, openSuccessMessage }) => {
+const RouteDrawer = ({ open, onClose, option, setOption, directions, openSuccessMessage, setSuccessMessage }) => {
     const theme = useTheme();
     const dispatch = useDispatch();
 
@@ -113,6 +113,12 @@ const RouteDrawer = ({ open, onClose, option, setOption, directions, openSuccess
         console.log(route._id)
 
         dispatch(addHistoryItemAsync(route));
+        setSuccessMessage('Route Added Successfully! Note that only the 50 most recent routes are saved.');
+        openSuccessMessage();
+    }
+
+    const onSendRouteToPhone = () => {
+        setSuccessMessage('Directions are sent to your phone! Please check your messages.');
         openSuccessMessage();
     }
 
@@ -132,7 +138,7 @@ const RouteDrawer = ({ open, onClose, option, setOption, directions, openSuccess
                 <RoutePlanner directions={directions} />
                 <RouteOptions option={option} setOption={setOption} />
                 <Divider />
-                <RouteInformation directions={directions} onAddRouteToHistory={onAddRouteToHistory} risk={optionToRiskMap[option]} />
+                <RouteInformation directions={directions} onAddRouteToHistory={onAddRouteToHistory} risk={optionToRiskMap[option]} onSendRouteToPhone={onSendRouteToPhone} />
                 <Divider />
                 <RouteDirections directions={directions} />
             </Drawer>

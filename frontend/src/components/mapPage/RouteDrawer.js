@@ -83,9 +83,18 @@ const RouteDrawer = ({ open, onClose, option, setOption, directions, openSuccess
     const theme = useTheme();
     const dispatch = useDispatch();
 
+    const optionToRiskMap = {
+        "safest": "low",
+        "balanced": "mid",
+        "fastest": "high",
+    }
+    
+    console.log(optionToRiskMap[option])
+
+
     const onAddRouteToHistory = () => {
         let route = {
-            risk: "low", // TODO: calculate risk
+            risk: optionToRiskMap[option],
             from: {
                 lat: directions.routes[0].legs[0].start_location.lat(),
                 lng: directions.routes[0].legs[0].start_location.lng(),
@@ -123,7 +132,7 @@ const RouteDrawer = ({ open, onClose, option, setOption, directions, openSuccess
                 <RoutePlanner directions={directions} />
                 <RouteOptions option={option} setOption={setOption} />
                 <Divider />
-                <RouteInformation directions={directions} onAddRouteToHistory={onAddRouteToHistory} />
+                <RouteInformation directions={directions} onAddRouteToHistory={onAddRouteToHistory} risk={optionToRiskMap[option]} />
                 <Divider />
                 <RouteDirections directions={directions} />
             </Drawer>

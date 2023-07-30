@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useTheme } from '@mui/material/styles';
-import { Button } from '@mui/material';
+import { Button, capitalize, Tooltip } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+import SendToMobileIcon from '@mui/icons-material/SendToMobile';
 
 const RouteInformationContainer = styled.div`
     display: flex;
@@ -49,35 +50,56 @@ const AddRouteButton = styled(Button)`
     }
 `;
 
-const RouteInformation = ({ directions, onAddRouteToHistory }) => {
+const RouteInformation = ({ directions, onAddRouteToHistory, risk }) => {
     const theme = useTheme();
     const [ successOpen, setSuccessOpen ] = useState(false);
 
     const time = directions?.routes[0].legs[0].duration.text || "0 mins";
     const distance = directions?.routes[0].legs[0].distance.text || "0 km";
-    const risk = "Low" // TODO: calculate risk
 
     return (
         <RouteInformationContainer>
             <TimeAndAddRoute>
                 <TimeText>{time}</TimeText>
-                <AddRouteButton 
-                    title='Add Route to History'
-                    onClick={() => {
-                        onAddRouteToHistory();
-                    }}
-                    type='text'
-                >
-                    <AddIcon />
-                </AddRouteButton>
+                <div>
+                    <Tooltip
+                        title='Save Route'
+                        placement='top'
+                    >
+                        <AddRouteButton 
+                            onClick={() => {
+                                onAddRouteToHistory();
+                            }}
+                            type='text'
+                        >
+                            <AddIcon />
+                        </AddRouteButton>
+                    </Tooltip>
+                    <Tooltip
+                        title='Send Directions to Phone'
+                        placement='top'
+                    >
+                        <AddRouteButton
+                            onClick={() => {
+                                setSuccessOpen(true);
+                                setTimeout(() => {
+                                    setSuccessOpen(false);
+                                }, 2000);
+                            }}
+                            type='text'
+                        >
+                            <SendToMobileIcon />
+                        </AddRouteButton>
+                    </Tooltip>
+                </div>
             </TimeAndAddRoute>
             <DistanceAndRisk>
                 <BodyText>{distance}</BodyText>
                 <BodyText
                     style={{
-                        color: theme.palette.risk[risk.toLowerCase()]
+                        color: theme.palette.risk[risk?.toLowerCase()]
                     }}
-                >{risk} Risk</BodyText>
+                >{capitalize(risk)} Risk</BodyText>
             </DistanceAndRisk>
         </RouteInformationContainer>
     )

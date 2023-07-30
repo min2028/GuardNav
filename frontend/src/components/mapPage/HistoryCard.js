@@ -11,7 +11,7 @@ const HistoryCardContainer = styled.div`
     background-color: ${(props) => props.theme.palette.risk[props.risk]};
     opacity: 0.9;
     width: 100%;
-    border-radius: 5px;
+    border-radius: 12px;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     margin: 0.5rem 0px;
     z-index: 4;

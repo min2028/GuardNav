@@ -33,7 +33,7 @@ const MapTopLeft = styleComp.div`
     ${({ hide }) =>
       hide &&
       css`
-        transform: translateX(-47%);
+        transform: translateX(-100%);
       `}
 `;
 

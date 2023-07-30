@@ -60,6 +60,7 @@ const ExpandedView = styled.div`
     visibility: hidden;
     opacity: 0;
     position: relative;
+    padding: 0;
 
     ${props => props.open ? css`
         animation: ${appear} 0.2s ease-in-out forwards;
@@ -69,6 +70,10 @@ const ExpandedView = styled.div`
         animation: ${disappear} 0.2s ease-in-out forwards;
         transform: translateY(-1%);
     `}
+
+    & > :first-child {
+        margin-top: 0;
+    }
 `;
 
 const sortByFavourite = (history) => {

@@ -29,17 +29,6 @@ const SearchButton = styled.button`
     border: none;
     padding: 0 0 0 8px;
     cursor: pointer;
-
-    > svg {
-        color: ${({ theme }) => theme.palette.primary.main};
-        transition: color 0.05s;
-    }
-
-    &:hover {
-        > svg {
-            color: ${({ theme }) => theme.palette.primary.hover};
-        }
-    }
 `;
 
 const PageSearchBar = ({ search, onSearch }) => {

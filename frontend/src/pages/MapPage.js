@@ -17,12 +17,16 @@ import { calculateWeight } from "../utilities/DangerScoreCalculator";
 import proj4 from "proj4";
 import styled from "styled-components";
 import { formatTime } from "../utility/TimeUtil";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
 
 const Content = styled.div`
-    display: flex;
-    height: 100%;
-    width: 100%;
-    overflow-x: hidden;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
 `;
 
 const MapPage = () => {
@@ -47,7 +51,7 @@ const MapPage = () => {
   let count = React.useRef(0);
 
   const [filteredCrimeData, setFilteredCrimeData] = useState([]);
-  const weightLimit = 6.0;
+  const [weightLimit, setWeightLimit] = useState(6.0);
   useEffect(() => {
     if (from && to && weightLimit < 10.0 && crimeData.length > 0) {
       const newFilteredData = filterCrimeData(from, to, weightLimit, crimeData);
@@ -65,15 +69,20 @@ const MapPage = () => {
       lng: from?.lng,
     },
     travelMode: "WALKING",
-    waypoints: filteredCrimeData.map((item) => ({ location: item.location })),
     optimizeWaypoints: true,
   };
+
+  if (weightLimit < 10.0) {
+    directionsServiceOptions.waypoints = filteredCrimeData.map((item) => ({
+      location: item.location,
+    }));
+  }
 
   const directionsCallback = (response) => {
     if (response !== null) {
       if (response.status === "OK" && count.current < 2) {
         count.current++;
-        
+
         // combine the legs of the route
         if (response) {
           const route = response.routes[0];
@@ -213,6 +222,16 @@ const MapPage = () => {
     }
   }, [isLoaded, google]);
 
+  const handleOptionChange = (option) => {
+    if (option === "safest") {
+      setWeightLimit(3.0);
+    } else if (option === "balanced") {
+      setWeightLimit(6.0);
+    } else if (option === "fastest") {
+      setWeightLimit(10.0);
+    }
+  };
+
   const handleSuccessClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -221,15 +240,15 @@ const MapPage = () => {
     setSuccessOpen(false);
   };
 
-    return (
-        <PageContainer>
-            {!isLoaded || !currentPosition ? (
-                <LoadingSpinner />
-            ) : (
-                <>
-                    <SideNavBar 
-                        setShowAllHistory={(value) => {
-                            setShowAllHistory(value)
+  return (
+    <PageContainer>
+      {!isLoaded || !currentPosition ? (
+        <LoadingSpinner />
+      ) : (
+        <>
+          <SideNavBar
+            setShowAllHistory={(value) => {
+              setShowAllHistory(value);
 
                             const historyList = document.getElementsByClassName("history-list");
                             if (historyList.length > 0) {
@@ -251,6 +270,7 @@ const MapPage = () => {
                             directions={directions}
                             openSuccessMessage={() => setSuccessOpen(true)}
                             setSuccessMessage={setSuccessMessage}
+                            handleOptionChange={handleOptionChange}
                         />
                         <Map
                             openRouteDrawer={openRouteDrawer}

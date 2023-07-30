@@ -13,15 +13,18 @@ const Tab = styled(BaseTab)`
     width: ${100 / 3}%;
 `;
 
-const RouteOptions = ({ option, setOption }) => {
+const RouteOptions = ({ option, setOption, handleOptionChange }) => {
     const theme = useTheme();
+
+    const handleChange = (event, newValue) => {
+        setOption(newValue);
+        handleOptionChange(newValue);
+    };
 
     return (
         <RouteOptionsContainer
                 value={option}
-                onChange={(event, newValue) => {
-                    setOption(newValue);
-                }}
+                onChange={handleChange}
                 TabIndicatorProps={{
                     style: {
                         backgroundColor: option === "safest" ? theme.palette.risk.low : option === "balanced" ? theme.palette.risk.mid : theme.palette.risk.high,

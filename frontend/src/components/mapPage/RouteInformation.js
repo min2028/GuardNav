@@ -78,7 +78,7 @@ const RouteInformation = ({ directions, onAddRouteToHistory, risk, onSendRouteTo
         // Twilio SMS API has a limit of 1600 characters per message
         if (body.length > 1500) {
             for (let i = 0; i < body.length / 1500; i++) {
-                sendMessage(token, {phone, body: `\n\n[${i + 1}/${Math.ceil(body.length / 1500)}]\n\n ` + body.substring(i * 1500, (i + 1) * 1500)});
+                sendMessage(token, {to: phone, body: `\n\n[${i + 1}/${Math.ceil(body.length / 1500)}]\n\n ` + body.substring(i * 1500, (i + 1) * 1500)});
                 setTimeout(() => {}, 1000);
             }
         } else {

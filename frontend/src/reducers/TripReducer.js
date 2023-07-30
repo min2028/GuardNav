@@ -8,10 +8,30 @@ const tripReducer = createSlice({
   },
   reducers: {
     setFrom: (state, action) => {
-        state.from = action.payload;
+        let from = action.payload;
+
+        if (typeof from.lat === "string") {
+            from.lat = parseFloat(from.lat);
+        }
+
+        if (typeof from.lng === "string") {
+            from.lng = parseFloat(from.lng);
+        }
+
+        state.from = from;
     }, 
     setTo: (state, action) => {
-        state.to = action.payload;
+        let to = action.payload;
+
+        if (typeof to.lat === "string") {
+            to.lat = parseFloat(to.lat);
+        }
+
+        if (typeof to.lng === "string") {
+            to.lng = parseFloat(to.lng);
+        }
+
+        state.to = to;
     }
   },
 });

@@ -79,12 +79,13 @@ const ContentDesciption = styled.p`
     margin: 0px;
     font-weight: 500;
     color: ${(props) => props.theme.palette.primary.main};
+    width: 40%;
 `;
 
 const riskMap = {
-    low: "Low",
-    mid: "Medium",
-    high: "High",
+    low: "Safest",
+    mid: "Balanced",
+    high: "Fastest",
     veryhigh: "Very High",
     extreme: "Extreme",
 };
@@ -123,7 +124,7 @@ const HistoryCard = (props) => {
                             height: "0.75rem",
                         }}
                     />
-                    <ContentDesciption>
+                    <ContentDesciption style={{textAlign: 'end'}}>
                         {to?.formatted_address?.split(",")[0]}
                     </ContentDesciption>
                 </ContentDesciptionContainer>

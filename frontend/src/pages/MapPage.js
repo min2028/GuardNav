@@ -107,6 +107,18 @@ const MapPage = () => {
           response.routes[0] = newRoute;
         }
 
+        // remove the "Destination will be on the left/right" text except for the last step
+        const newSteps = response.routes[0].legs[0].steps.filter(
+          (step, index) => {
+            if (index === response.routes[0].legs[0].steps.length - 1) {
+              return true;
+            }
+            return !step.instructions.includes("Destination will be");
+          }
+        );
+
+        response.routes[0].legs[0].steps = newSteps;
+
         setDirections(response);
       } else {
         count.current = 0;

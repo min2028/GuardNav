@@ -4,6 +4,7 @@ import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import LogoutIcon from '@mui/icons-material/Logout';
 import styled from "styled-components";
 import { useTheme } from "@mui/material/styles";
+import {useAuth0} from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
 import { Logout } from "../../reducers/UserReducer";
 
@@ -42,8 +43,8 @@ const ProfileDropdown = () => {
     const theme = useTheme();
     const [anchorEl, setAnchorEl] = useState(null);
     let open = Boolean(anchorEl);
-    let isLoggedIn = useSelector((state) => state.user.token !== "");
-    console.log(useSelector((state) => state.user.token));
+
+    const { isAuthenticated, logout } = useAuth0();
 
     return (
         <ProfileDropdownContainer theme={theme} >
@@ -85,7 +86,7 @@ const ProfileDropdown = () => {
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
-                {isLoggedIn ? (
+                {isAuthenticated ? (
                     <>
                         <MenuItem onClick={() => {
                             window.location.href = '/setting';
@@ -94,6 +95,7 @@ const ProfileDropdown = () => {
                         </MenuItem>
                         <Divider />
                         <MenuItem onClick={() => {
+                            logout();
                             dispatch(Logout());
                             window.location.href = '/';
                         }}>

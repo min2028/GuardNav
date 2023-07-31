@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import React, {useEffect} from "react";
 import styled from "styled-components";
 import LoginIcon from '@mui/icons-material/Login';
-import GoogleIcon from '@mui/icons-material/Google';
 import ButtonContainer from "./ButtonContainer";
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import { useTheme } from "@mui/material/styles";
-import AuthButton from "./AuthButton";
-import {useSelector} from "react-redux";
+import {useAuth0} from "@auth0/auth0-react";
+import {getUserAsync} from "../../thunks/userThunk";
+import {useDispatch, useSelector} from "react-redux";
+import {decodeJwt} from "jose";
 
 const Text = styled.div`
     margin-right: 8px;
@@ -17,58 +15,39 @@ const SignInButtonContainer = styled.div`
     margin-top: 1rem;
 `;
 
-
-const ContentDesciption = styled.h2`
-    font-size: 1.5rem;
-    margin: 0px;
-    font-weight: 500;
-    color: ${(props) => props.theme.palette.primary.main};
-    margin-bottom: 1rem;
-`;
-
-
-const StyledBox = styled(Box)`
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-    background-color: ${props => props.theme.palette.secondary.main};
-    boxShadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    padding: 2rem;
-`;
-
 const SignInButton = () => {
-    const user = useSelector((state) => state.user)
 
-    const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const dispatch = useDispatch();
+    const userState = useSelector(state => state.user);
 
-    const theme = useTheme();
+    const {
+        user,
+        loginWithRedirect,
+        isAuthenticated,
+        getAccessTokenSilently
+    } = useAuth0();
+
+    const getToken = async () => {
+        const token = await getAccessTokenSilently();
+        dispatch(getUserAsync(token));
+    }
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            getToken();
+        }
+    }, [isAuthenticated]);
+
+    console.log(userState);
 
     return (
         <SignInButtonContainer>
-            {user.token == "" && 
-                <ButtonContainer onClick={handleOpen}>
-                    <Text>Log in</Text>
+            {!isAuthenticated &&
+                <ButtonContainer onClick={loginWithRedirect}>
+                    <Text>Account</Text>
                     <LoginIcon />
                 </ButtonContainer>
             }
-            <Modal
-                open={open && user.token == ""}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <StyledBox theme = {theme}>
-                    <ContentDesciption theme = {theme}>
-                        Log in Using Google
-                    </ContentDesciption>
-                    
-                    <AuthButton />
-                </StyledBox>
-            </Modal>
         </SignInButtonContainer>
     );
 };

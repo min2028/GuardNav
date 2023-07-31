@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useSelector, useDispatch } from "react-redux";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -14,15 +13,17 @@ import Logo from '../../resources/logo.png';
 import SignInButton from '../landingPage/SignInButton';
 import { Logout } from '../../reducers/UserReducer';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import {useAuth0} from "@auth0/auth0-react";
 
 const pages = ['map', 'about'];
 const settings = ['Dashboard', 'Logout'];
 
 function NavBar() {
 
-    const userState = useSelector(state => state.user);
-    const dispatch = useDispatch();
-
+    const {
+        logout,
+        isAuthenticated
+    } = useAuth0();
     
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -32,6 +33,7 @@ function NavBar() {
 
     const handleCloseUserMenu = (setting) => {
         if (setting == "Logout") {
+            logout();
             dispatch(Logout());
         }
         setAnchorElUser(null);
@@ -72,7 +74,7 @@ function NavBar() {
                     </Box>
                     <Box sx={{ flexGrow: 0 }}>
                         {
-                            userState.token == "" ? 
+                            !isAuthenticated ?
                             <SignInButton /> :
                             <React.Fragment>
                                 <Tooltip title="Open settings">

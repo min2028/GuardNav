@@ -8,15 +8,6 @@ const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
 
 require('dotenv').config();
-//
-// const config = {
-//     authRequired: false,
-//     auth0Logout: true,
-//     secret: process.env.AUTH0_SECRET,
-//     baseURL: process.env.CLIENT_URI,
-//     clientID: process.env.AUTH0_CLIENT_ID,
-//     issuerBaseURL: process.env.AUTH0_ISSUERBASEURL
-// };
 
 const jwtCheck = auth({
     audience: process.env.AUTH0_AUDIENCE,
@@ -31,12 +22,10 @@ var userRouter = require('./routes/userRoutes');
 var historyRouter = require('./routes/historyRoutes');
 
 require('./config/database');
-const getUserInfo = require("./middleware/auth");
+const getUserInfo = require("./middleware/getUserInfo");
 
 var app = express();
 
-// auth router attaches /login, /logout, and /callback routes to the baseURL
-// app.use(auth(config));
 app.use(cors());
 
 app.use(logger('dev'));

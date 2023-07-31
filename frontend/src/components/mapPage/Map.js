@@ -33,7 +33,7 @@ const MapTopLeft = styleComp.div`
     ${({ hide }) =>
       hide &&
       css`
-        transform: translateX(-47%);
+        transform: translateX(-100%);
       `}
 `;
 
@@ -76,10 +76,14 @@ const Map = ({
   const onHistoryCardClick = (from, to) => {
     dispatch(setFrom(from));
     dispatch(setTo(to));
+
+    console.log(from, to);
+  
     openRouteDrawer();
   };
 
   const onSearch = (to) => {
+    dispatch(setTo(currentPosition));
     dispatch(setTo(to));
     openRouteDrawer();
   };

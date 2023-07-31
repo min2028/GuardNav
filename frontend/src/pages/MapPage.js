@@ -43,6 +43,7 @@ const MapPage = () => {
   const [routeDrawerOpen, setRouteDrawerOpen] = useState(false);
   const [option, setOption] = useState("safest");
   const [successOpen, setSuccessOpen] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
   const [crimeData, setCrimeData] = useState([]);
   const [showAllHistory, setShowAllHistory] = useState(false);
 
@@ -115,6 +116,18 @@ const MapPage = () => {
           };
           response.routes[0] = newRoute;
         }
+
+        // remove the "Destination will be on the left/right" text except for the last step
+        const newSteps = response.routes[0].legs[0].steps.filter(
+          (step, index) => {
+            if (index === response.routes[0].legs[0].steps.length - 1) {
+              return true;
+            }
+            return !step.instructions.includes("Destination will be");
+          }
+        );
+
+        response.routes[0].legs[0].steps = newSteps;
 
         setDirections(response);
       } else {
@@ -237,57 +250,57 @@ const MapPage = () => {
             setShowAllHistory={(value) => {
               setShowAllHistory(value);
 
-              const historyList =
-                document.getElementsByClassName("history-list");
-              if (historyList.length > 0) {
-                historyList[0].scrollTop = 0;
-              }
-            }}
-            showAllHistory={showAllHistory}
-          />
-          <Content>
-            <RouteDrawer
-              open={routeDrawerOpen}
-              onClose={() => {
-                setTo(null);
-                setRouteDrawerOpen(false);
-              }}
-              option={option}
-              setOption={setOption}
-              isLoaded={isLoaded}
-              directions={directions}
-              openSuccessMessage={() => setSuccessOpen(true)}
-              handleOptionChange={handleOptionChange}
-            />
-            <Map
-              openRouteDrawer={openRouteDrawer}
-              isLoaded={isLoaded}
-              isRouteDrawerOpen={routeDrawerOpen}
-              directions={directions}
-              directionsServiceOptions={directionsServiceOptions}
-              directionsCallback={directionsCallback}
-              crimeData={crimeData}
-              showAllHistory={showAllHistory}
-            />
-          </Content>
-        </>
-      )}
-      <Snackbar
-        open={successOpen}
-        autoHideDuration={1000}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        onClose={handleSuccessClose}
-      >
-        <Alert
-          onClose={handleSuccessClose}
-          severity="success"
-          sx={{ width: "100%" }}
-        >
-          Route saved successfully! Only the 50 most recent routes are saved.
-        </Alert>
-      </Snackbar>
-    </PageContainer>
-  );
+                            const historyList = document.getElementsByClassName("history-list");
+                            if (historyList.length > 0) {
+                                historyList[0].scrollTop = 0;
+                            }
+                        }} 
+                        showAllHistory={showAllHistory}
+                    />
+                    <Content>
+                        <RouteDrawer
+                            open={routeDrawerOpen}
+                            onClose={() => {
+                                setTo(null);
+                                setRouteDrawerOpen(false);
+                            }}
+                            option={option}
+                            setOption={setOption}
+                            isLoaded={isLoaded}
+                            directions={directions}
+                            openSuccessMessage={() => setSuccessOpen(true)}
+                            setSuccessMessage={setSuccessMessage}
+                            handleOptionChange={handleOptionChange}
+                        />
+                        <Map
+                            openRouteDrawer={openRouteDrawer}
+                            isLoaded={isLoaded}
+                            isRouteDrawerOpen={routeDrawerOpen}
+                            directions={directions}
+                            directionsServiceOptions={directionsServiceOptions}
+                            directionsCallback={directionsCallback}
+                            crimeData={crimeData}
+                            showAllHistory={showAllHistory}
+                        />
+                    </Content>
+                </>
+            )}
+            <Snackbar
+                open={successOpen}
+                autoHideDuration={1000}
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                onClose={handleSuccessClose}
+            >
+                <Alert
+                    onClose={handleSuccessClose}
+                    severity="success"
+                    sx={{ width: "100%" }}
+                >
+                    {successMessage}
+                </Alert>
+            </Snackbar>
+        </PageContainer>
+    );
 };
 
 export default MapPage;

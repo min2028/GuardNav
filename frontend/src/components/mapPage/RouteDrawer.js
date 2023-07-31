@@ -79,13 +79,22 @@ const Divider = styled.hr`
     border-bottom-width: thin;
 `;
 
-const RouteDrawer = ({ open, onClose, option, setOption, directions, openSuccessMessage, handleOptionChange }) => {
+const RouteDrawer = ({ open, onClose, option, setOption, directions, openSuccessMessage, setSuccessMessage, handleOptionChange }) => {
     const theme = useTheme();
     const dispatch = useDispatch();
 
+    const optionToRiskMap = {
+        "safest": "low",
+        "balanced": "mid",
+        "fastest": "high",
+    }
+    
+    console.log(optionToRiskMap[option])
+
+
     const onAddRouteToHistory = () => {
         let route = {
-            risk: "low", // TODO: calculate risk
+            risk: optionToRiskMap[option],
             from: {
                 lat: directions.routes[0].legs[0].start_location.lat(),
                 lng: directions.routes[0].legs[0].start_location.lng(),
@@ -104,6 +113,12 @@ const RouteDrawer = ({ open, onClose, option, setOption, directions, openSuccess
         console.log(route._id)
 
         dispatch(addHistoryItemAsync(route));
+        setSuccessMessage('Route Added Successfully! Note that only the 50 most recent routes are saved.');
+        openSuccessMessage();
+    }
+
+    const onSendRouteToPhone = () => {
+        setSuccessMessage('Directions are sent to your phone! Please check your messages.');
         openSuccessMessage();
     }
 
@@ -123,7 +138,7 @@ const RouteDrawer = ({ open, onClose, option, setOption, directions, openSuccess
                 <RoutePlanner directions={directions} />
                 <RouteOptions option={option} setOption={setOption} handleOptionChange={handleOptionChange} />
                 <Divider />
-                <RouteInformation directions={directions} onAddRouteToHistory={onAddRouteToHistory} />
+                <RouteInformation directions={directions} onAddRouteToHistory={onAddRouteToHistory} risk={optionToRiskMap[option]} onSendRouteToPhone={onSendRouteToPhone} />
                 <Divider />
                 <RouteDirections directions={directions} />
             </Drawer>

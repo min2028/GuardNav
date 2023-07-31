@@ -4,6 +4,8 @@ import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import LogoutIcon from '@mui/icons-material/Logout';
 import styled from "styled-components";
 import { useTheme } from "@mui/material/styles";
+import { useDispatch, useSelector } from "react-redux";
+import { Logout } from "../../reducers/UserReducer";
 
 import { Menu, MenuItem, Divider } from "@mui/material";
 
@@ -36,9 +38,12 @@ const AccountButton = styled.button`
 `;
 
 const ProfileDropdown = () => {
+    const dispatch = useDispatch();
     const theme = useTheme();
     const [anchorEl, setAnchorEl] = useState(null);
     let open = Boolean(anchorEl);
+    let isLoggedIn = useSelector((state) => state.user.token !== "");
+    console.log(useSelector((state) => state.user.token));
 
     return (
         <ProfileDropdownContainer theme={theme} >
@@ -80,13 +85,30 @@ const ProfileDropdown = () => {
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
-                <MenuItem onClick={() => setAnchorEl(null)}>
-                    <PermIdentityIcon style={{marginRight: '0.5rem'}} /> Profile
-                </MenuItem>
-                <Divider />
-                <MenuItem onClick={() => setAnchorEl(null)}>
-                    <LogoutIcon style={{marginRight: '0.5rem'}} /> Logout
-                </MenuItem>
+                {isLoggedIn ? (
+                    <>
+                        <MenuItem onClick={() => {
+                            window.location.href = '/setting';
+                        }}>
+                            <PermIdentityIcon style={{marginRight: '0.5rem'}} /> Profile
+                        </MenuItem>
+                        <Divider />
+                        <MenuItem onClick={() => {
+                            dispatch(Logout());
+                            window.location.href = '/';
+                        }}>
+                            <LogoutIcon style={{marginRight: '0.5rem'}} /> Logout
+                        </MenuItem>
+                    </>
+                ) : (
+                    <>
+                        <MenuItem onClick={() => {
+                            window.location.href = '/';
+                        }}>
+                            <PermIdentityIcon style={{marginRight: '0.5rem'}} /> Login
+                        </MenuItem>
+                    </>
+                )}
             </Menu>
         </ProfileDropdownContainer>
     )

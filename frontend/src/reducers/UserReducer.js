@@ -5,7 +5,6 @@ const initialUser = {
     email: "",
     history: [],
     name: "",
-    token: "",
     _id: ""
 }
 
@@ -23,7 +22,6 @@ const userSlice = createSlice({
                 state.email = action.payload?.email;
                 state.history = action.payload?.history;
                 state.name = action.payload?.name;
-                state.token = action.payload?.token;
                 state._id = action.payload?._id;
             })
     }

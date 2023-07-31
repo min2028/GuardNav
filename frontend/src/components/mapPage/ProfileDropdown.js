@@ -4,6 +4,7 @@ import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import LogoutIcon from '@mui/icons-material/Logout';
 import styled from "styled-components";
 import { useTheme } from "@mui/material/styles";
+import {useAuth0} from "@auth0/auth0-react";
 
 import { Menu, MenuItem, Divider } from "@mui/material";
 
@@ -40,8 +41,16 @@ const ProfileDropdown = () => {
     const [anchorEl, setAnchorEl] = useState(null);
     let open = Boolean(anchorEl);
 
+    const { isAuthenticated, logout } = useAuth0();
+
+    const handleLogout = () => {
+        logout();
+        setAnchorEl(null);
+    }
+
     return (
-        <ProfileDropdownContainer theme={theme} >
+        <>
+            {isAuthenticated ? <ProfileDropdownContainer theme={theme} >
             <AccountButton onClick={(e) => setAnchorEl(e.currentTarget)} theme={theme}>
                 <AccountCircleIcon style={{ fontSize: '40px' }} />
             </AccountButton>
@@ -84,11 +93,12 @@ const ProfileDropdown = () => {
                     <PermIdentityIcon style={{marginRight: '0.5rem'}} /> Profile
                 </MenuItem>
                 <Divider />
-                <MenuItem onClick={() => setAnchorEl(null)}>
+                <MenuItem onClick={handleLogout}>
                     <LogoutIcon style={{marginRight: '0.5rem'}} /> Logout
                 </MenuItem>
             </Menu>
-        </ProfileDropdownContainer>
+        </ProfileDropdownContainer> : null}
+        </>
     )
 }
 

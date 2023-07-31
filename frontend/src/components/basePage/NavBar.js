@@ -34,6 +34,7 @@ function NavBar() {
     const handleCloseUserMenu = (setting) => {
         if (setting == "Logout") {
             logout();
+            dispatch(Logout());
         }
         setAnchorElUser(null);
     };

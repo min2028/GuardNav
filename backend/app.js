@@ -14,12 +14,14 @@ const jwtCheck = auth({
     issuerBaseURL: process.env.AUTH0_ISSUERBASEURL,
     tokenSigningAlg: 'RS256'
 });
+const twilio = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN)
 
 
 var indexRouter = require('./routes/index');
 var crimeRouter = require('./routes/crimeRoutes');
 var userRouter = require('./routes/userRoutes');
-var historyRouter = require('./routes/historyRoutes');
+var historyRouter = require('./routes/historyRoutes')
+var messageRouter = require('./routes/messageRoute');
 
 require('./config/database');
 const getUserInfo = require("./middleware/getUserInfo");
@@ -39,7 +41,8 @@ app.use('/', indexRouter);
 app.use('/public/crime', crimeRouter);
 
 app.use(jwtCheck);
-app.use('/protected/history', historyRouter);
 app.use('/protected/user', getUserInfo, userRouter);
+app.use('/protected/history', historyRouter);
+app.use('/protected/message', messageRouter);
 
 module.exports = app;

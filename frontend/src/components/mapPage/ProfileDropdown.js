@@ -5,6 +5,8 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import styled from "styled-components";
 import { useTheme } from "@mui/material/styles";
 import {useAuth0} from "@auth0/auth0-react";
+import { useDispatch, useSelector } from "react-redux";
+import { Logout } from "../../reducers/UserReducer";
 
 import { Menu, MenuItem, Divider } from "@mui/material";
 
@@ -37,20 +39,15 @@ const AccountButton = styled.button`
 `;
 
 const ProfileDropdown = () => {
+    const dispatch = useDispatch();
     const theme = useTheme();
     const [anchorEl, setAnchorEl] = useState(null);
     let open = Boolean(anchorEl);
 
     const { isAuthenticated, logout } = useAuth0();
 
-    const handleLogout = () => {
-        logout();
-        setAnchorEl(null);
-    }
-
     return (
-        <>
-            {isAuthenticated ? <ProfileDropdownContainer theme={theme} >
+        <ProfileDropdownContainer theme={theme} >
             <AccountButton onClick={(e) => setAnchorEl(e.currentTarget)} theme={theme}>
                 <AccountCircleIcon style={{ fontSize: '40px' }} />
             </AccountButton>
@@ -89,16 +86,33 @@ const ProfileDropdown = () => {
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
-                <MenuItem onClick={() => setAnchorEl(null)}>
-                    <PermIdentityIcon style={{marginRight: '0.5rem'}} /> Profile
-                </MenuItem>
-                <Divider />
-                <MenuItem onClick={handleLogout}>
-                    <LogoutIcon style={{marginRight: '0.5rem'}} /> Logout
-                </MenuItem>
+                {isAuthenticated ? (
+                    <>
+                        <MenuItem onClick={() => {
+                            window.location.href = '/setting';
+                        }}>
+                            <PermIdentityIcon style={{marginRight: '0.5rem'}} /> Profile
+                        </MenuItem>
+                        <Divider />
+                        <MenuItem onClick={() => {
+                            logout();
+                            dispatch(Logout());
+                            window.location.href = '/';
+                        }}>
+                            <LogoutIcon style={{marginRight: '0.5rem'}} /> Logout
+                        </MenuItem>
+                    </>
+                ) : (
+                    <>
+                        <MenuItem onClick={() => {
+                            window.location.href = '/';
+                        }}>
+                            <PermIdentityIcon style={{marginRight: '0.5rem'}} /> Login
+                        </MenuItem>
+                    </>
+                )}
             </Menu>
-        </ProfileDropdownContainer> : null}
-        </>
+        </ProfileDropdownContainer>
     )
 }
 

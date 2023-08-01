@@ -10,7 +10,7 @@ const Text = styled.div`
 
 const PlanTripButton = () => {
     return (
-        <Link to="/Map">
+        <Link to="/map">
             <ButtonContainer>
                 <Text>Plan Trip</Text>
                 <ForkRightIcon />

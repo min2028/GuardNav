@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import LogoutIcon from '@mui/icons-material/Logout';
 import styled from "styled-components";
 import { useTheme } from "@mui/material/styles";
 import {useAuth0} from "@auth0/auth0-react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Logout } from "../../reducers/UserReducer";
 
 import { Menu, MenuItem, Divider } from "@mui/material";
+import {getUserAsync} from "../../thunks/userThunk";
 
 const ProfileDropdownContainer = styled.div`
     height: 100%;
@@ -44,7 +45,22 @@ const ProfileDropdown = () => {
     const [anchorEl, setAnchorEl] = useState(null);
     let open = Boolean(anchorEl);
 
-    const { isAuthenticated, logout } = useAuth0();
+    const {
+        loginWithPopup,
+        getAccessTokenSilently,
+        isAuthenticated,
+        logout
+    } = useAuth0();
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            getAccessTokenSilently().then(token => {
+                dispatch(getUserAsync(token));
+            }).catch(err => {
+                console.log(err);
+            });
+        }
+    }, [isAuthenticated]);
 
     return (
         <ProfileDropdownContainer theme={theme} >
@@ -95,9 +111,8 @@ const ProfileDropdown = () => {
                         </MenuItem>
                         <Divider />
                         <MenuItem onClick={() => {
-                            logout();
+                            logout({ returnTo: window.location.origin});
                             dispatch(Logout());
-                            window.location.href = '/';
                         }}>
                             <LogoutIcon style={{marginRight: '0.5rem'}} /> Logout
                         </MenuItem>
@@ -105,7 +120,7 @@ const ProfileDropdown = () => {
                 ) : (
                     <>
                         <MenuItem onClick={() => {
-                            window.location.href = '/';
+                            loginWithPopup();
                         }}>
                             <PermIdentityIcon style={{marginRight: '0.5rem'}} /> Login
                         </MenuItem>

@@ -14,11 +14,14 @@ import SignInButton from '../landingPage/SignInButton';
 import { Logout } from '../../reducers/UserReducer';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import {useAuth0} from "@auth0/auth0-react";
+import {useDispatch} from "react-redux";
 
 const pages = ['map', 'about'];
 const settings = ['Dashboard', 'Logout'];
 
 function NavBar() {
+
+    const dispatch = useDispatch();
 
     const {
         logout,

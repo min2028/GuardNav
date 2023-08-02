@@ -5,7 +5,6 @@ import ButtonContainer from "./ButtonContainer";
 import {useAuth0} from "@auth0/auth0-react";
 import {getUserAsync} from "../../thunks/userThunk";
 import {useDispatch, useSelector} from "react-redux";
-import {decodeJwt} from "jose";
 
 const Text = styled.div`
     margin-right: 8px;
@@ -18,6 +17,7 @@ const SignInButtonContainer = styled.div`
 const SignInButton = () => {
 
     const dispatch = useDispatch();
+
     const userState = useSelector(state => state.user);
 
     const {
@@ -27,17 +27,18 @@ const SignInButton = () => {
         getAccessTokenSilently
     } = useAuth0();
 
-    const getToken = async () => {
-        const token = await getAccessTokenSilently();
-        dispatch(getUserAsync(token));
-    }
 
     useEffect(() => {
         if (isAuthenticated) {
-            getToken();
+            getAccessTokenSilently().then(token => {
+                dispatch(getUserAsync(token));
+            }).catch(err => {
+                console.log(err);
+            });
         }
     }, [isAuthenticated]);
 
+    console.log(user)
     console.log(userState);
 
     return (

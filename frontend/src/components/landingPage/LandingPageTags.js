@@ -6,7 +6,6 @@ const TitleTag = styled.h1`
     margin-top: 0px;
     font-size: 3.5rem;
     ${(props) => {
-        console.log(props);
         return "";
     }}
 `;

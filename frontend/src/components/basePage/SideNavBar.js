@@ -23,6 +23,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { clearHistoryAsync } from "../../thunks/historyThunk";
 
+
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({

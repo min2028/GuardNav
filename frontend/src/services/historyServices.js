@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-import { useSelector } from 'react-redux';
 
 const addHistoryItem = async (token, item) => {
     try {

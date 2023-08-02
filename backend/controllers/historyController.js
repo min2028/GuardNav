@@ -12,7 +12,6 @@ const historyController = {
             if (!user) {
                 res.status(404).send("User not found");
             }
-            console.log(req.body);
             const historyDocument = new HistoryModel(req.body);
             const savedModel = await historyDocument.save();
 

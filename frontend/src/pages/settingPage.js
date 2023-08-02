@@ -7,6 +7,7 @@ import styled from "@emotion/styled";
 
 const SettingPageContainer = styled(PageContainer)`
     display: flex;
+    margin-top: 60px;
     background-color: #1a191a;
     flex-direction: column;
 `;

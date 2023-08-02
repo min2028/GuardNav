@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
-import { addPlace } from "../../reducers/SavedPlaceReducer";
+import { addSavedLocationAsync } from "../../thunks/savedLocationThunk";
+import SearchBar from "../mapPage/SearchBar";
 
 const FormContainer = styled.div`
     display: flex;
@@ -57,44 +58,60 @@ const Form = styled.form`
 
 const EditFavoriteLocation = () => {
     const dispatch = useDispatch();
-    const [address, setAddress] = useState("");
-    const [name, setName] = useState("");
+    const [type, setOptionValue] = useState("HOME");
+    const [searchData, setSearchData] = useState({
+        lat: null,
+        lng: null,
+        formatted_address: "",
+    });
+
+    const handleSearch = (searchResult) => {
+        setSearchData(searchResult);
+    };
+
+    const handleSelect = (e) => {
+        setOptionValue(e.target.value);
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const formatted_address = searchData.formatted_address;
+        const lat = searchData.lat;
+        const lng = searchData.lng;
 
         const favoritePlace = {
-            address,
-            name,
-            id: uuidv4(),
+            formatted_address,
+            lat,
+            lng,
+            to: {
+                lat: lat,
+                lng: lng,
+                formatted_address: formatted_address,
+            },
+            type,
+            _id: uuidv4().replace(/-/g, "").slice(0, 24),
         };
-        dispatch(addPlace(favoritePlace));
+        dispatch(addSavedLocationAsync(favoritePlace));
     };
 
     return (
         <FormContainer>
             <FormWrapper>
-                <Form id="addPlaceForm" onSubmit={handleSubmit}>
+                <Form id="addPlaceFocdrm" onSubmit={handleSubmit}>
                     <FormTitle>Add Favorite Place</FormTitle>
                     <div className="form-row">
-                        <label htmlFor="name">Name:</label>
-                        <input
-                            type="text"
-                            required
-                            placeholder="Home/Work/Gym"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                        />
+                        <label htmlFor="dropdown">Select location:</label>
+                        <select
+                            id="dropdown"
+                            onChange={handleSelect}
+                        >
+                            <option value="HOME">Home</option>
+                            <option value="WORK">Work</option>
+                            <option value="SCHOOL">School</option>
+                        </select>
                     </div>
                     <div className="form-row">
-                        <label htmlFor="address">Address:</label>
-                        <input
-                            type="text"
-                            required
-                            placeholder="8492 Oak Street"
-                            value={address}
-                            onChange={(e) => setAddress(e.target.value)}
-                        />
+                        <SearchBar onSearch={handleSearch} value={searchData} />
                     </div>
                     <button className="submit-button" type="submit">
                         Add

@@ -9,12 +9,12 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import PageContainer from "../basePage/PageContainer";
 import WeatherInformation from "./WeatherInformation";
-import { useTheme } from "@mui/material/styles";
 import styleComp from "@emotion/styled";
 import { css } from "@emotion/react";
 
-import { PageSearchBar, HistoryCard, HistoryList, ProfileDropdown } from "../index";
+import { PageSearchBar, HistoryList, ProfileDropdown } from "../index";
 import { setFrom, setTo } from "../../reducers/TripReducer";
+import ShortCut from "./ShortCut";
 
 const MapTopContainer = styleComp.div`
     display: flex;
@@ -67,7 +67,6 @@ const Map = ({
   showAllHistory,
   crimeData,
 }) => {
-  const theme = useTheme();
   const dispatch = useDispatch();
   const { currentPosition } = useSelector((state) => state.location);
 
@@ -79,6 +78,11 @@ const Map = ({
 
     console.log(from, to);
   
+    openRouteDrawer();
+  };
+
+  const onShortCutClick = (to) => {
+    dispatch(setTo(to));
     openRouteDrawer();
   };
 
@@ -106,70 +110,77 @@ const BorderMarker = {
 };
 
   return (
-    <PageContainer style={{ flexGrow: 1 }}>
-      <div
-        style={{
-          width: "100%",
-          height: "100%",
-        }}
-      >
-        {currentPosition && (
-          <GoogleMap
-            mapContainerStyle={{
-              width: "100%",
-              height: "100%",
-            }}
-            center={currentPosition}
-            zoom={15}
-            options={{
-              disableDefaultUI: true,
-              zoomControl: true,
-              rotateControl: true,
-            }}
-          >
-            <HeatmapLayer
-              data={crimeData.map((item) => ({
-                location: item.location,
-                weight: item.weight,
-              }))}
-              options={{
-                radius: 10,
+      <PageContainer style={{ flexGrow: 1 }}>
+          <div
+              style={{
+                  width: "100%",
+                  height: "100%",
               }}
-            />
-            <MapTopContainer>
-              <MapTopLeft hide={isRouteDrawerOpen}>
-                <MapSearch>
-                  <PageSearchBar onSearch={onSearch} />
-                  <HistoryList
-                    onClick={onHistoryCardClick}
-                    history={history}
-                    expanded={showAllHistory}
-                  />
-                </MapSearch>
-                <WeatherInformation />
-              </MapTopLeft>
-              <MapTopRight>
-                <ProfileDropdown />
-              </MapTopRight>
-              {isRouteDrawerOpen && (
-                <>
-                  <DirectionsService
-                    options={directionsServiceOptions}
-                    callback={directionsCallback}
-                  />
-                  <DirectionsRenderer
-                    directions={directions}
-                    preserveViewport={true}
-                  />
-                </>
+          >
+              {currentPosition && (
+                  <GoogleMap
+                      mapContainerStyle={{
+                          width: "100%",
+                          height: "100%",
+                      }}
+                      center={currentPosition}
+                      zoom={15}
+                      options={{
+                          disableDefaultUI: true,
+                          zoomControl: true,
+                          rotateControl: true,
+                      }}
+                  >
+                      <HeatmapLayer
+                          data={crimeData.map((item) => ({
+                              location: item.location,
+                              weight: item.weight,
+                          }))}
+                          options={{
+                              radius: 10,
+                          }}
+                      />
+                      <MapTopContainer>
+                          <MapTopLeft hide={isRouteDrawerOpen}>
+                              <MapSearch>
+                                  <PageSearchBar onSearch={onSearch} />
+                                  <HistoryList
+                                      onClick={onHistoryCardClick}
+                                      history={history}
+                                      expanded={showAllHistory}
+                                  />
+                              </MapSearch>
+                              <WeatherInformation />
+                              <ShortCut onClick={onShortCutClick} />
+                          </MapTopLeft>
+                          <MapTopRight>
+                              <ProfileDropdown />
+                          </MapTopRight>
+                          {isRouteDrawerOpen && (
+                              <>
+                                  <DirectionsService
+                                      options={directionsServiceOptions}
+                                      callback={directionsCallback}
+                                  />
+                                  <DirectionsRenderer
+                                      directions={directions}
+                                      preserveViewport={true}
+                                  />
+                              </>
+                          )}
+                          <Marker
+                              position={currentPosition}
+                              icon={UserMarker}
+                          />
+                          <Marker
+                              position={currentPosition}
+                              icon={BorderMarker}
+                          />
+                      </MapTopContainer>
+                  </GoogleMap>
               )}
-              <Marker position={currentPosition} icon={UserMarker} />
-              <Marker position={currentPosition} icon={BorderMarker} />
-            </MapTopContainer>
-          </GoogleMap>
-        )}
-      </div>
-    </PageContainer>
+          </div>
+      </PageContainer>
   );
 };
 

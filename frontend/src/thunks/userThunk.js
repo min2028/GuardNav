@@ -8,3 +8,17 @@ export const getUserAsync = createAsyncThunk(
         return await UserService.getUser(token)
     }
 );
+
+export const updateUserNameAsync = createAsyncThunk(
+    actionTypes.UPDATE_USER_NAME,
+    async ({ token, id, name }) => {
+        return await UserService.updateUserName(token, id, name);
+    }
+);
+
+export const updateUserNumberAsync = createAsyncThunk(
+    actionTypes.UPDATE_USER_NUMBER,
+    async ({ token, id, number }) => {
+        return await UserService.updateUserNumber(token, id, number);
+    }
+);

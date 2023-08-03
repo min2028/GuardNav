@@ -39,7 +39,7 @@ const SignInButton = () => {
     }, [isAuthenticated]);
 
     console.log(user)
-    console.log(userState.token);
+    console.log(userState);
 
     return (
         <SignInButtonContainer>

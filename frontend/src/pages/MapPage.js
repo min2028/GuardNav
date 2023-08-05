@@ -17,10 +17,7 @@ import { calculateWeight } from "../utilities/DangerScoreCalculator";
 import proj4 from "proj4";
 import styled from "styled-components";
 import { formatTime } from "../utility/TimeUtil";
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
+import { setHistory } from "../reducers/HistoryReducer";
 
 const Content = styled.div`
   display: flex;
@@ -36,6 +33,8 @@ const MapPage = () => {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_KEY,
     libraries,
   });
+
+  setHistory(useSelector((state) => state.user.history));
 
   const from = useSelector((state) => state.trip.from);
   const to = useSelector((state) => state.trip.to);

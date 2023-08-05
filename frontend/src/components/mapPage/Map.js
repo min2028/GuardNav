@@ -70,13 +70,9 @@ const Map = ({
   const dispatch = useDispatch();
   const { currentPosition } = useSelector((state) => state.location);
 
-  const { history } = useSelector((state) => state);
-
   const onHistoryCardClick = (from, to) => {
     dispatch(setFrom(from));
     dispatch(setTo(to));
-
-    console.log(from, to);
   
     openRouteDrawer();
   };
@@ -146,8 +142,7 @@ const BorderMarker = {
                                   <PageSearchBar onSearch={onSearch} />
                                   <HistoryList
                                       onClick={onHistoryCardClick}
-                                      history={history}
-                                      expanded={showAllHistory}
+                                                        expanded={showAllHistory}
                                   />
                               </MapSearch>
                               <WeatherInformation />

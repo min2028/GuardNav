@@ -21,9 +21,7 @@ const settings = ['Dashboard', 'Logout'];
 
 function NavBar() {
     const dispatch = useDispatch();
-
-    const dispatch = useDispatch();
-
+    
     const {
         logout,
         isAuthenticated

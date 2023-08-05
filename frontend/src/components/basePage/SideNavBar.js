@@ -93,7 +93,6 @@ export default function SideNavBar({ setShowAllHistory, showAllHistory }) {
         },
         { text: showAllHistory ? "Hide All History" : "Show All History" ,action: () => {
             setShowAllHistory(!showAllHistory);
-            console.log(showAllHistory);
         }},
         { text: "Report", action: () => console.log("Report") },
     ];
@@ -135,6 +134,7 @@ export default function SideNavBar({ setShowAllHistory, showAllHistory }) {
                 <List>
                     {["Settings"].map((text, index) => (
                         <Link
+                            key={index}
                             to="/setting"
                             style={{ textDecoration: "none", color: "inherit" }}
                         >

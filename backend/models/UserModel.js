@@ -8,6 +8,7 @@ const userSchema = new Schema({
     history: [
         { type: Schema.Types.ObjectId, ref: 'History' },
     ],
+    number: String,
 }, {collection: 'users'});
 
 const UserModel = model('User', userSchema);

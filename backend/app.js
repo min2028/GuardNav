@@ -42,7 +42,7 @@ app.use('/public/crime', crimeRouter);
 
 app.use(jwtCheck);
 app.use('/protected/user', getUserInfo, userRouter);
-app.use('/protected/history', historyRouter);
-app.use('/protected/message', messageRouter);
+app.use('/protected/history', getUserInfo, historyRouter);
+app.use('/protected/message', getUserInfo, messageRouter);
 
 module.exports = app;

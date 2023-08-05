@@ -4,6 +4,7 @@ import AddressList from "../components/SettingPage/addressList";
 import EditFavoriteLocation from "../components/SettingPage/editFavoriteLocation";
 import { PageContainer } from "../components";
 import styled from "@emotion/styled";
+import ProfileSettings from "../components/SettingPage/ProfileSettings";
 
 const SettingPageContainer = styled(PageContainer)`
     display: flex;
@@ -18,7 +19,10 @@ const SettingPage = ({ google, isLoaded }) => {
             {isLoaded && (
                 <SettingPageContainer>
                     <NavBar />
-                    <EditFavoriteLocation />
+                    <div style={{display: 'flex', flexDirection: 'row', alignContent: 'center'}}>
+                        <EditFavoriteLocation />
+                        <ProfileSettings />
+                    </div>
                     <AddressList />
                 </SettingPageContainer>
             )}

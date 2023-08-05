@@ -8,6 +8,8 @@ const MessageController = {
     sendMessage: async function (req, res, next) {
         try {
             const { to, body } = req.body;
+
+            console.log('Sending SMS to', to);
           
             client.messages
               .create({

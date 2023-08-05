@@ -1,4 +1,9 @@
 const UserModel = require('../models/UserModel');
+require('dotenv').config();
+
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = require('twilio')(accountSid, authToken);
 
 const userController = {
     getUser: async function (req, res, next) {
@@ -26,6 +31,12 @@ const userController = {
                 } else {
                     user.number = req.body.number;
                     await user.save();
+                    // add verified to twilio
+                    // client.validationRequests({
+                    //     friendlyName: user.name,
+                    //     phoneNumber: user.number
+                    // })
+
                     return res.status(200).json(user);
                 }
             } else {

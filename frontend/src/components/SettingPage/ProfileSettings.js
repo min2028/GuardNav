@@ -1,8 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
-import { changeNameAsync, changePhoneNumberAsync } from '../../thunks/userThunk';
+import { updateUserNameAsync, updateUserNumberAsync } from '../../thunks/userThunk';
+
+import MuiPhoneNumber from 'mui-phone-number';
 
 const FormContainer = styled.div`
     display: flex;
@@ -56,6 +58,8 @@ const Form = styled.form`
 `;
 
 const ProfileSettings = () => {
+    const dispatch = useDispatch();
+
     const originalName = useSelector(state => state.user.name);
     const originalPhoneNumber = useSelector(state => state.user.number);
 
@@ -67,12 +71,15 @@ const ProfileSettings = () => {
         const name = e.target.name.value;
         const number = e.target.number.value;
 
+        console.log(user)
+
         if (name !== originalName) {
-            changeNameAsync(user, name);
+            console.log('updating name')
+            dispatch(updateUserNameAsync({ token: user.token, id: user.id, name }));
         }
 
         if (number !== originalPhoneNumber) {
-            changePhoneNumberAsync(user, number);
+            dispatch(updateUserNumberAsync({ token: user.token, id: user.id, number }));
         }
     }
 
@@ -87,7 +94,7 @@ const ProfileSettings = () => {
                     </div>
                     <div className="form-row">  
                         <label htmlFor="number">Phone Number</label>
-                        <input type="text" id="number" defaultValue={originalPhoneNumber} />
+                        <MuiPhoneNumber defaultCountry={'ca'} id="number" />
                     </div>
                     <button className="submit-button" type="submit">Save Changes</button>
                 </Form>

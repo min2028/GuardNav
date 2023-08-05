@@ -58,11 +58,13 @@ const RouteInformation = ({ directions, onAddRouteToHistory, risk, onSendRouteTo
     const [ disabledPhone, setDisabledPhone ] = useState(false);
 
     let token = useSelector((state) => state.user.token);
-    let phone = useSelector((state) => state.user.phone);
+    let phone = useSelector((state) => state.user.number);
     let isLoggedIn = useSelector((state) => state.user.token !== "");
 
     const time = directions?.routes[0].legs[0].duration.text || "0 mins";
     const distance = directions?.routes[0].legs[0].distance.text || "0 km";
+
+    console.log(phone)
 
     const sendDirectionsToPhone = () => {
         if (phone === "" || undefined || null || !phone) {

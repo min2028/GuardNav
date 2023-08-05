@@ -12,13 +12,17 @@ const SettingPageContainer = styled(PageContainer)`
     flex-direction: column;
 `;
 
-const SettingPage = () => {
+const SettingPage = ({ google, isLoaded }) => {
     return (
-        <SettingPageContainer>
-            <NavBar />
-            <EditFavoriteLocation />
-            <AddressList />
-        </SettingPageContainer>
+        <>
+            {isLoaded && (
+                <SettingPageContainer>
+                    <NavBar />
+                    <EditFavoriteLocation />
+                    <AddressList />
+                </SettingPageContainer>
+            )}
+        </>
     );
 };
 

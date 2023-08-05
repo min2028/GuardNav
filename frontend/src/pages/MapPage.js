@@ -26,13 +26,8 @@ const Content = styled.div`
   overflow-x: hidden;
 `;
 
-const MapPage = () => {
+const MapPage = ({ isLoaded, google }) => {
   const dispatch = useDispatch();
-  const [libraries] = useState(["places", "routes", "visualization"]);
-  const { isLoaded, google } = useJsApiLoader({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_KEY,
-    libraries,
-  });
 
   setHistory(useSelector((state) => state.user.history));
 

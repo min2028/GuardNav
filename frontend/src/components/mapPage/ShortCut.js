@@ -26,16 +26,22 @@ const ShortCut = ({ onClick }) => {
     const theme = useTheme();
 
     return (
-        <InformationContainer theme={theme}>
-            {addresses.map((address) => (
-                <div key={address.id}>
-                    <ShortCutIcon
-                        address={address}
-                        onClick={() => onClick(address.to)} // Call the onClick prop here
-                    />
-                </div>
-            ))}
-        </InformationContainer>
+        <>
+            {
+                addresses.length > 0 && (
+                    <InformationContainer theme={theme}>
+                        {addresses.map((address) => (
+                            <div key={address.id}>
+                                <ShortCutIcon
+                                    address={address}
+                                    onClick={() => onClick(address.to)} // Call the onClick prop here
+                                />
+                            </div>
+                        ))}
+                    </InformationContainer>
+                )
+            }
+        </>
     );
 };
 

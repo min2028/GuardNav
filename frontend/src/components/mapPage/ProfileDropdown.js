@@ -3,9 +3,10 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import LogoutIcon from '@mui/icons-material/Logout';
 import styled from "styled-components";
+import { Avatar } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import {useAuth0} from "@auth0/auth0-react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Logout } from "../../reducers/UserReducer";
 
 import { Menu, MenuItem, Divider } from "@mui/material";
@@ -26,23 +27,27 @@ const AccountButton = styled.button`
     cursor: pointer;
     outline: none;
 
-    > svg {
-        color: ${({ theme }) => theme.palette.primary.main};
-        transition: color 0.05s;
-    }
-
-    &:hover {
-        > svg {
-            color: ${({ theme }) => theme.palette.primary.hover};
-            drop-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-        }
+    > .MuiAvatar-root {
+        drop-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        width: 40px;
+        height: 40px;
     }
 `;
 
 const ProfileDropdown = () => {
+    const {
+        user,
+    } = useAuth0();
+
     const dispatch = useDispatch();
     const theme = useTheme();
     const [anchorEl, setAnchorEl] = useState(null);
+
+    console.log(user);
+
+    const username = user?.name;
+    const userPicture = user?.picture;
+
     let open = Boolean(anchorEl);
 
     const {
@@ -65,7 +70,11 @@ const ProfileDropdown = () => {
     return (
         <ProfileDropdownContainer theme={theme} >
             <AccountButton onClick={(e) => setAnchorEl(e.currentTarget)} theme={theme}>
-                <AccountCircleIcon style={{ fontSize: '40px' }} />
+                {isAuthenticated ? (
+                    <Avatar alt={username} src={userPicture} />
+                ) : (
+                    <AccountCircleIcon fontSize="large" />
+                )}
             </AccountButton>
                 {isAuthenticated ? (
                         <Menu
@@ -106,7 +115,7 @@ const ProfileDropdown = () => {
                         <MenuItem onClick={() => {
                             window.location.href = '/setting';
                         }}>
-                            <PermIdentityIcon style={{marginRight: '0.5rem'}} /> Profile
+                            <PermIdentityIcon style={{marginRight: '0.5rem'}} /> {username}
                         </MenuItem>
                         <Divider />
                         <MenuItem onClick={() => {

@@ -52,8 +52,11 @@ const AddressItem = ({ address }) => {
     const dispatch = useDispatch();
     const handleDeleteAddress = () => {
         var result = window.confirm("Are you sure to delete?");
-        if (result)
+        if (result) {
             dispatch(deleteSavedLocationAsync(address));
+            window.location.href = "/map";
+        }
+
     };
 
     return (

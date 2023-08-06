@@ -59,7 +59,6 @@ const Form = styled.form`
 const EditFavoriteLocation = () => {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user);
-    console.log(user);
     const [type, setOptionValue] = useState("HOME");
     const [searchData, setSearchData] = useState({
         lat: null,
@@ -94,6 +93,7 @@ const EditFavoriteLocation = () => {
             _id: uuidv4().replace(/-/g, "").slice(0, 24),
         };
         dispatch(addSavedLocationAsync(favoritePlace));
+        window.location.href = "/map"
     };
 
     return (

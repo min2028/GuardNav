@@ -27,7 +27,6 @@
     "proj4": "^2.9.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-google-login": "^5.2.2",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.13.0",
     "react-scripts": "5.0.1",

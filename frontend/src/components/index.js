@@ -13,6 +13,7 @@ import RouteInformation from "./mapPage/RouteInformation";
 import RouteDirections from "./mapPage/RouteDirections";
 import HistoryList from "./mapPage/HistoryList";
 import ProfileDropdown from "./mapPage/ProfileDropdown";
+import TermsOfService from "./mapPage/TermsOfService";
 
 export {
     Map,
@@ -29,5 +30,6 @@ export {
     RouteInformation,
     RouteDirections,
     HistoryList,
-    ProfileDropdown
+    ProfileDropdown,
+    TermsOfService
 };

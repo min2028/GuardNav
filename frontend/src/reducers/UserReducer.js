@@ -4,6 +4,7 @@ import {getUserAsync, updateUserNameAsync, updateUserNumberAsync} from "../thunk
 const initialUser = {
     email: "",
     history: [],
+    saved_location: [],
     name: "",
     _id: "",
     token: "",
@@ -23,6 +24,7 @@ const userSlice = createSlice({
             .addCase(getUserAsync.fulfilled, (state, action) => {
                 state.email = action.payload?.email;
                 state.history = action.payload?.history;
+                state.saved_location = action.payload?.saved_location;
                 state.name = action.payload?.name;
                 state._id = action.payload?._id;
                 state.token = action.payload?.token;

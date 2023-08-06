@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import AddressItem from "./addressItem";
+import { setSavedLocation } from "../../reducers/SavedLocationReducer";
 
 const AddressListContainer = styled.div`
     height: 300px;
@@ -26,7 +27,8 @@ const CenteredHeading = styled.h2`
 `;
 
 const AddressList = () => {
-    const addresses = useSelector((state) => state.saved_location.items);
+    const saved_locations = setSavedLocation(useSelector((state) => state.user));
+    const addresses = saved_locations.payload.saved_location;
     const addressListRef = useRef(null);
 
     useEffect(() => {

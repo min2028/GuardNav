@@ -7,6 +7,7 @@ const savedLocationController = {
     addSavedLocation: async function (req, res, next) {
         try {
             const user = await UserModel.findById(req.user._id);
+            console.log(user)
             if (!user) {
                 return res.status(404).send("User not found");
             }

@@ -19,6 +19,7 @@ import proj4 from "proj4";
 import styled from "styled-components";
 import { formatTime } from "../utility/TimeUtil";
 import { setHistory } from "../reducers/HistoryReducer";
+import { setSavedLocation } from "../reducers/SavedLocationReducer";
 
 const Content = styled.div`
   display: flex;
@@ -30,7 +31,9 @@ const Content = styled.div`
 const MapPage = ({ isLoaded, google }) => {
   const dispatch = useDispatch();
 
-  setHistory(useSelector((state) => state.user.history));
+  const hist = setHistory(useSelector((state) => state.user.history));
+  const saved_locations = setSavedLocation(useSelector((state) => state.user));
+  const addresses = saved_locations.payload.saved_location;
 
   const from = useSelector((state) => state.trip.from);
   const to = useSelector((state) => state.trip.to);

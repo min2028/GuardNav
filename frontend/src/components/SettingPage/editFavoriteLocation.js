@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
 import { addSavedLocationAsync } from "../../thunks/savedLocationThunk";
@@ -58,6 +58,8 @@ const Form = styled.form`
 
 const EditFavoriteLocation = () => {
     const dispatch = useDispatch();
+    const user = useSelector((state) => state.user);
+    console.log(user);
     const [type, setOptionValue] = useState("HOME");
     const [searchData, setSearchData] = useState({
         lat: null,

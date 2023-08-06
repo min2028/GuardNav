@@ -9,7 +9,9 @@ const userController = {
     getUser: async function (req, res, next) {
         try {
             if (req.user) {
+                console.log(req.user)
                 const userWithHistory = await UserModel.findById(req.user._id)
+                    .populate("saved_location")
                     .populate("history")
                 res.status(200).json(userWithHistory);
             } else {

@@ -14,6 +14,7 @@ import SignInButton from '../landingPage/SignInButton';
 import { Logout } from '../../reducers/UserReducer';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import {useAuth0} from "@auth0/auth0-react";
+import { Link } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 
 const pages = ['map', 'about'];
@@ -45,8 +46,10 @@ function NavBar() {
         <AppBar position="fixed">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
+                    <Link to="/">
                     <Avatar alt="Logo" src={Logo} />
-                    <Typography
+                    </Link>
+                        <Typography
                         variant="h6"
                         noWrap
                         component="a"
@@ -63,7 +66,7 @@ function NavBar() {
                     >
                         GuardNav
                     </Typography>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                    <Box sx={{ flexGrow: 1, display: { xs: 'flex'} }}>
                         {pages.map((page) => (
                             <Button
                                 key={page}

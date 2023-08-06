@@ -13,6 +13,8 @@ const Text = styled.div`
 
 const SignInButtonContainer = styled.div`
     margin-top: 1rem;
+    margin-bottom: 1rem;
+    
 `;
 
 const SignInButton = () => {

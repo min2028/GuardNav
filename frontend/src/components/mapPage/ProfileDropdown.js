@@ -45,9 +45,7 @@ const ProfileDropdown = () => {
     const theme = useTheme();
     const [anchorEl, setAnchorEl] = useState(null);
 
-    console.log(user);
-
-    const username = user?.name;
+    const username = useSelector(state => state.user.name);
     const userPicture = user?.picture;
 
     let open = Boolean(anchorEl);

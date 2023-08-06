@@ -24,9 +24,9 @@ const RouteDirections = ({directions = {}}) => {
 
     return (
         <RouteDirectionsContainer>
-            {steps?.map((step) => {
+            {steps?.map((step, index) => {
                 return (
-                    <RouteDirectionCard key={step.encoded_lats_lngs}>
+                    <RouteDirectionCard key={index}>
                         <p dangerouslySetInnerHTML={{ __html: step.instructions }} />
                         <p>{step.distance.text}</p>
                     </RouteDirectionCard>

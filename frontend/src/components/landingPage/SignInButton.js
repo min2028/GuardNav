@@ -27,7 +27,6 @@ const SignInButton = () => {
         getAccessTokenSilently
     } = useAuth0();
 
-
     useEffect(() => {
         if (isAuthenticated) {
             getAccessTokenSilently().then(token => {
@@ -45,7 +44,7 @@ const SignInButton = () => {
         <SignInButtonContainer>
             {!isAuthenticated &&
                 <ButtonContainer onClick={loginWithRedirect}>
-                    <Text>Account</Text>
+                    <Text>Sign In</Text>
                     <LoginIcon />
                 </ButtonContainer>
             }

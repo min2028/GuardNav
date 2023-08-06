@@ -26,7 +26,7 @@ const CenteredHeading = styled.h2`
 `;
 
 const AddressList = () => {
-    const addresses = useSelector((state) => state.places.places);
+    const addresses = useSelector((state) => state.saved_location.items);
     const addressListRef = useRef(null);
 
     useEffect(() => {

@@ -22,6 +22,7 @@ var crimeRouter = require('./routes/crimeRoutes');
 var userRouter = require('./routes/userRoutes');
 var historyRouter = require('./routes/historyRoutes')
 var messageRouter = require('./routes/messageRoute');
+var savedLocationRouter = require('./routes/savedLocationRoutes');
 
 require('./config/database');
 const getUserInfo = require("./middleware/getUserInfo");
@@ -42,7 +43,8 @@ app.use('/public/crime', crimeRouter);
 
 app.use(jwtCheck);
 app.use('/protected/user', getUserInfo, userRouter);
-app.use('/protected/history', getUserInfo, historyRouter);
-app.use('/protected/message', getUserInfo, messageRouter);
+app.use('/protected/history', historyRouter);
+app.use('/protected/message', messageRouter);
+app.use('/protected/savedLocation', savedLocationRouter)
 
 module.exports = app;

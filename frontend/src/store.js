@@ -1,17 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
+
+import SavedLocationReducer from "./reducers/SavedLocationReducer";
 import LocationReducer from "./reducers/LocationReducer";
 import TripReducer from "./reducers/TripReducer";
 import HistoryReducer from "./reducers/HistoryReducer";
-import SavedPlaceReducer from "./reducers/SavedPlaceReducer";
 import UserReducer from "./reducers/UserReducer";
 
 const store = configureStore({
     reducer: {
         location: LocationReducer,
+        saved_location: SavedLocationReducer,
         trip: TripReducer,
         history: HistoryReducer,
-        places: SavedPlaceReducer,
-        user: UserReducer
+        user: UserReducer,
     },
     devTools: true,
 });

@@ -1,7 +1,12 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { Icon } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import HomeIcon from "@mui/icons-material/Home";
+import WorkIcon from "@mui/icons-material/Work";
+import SchoolIcon from "@mui/icons-material/School";
+import { deleteSavedLocationAsync } from "../../thunks/savedLocationThunk";
 
 const AddressItemContainer = styled.div`
     display: flex;
@@ -29,16 +34,43 @@ const IconContainer = styled.div`
     margin-left: auto;
 `;
 
+const getMuiElement = (enumValue) => {
+    switch (enumValue) {
+        case "HOME":
+            return <HomeIcon />;
+        case "WORK":
+            return <WorkIcon />;
+        case "SCHOOL":
+            return <SchoolIcon />;
+        default:
+            // You can choose to return a default icon or element here, if needed
+            return null;
+    }
+};
+
 const AddressItem = ({ address }) => {
+    const dispatch = useDispatch();
+    const handleDeleteAddress = () => {
+        var result = window.confirm("Are you sure to delete?");
+        if (result)
+            dispatch(deleteSavedLocationAsync(address));
+    };
+
     return (
         <AddressItemContainer>
             <AddressDetails>
                 <AddressName>{address.name}</AddressName>
-                <div>Address: {address.address}</div>
+                <div>Address: {address.formatted_address}</div>
             </AddressDetails>
             <IconContainer>
                 <Icon>
-                    <EditIcon />
+                    <div>{getMuiElement(address.type)}</div>
+                </Icon>
+                <Icon>
+                    <DeleteForeverIcon
+                        onClick={handleDeleteAddress}
+                        style={{ cursor: "pointer" }}
+                    />
                 </Icon>
             </IconContainer>
         </AddressItemContainer>

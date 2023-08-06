@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { updateUserNameAsync, updateUserNumberAsync } from '../../thunks/userThunk';
-import MuiPhoneNumber from '@mui/icons-material/AccountCircleOutlined';
+import MuiPhoneNumber from "mui-phone-number";
 
 const FormContainer = styled.div`
     display: flex;

@@ -22,7 +22,7 @@ const userController = {
     updateUserNumber: async function (req, res, next) {
         try {
             if (req.user) {
-                const user = await UserModel.findById(req.user._id)
+                const user = await UserModel.findById(req.user._id).populate("history");
                 console.log(user.email)
                 if (!user) {
                     return res.status(404).send("User not found");
@@ -50,7 +50,7 @@ const userController = {
     updateUserName: async function (req, res, next) {
         try {
             if (req.user) {
-                const user = await UserModel.findById(req.user._id)
+                const user = await UserModel.findById(req.user._id).populate("history");
                 console.log(user.email)
                 if (!user) {
                     return res.status(404).send("User not found");

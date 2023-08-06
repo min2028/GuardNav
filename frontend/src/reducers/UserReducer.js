@@ -27,6 +27,7 @@ const userSlice = createSlice({
                 state._id = action.payload?._id;
                 state.token = action.payload?.token;
                 state.number = action.payload?.number;
+                console.log("token: " + state.token);
             })
             .addCase(updateUserNumberAsync.fulfilled, (state, action) => {
                 state.number = action.payload?.number;

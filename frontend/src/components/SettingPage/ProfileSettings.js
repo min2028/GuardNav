@@ -70,15 +70,14 @@ const ProfileSettings = () => {
         const name = e.target.name.value;
         const number = e.target.number.value;
 
-        console.log(user)
-
         if (name !== originalName) {
-            console.log('updating name')
             dispatch(updateUserNameAsync({ token: user.token, id: user.id, name }));
+            alert('Name updated successfully!');
         }
 
         if (number !== originalPhoneNumber) {
             dispatch(updateUserNumberAsync({ token: user.token, id: user.id, number }));
+            alert('Phone number updated successfully!');
         }
     }
 

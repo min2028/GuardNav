@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const addSavedLocation = async (token, item) => {
+    console.log(token)
     try {
         const response = await axios.post(
             `${process.env.REACT_APP_API_URL}/protected/savedLocation`,

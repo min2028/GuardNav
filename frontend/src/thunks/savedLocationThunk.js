@@ -12,8 +12,7 @@ export const addSavedLocationAsync = createAsyncThunk(
         while (user.user) {
             user = user.user;
         }
-        const token = user.token;
-        return await addSavedLocation(token, item);
+        return await addSavedLocation(user, item);
     }
 );
 

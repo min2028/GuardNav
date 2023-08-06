@@ -88,9 +88,6 @@ const RouteDrawer = ({ open, onClose, option, setOption, directions, openSuccess
         "balanced": "mid",
         "fastest": "high",
     }
-    
-    console.log(optionToRiskMap[option])
-
 
     const onAddRouteToHistory = () => {
         let route = {

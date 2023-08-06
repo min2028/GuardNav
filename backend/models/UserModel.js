@@ -8,6 +8,9 @@ const userSchema = new Schema({
     history: [
         { type: Schema.Types.ObjectId, ref: 'History' },
     ],
+    saved_location: [
+        { type: Schema.Types.ObjectId, ref: 'SavedLocation' },
+    ],
     number: String,
 }, {collection: 'users'});
 

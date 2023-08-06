@@ -10,6 +10,7 @@ const savedLocation = createSlice({
     reducers: {
         setSavedLocation: (state, action) => {
             state.items = action.payload;
+            console.log(state.items)
         },
     },
     extraReducers: (builder) => {

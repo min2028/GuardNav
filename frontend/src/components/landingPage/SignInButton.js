@@ -37,7 +37,7 @@ const SignInButton = () => {
         }
     }, [isAuthenticated]);
 
-    console.log(user)
+    // console.log(user)
     console.log(userState);
 
     return (

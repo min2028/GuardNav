@@ -3,6 +3,7 @@ import ShortCutIcon from "./ShortCutIcon";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { useTheme } from "@mui/material/styles";
+import { setSavedLocation } from "../../reducers/SavedLocationReducer";
 
 const InformationContainer = styled.div`
     display: flex;
@@ -22,7 +23,10 @@ const InformationContainer = styled.div`
 
 const ShortCut = ({ onClick }) => {
     // Use curly braces for destructuring
-    const addresses = useSelector((state) => state.saved_location.items);
+    const saved_locations = setSavedLocation(
+        useSelector((state) => state.user)
+    );
+    const addresses = saved_locations.payload.saved_location;
     const theme = useTheme();
 
     return (

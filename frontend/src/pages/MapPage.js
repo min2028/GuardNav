@@ -8,6 +8,7 @@ import {
   SideNavBar,
   RouteDrawer,
   LoadingSpinner,
+  TermsOfService,
 } from "../components";
 import { setCurrentPosition, resetLocation } from "../reducers/LocationReducer";
 import { setFrom, setTo } from "../reducers/TripReducer";
@@ -40,6 +41,7 @@ const MapPage = ({ isLoaded, google }) => {
   const [successMessage, setSuccessMessage] = useState("");
   const [crimeData, setCrimeData] = useState([]);
   const [showAllHistory, setShowAllHistory] = useState(false);
+  const [hasAgreedToS, setHasAgreedToS] = useState(false);
 
   const [directions, setDirections] = useState(null);
   let count = React.useRef(0);
@@ -234,6 +236,14 @@ const MapPage = ({ isLoaded, google }) => {
     setSuccessOpen(false);
   };
 
+  const handleAgreement = () => {
+    setHasAgreedToS(true);
+  };
+
+  if (!hasAgreedToS) {
+    return <TermsOfService onAgree={handleAgreement} />;
+  }
+
   return (
     <PageContainer>
       {!isLoaded || !currentPosition ? (
@@ -244,57 +254,58 @@ const MapPage = ({ isLoaded, google }) => {
             setShowAllHistory={(value) => {
               setShowAllHistory(value);
 
-                            const historyList = document.getElementsByClassName("history-list");
-                            if (historyList.length > 0) {
-                                historyList[0].scrollTop = 0;
-                            }
-                        }} 
-                        showAllHistory={showAllHistory}
-                    />
-                    <Content>
-                        <RouteDrawer
-                            open={routeDrawerOpen}
-                            onClose={() => {
-                                setTo(null);
-                                setRouteDrawerOpen(false);
-                            }}
-                            option={option}
-                            setOption={setOption}
-                            isLoaded={isLoaded}
-                            directions={directions}
-                            openSuccessMessage={() => setSuccessOpen(true)}
-                            setSuccessMessage={setSuccessMessage}
-                            handleOptionChange={handleOptionChange}
-                        />
-                        <Map
-                            openRouteDrawer={openRouteDrawer}
-                            isLoaded={isLoaded}
-                            isRouteDrawerOpen={routeDrawerOpen}
-                            directions={directions}
-                            directionsServiceOptions={directionsServiceOptions}
-                            directionsCallback={directionsCallback}
-                            crimeData={crimeData}
-                            showAllHistory={showAllHistory}
-                        />
-                    </Content>
-                </>
-            )}
-            <Snackbar
-                open={successOpen}
-                autoHideDuration={1000}
-                anchorOrigin={{ vertical: "top", horizontal: "center" }}
-                onClose={handleSuccessClose}
-            >
-                <Alert
-                    onClose={handleSuccessClose}
-                    severity="success"
-                    sx={{ width: "100%" }}
-                >
-                    {successMessage}
-                </Alert>
-            </Snackbar>
-        </PageContainer>
-    );
+              const historyList =
+                document.getElementsByClassName("history-list");
+              if (historyList.length > 0) {
+                historyList[0].scrollTop = 0;
+              }
+            }}
+            showAllHistory={showAllHistory}
+          />
+          <Content>
+            <RouteDrawer
+              open={routeDrawerOpen}
+              onClose={() => {
+                setTo(null);
+                setRouteDrawerOpen(false);
+              }}
+              option={option}
+              setOption={setOption}
+              isLoaded={isLoaded}
+              directions={directions}
+              openSuccessMessage={() => setSuccessOpen(true)}
+              setSuccessMessage={setSuccessMessage}
+              handleOptionChange={handleOptionChange}
+            />
+            <Map
+              openRouteDrawer={openRouteDrawer}
+              isLoaded={isLoaded}
+              isRouteDrawerOpen={routeDrawerOpen}
+              directions={directions}
+              directionsServiceOptions={directionsServiceOptions}
+              directionsCallback={directionsCallback}
+              crimeData={crimeData}
+              showAllHistory={showAllHistory}
+            />
+          </Content>
+        </>
+      )}
+      <Snackbar
+        open={successOpen}
+        autoHideDuration={1000}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        onClose={handleSuccessClose}
+      >
+        <Alert
+          onClose={handleSuccessClose}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          {successMessage}
+        </Alert>
+      </Snackbar>
+    </PageContainer>
+  );
 };
 
 export default MapPage;

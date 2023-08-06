@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from 'styled-components';
 import Image from "../../resources/GuyUsingComp.png";
 import {
     TitleTag,
@@ -7,6 +7,16 @@ import {
     LadingPageOuterContainer,
 } from "./LandingPageTags";
 import { useTheme } from "@emotion/react";
+
+const GoalTitle = styled(TitleTag)`
+    background-color: rgba(26,25,26,0.8);
+    padding: 15px;
+`;
+
+const GoalDesc = styled(DescriptionTag)`
+    background-color: rgba(26,25,26,0.8);
+    padding: 15px;
+`;
 
 const ContentContainer = styled.div`
     display: flex;
@@ -17,7 +27,7 @@ const ContentContainer = styled.div`
 `;
 
 const ImageContainer = styled.div`
-    flex: 2;
+    flex: 1.5;
     position: relative;
     > img {
         height: 100%;
@@ -27,6 +37,11 @@ const ImageContainer = styled.div`
         bottom: 0;
         z-index: 0;
     }
+    ${(props) => `
+    @media (max-width: ${props.theme.breakpoints.values.md}px) {
+        display: none;
+    }
+`}
 `;
 
 const GoalComponent = () => {
@@ -35,21 +50,21 @@ const GoalComponent = () => {
         <LadingPageOuterContainer>
             <LadingPageInnerContainer>
                 <ContentContainer>
-                    <TitleTag theme={theme}>Our Goal</TitleTag>
-                    <DescriptionTag theme={theme} size={"1.2rem"}>
+                    <GoalTitle theme={theme}>Our Goal</GoalTitle>
+                    <GoalDesc theme={theme} size={"1.2rem"}>
                         1. Safe Route Planning
-                    </DescriptionTag>
-                    <DescriptionTag theme={theme} size={"1.2rem"}>
+                    </GoalDesc>
+                    <GoalDesc theme={theme} size={"1.2rem"}>
                         2. User Friendly UI/UX design
-                    </DescriptionTag>
-                    <DescriptionTag theme={theme} size={"1.2rem"}>
+                    </GoalDesc>
+                    <GoalDesc theme={theme} size={"1.2rem"}>
                         3. Visualization of Safety
-                    </DescriptionTag>
-                    <DescriptionTag theme={theme} size={"1.2rem"}>
+                    </GoalDesc>
+                    <GoalDesc theme={theme} size={"1.2rem"}>
                         4. Utilize Real Crime Data to Achieve Above Points
-                    </DescriptionTag>
+                    </GoalDesc>
                 </ContentContainer>
-                <ImageContainer>
+                <ImageContainer theme = {theme}>
                     <img src={Image} />
                 </ImageContainer>
             </LadingPageInnerContainer>

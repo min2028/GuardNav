@@ -11,7 +11,8 @@ const userController = {
             if (req.user) {
                 console.log(req.user)
                 const userWithHistory = await UserModel.findById(req.user._id)
-                    // .populate("saved_location")
+                    .populate("saved_location")
+                    .populate("history")
                 res.status(200).json(userWithHistory);
             } else {
                 res.status(404).send("User not found");

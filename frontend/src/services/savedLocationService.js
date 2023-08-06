@@ -1,17 +1,18 @@
 import axios from "axios";
 
-const addSavedLocation = async (token, item) => {
-    console.log(token)
+const addSavedLocation = async (user, item) => {
+    console.log(user)
     try {
         const response = await axios.post(
             `${process.env.REACT_APP_API_URL}/protected/savedLocation`,
             item,
             {
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${user.token}`,
                 },
             }
         );
+        console.log(response);
         return response.data;
     } catch (err) {
         console.log(err.message);

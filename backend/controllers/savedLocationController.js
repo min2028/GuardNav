@@ -7,7 +7,6 @@ const savedLocationController = {
     addSavedLocation: async function (req, res, next) {
         try {
             const user = await UserModel.findById(req.user._id);
-            console.log(user)
             if (!user) {
                 return res.status(404).send("User not found");
             }
@@ -30,16 +29,27 @@ const savedLocationController = {
             if (!user) {
                 return res.status(404).send("User not found");
             }
-            console.log(req.param);
-            console.log(req.param._id);
+            const id = req.params.id.toString();
+            let index = -1;
+            for (let i = 0; i < user.saved_location.length; i++) {
+                const a = user.saved_location[i];
+                const b = new Types.ObjectId(id);
+                if (a.equals(b)) {
+                    index = i;
+                }
+            }
+            if (index !== -1) {
+                user.saved_location.splice(index, 1);
+            }
+            await user.save();
+            console.log(user.saved_location)
 
-            await SavedLocationModel.findByIdAndDelete(req.param._id);
-
+            await SavedLocationModel.findByIdAndDelete(req.params.id);
             res.status(204).send();
         } catch (err) {
             res.status(500).send(err.message);
         }
-    },
+    }
 };
 
 module.exports = savedLocationController;

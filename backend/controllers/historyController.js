@@ -7,6 +7,7 @@ const historyController = {
 
     addHistoryItem: async function (req, res, next) {
         try {
+            console.log(req.user);
             const user = await UserModel.findById(req.user._id);
             // If this occurs, the something is wrong with the middleware
             if (!user) {
@@ -23,6 +24,7 @@ const historyController = {
             if (err.name === "ValidationError") {
                 return res.status(400).json({ error: "Invalid Request" });
             }
+            console.error(err.message);
             res.status(500).send(err.message);
         }
     },

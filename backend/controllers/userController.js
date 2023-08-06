@@ -10,6 +10,7 @@ const userController = {
         try {
             if (req.user) {
                 const userWithHistory = await UserModel.findById(req.user._id)
+                    .populate("history")
                 res.status(200).json(userWithHistory);
             } else {
                 res.status(404).send("User not found");

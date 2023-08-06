@@ -64,8 +64,6 @@ const RouteInformation = ({ directions, onAddRouteToHistory, risk, onSendRouteTo
     const time = directions?.routes[0].legs[0].duration.text || "0 mins";
     const distance = directions?.routes[0].legs[0].distance.text || "0 km";
 
-    console.log(phone)
-
     const sendDirectionsToPhone = () => {
         if (phone === "" || undefined || null || !phone) {
             alert("Please add a phone number in your profile to send directions to your phone.");

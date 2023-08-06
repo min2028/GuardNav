@@ -1,5 +1,5 @@
 import styled, { css, keyframes } from 'styled-components';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { HistoryCard } from '../index';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -86,9 +86,9 @@ const sortByFavourite = (history) => {
 const HistoryList = ({ onClick, expanded }) => {
     const dispatch = useDispatch();
 
-    let history = useSelector(state => state.history);
-
-    const sortedHistory = sortByFavourite(history.items);
+    let history = useSelector(state => state.history.items);
+        
+    const sortedHistory = sortByFavourite(history);
 
     return (
         <HistoryListContainer expanded={expanded} className={"history-list"}>

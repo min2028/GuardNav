@@ -7,6 +7,7 @@ import { Avatar } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import {useAuth0} from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Logout } from "../../reducers/UserReducer";
 
 import { Menu, MenuItem, Divider } from "@mui/material";
@@ -40,6 +41,7 @@ const ProfileDropdown = () => {
     } = useAuth0();
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const theme = useTheme();
     const [anchorEl, setAnchorEl] = useState(null);
 
@@ -113,7 +115,7 @@ const ProfileDropdown = () => {
                         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                     >
                         <MenuItem onClick={() => {
-                            window.location.href = '/setting';
+                            navigate("/setting");
                         }}>
                             <PermIdentityIcon style={{marginRight: '0.5rem'}} /> {username}
                         </MenuItem>

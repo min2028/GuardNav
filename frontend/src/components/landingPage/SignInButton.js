@@ -5,6 +5,7 @@ import ButtonContainer from "./ButtonContainer";
 import {useAuth0} from "@auth0/auth0-react";
 import {getUserAsync} from "../../thunks/userThunk";
 import {useDispatch, useSelector} from "react-redux";
+import { setHistory } from "../../reducers/HistoryReducer";
 
 const Text = styled.div`
     margin-right: 8px;
@@ -36,9 +37,6 @@ const SignInButton = () => {
             });
         }
     }, [isAuthenticated]);
-
-    console.log(user)
-    console.log(userState);
 
     return (
         <SignInButtonContainer>

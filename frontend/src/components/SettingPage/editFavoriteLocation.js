@@ -113,7 +113,7 @@ const EditFavoriteLocation = () => {
                         </select>
                     </div>
                     <div className="form-row">
-                        <SearchBar onSearch={handleSearch} value={searchData} />
+                        <SearchBar onSearch={handleSearch} />
                     </div>
                     <button className="submit-button" type="submit">
                         Add

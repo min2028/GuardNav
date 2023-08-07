@@ -4,10 +4,11 @@ import EastIcon from "@mui/icons-material/East";
 import StarIcon from '@mui/icons-material/Star';
 
 import { formatTime } from "../../utility/TimeUtil";
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const HistoryCardContainer = styled.div`
-    grid-template-areas: "logo content";
-    grid-template-columns: 100px 1fr;
+    grid-template-areas: ${(props) => props.isMobileScreen ? ("'logo' 'content'") : '"logo content"'};
+    grid-template-columns: ${(props) => props.isMobileScreen ? '' : '100px 1fr'};
     background-color: ${(props) => props.theme.palette.risk[props.risk]};
     opacity: 0.9;
     width: 100%;
@@ -33,6 +34,7 @@ const LogoContainer = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    padding: ${(props) => props.isMobileScreen ? "10px 0px" : ''};
 
     & > svg {
         color: black;
@@ -51,12 +53,13 @@ const ContentContainer = styled.div`
 `;
 
 const ContentTitleContainer = styled.div`
-    display: flex;
-    flex-direction: row;
+    display: ${(props) => props.isMobileScreen ? "" : "flex"};
+    flex-direction: ${(props) => props.isMobileScreen ? "" : "row"};
     padding: 10px 0px;
-    padding-right: 1.5rem;
     justify-content: space-between;
-    gap: 30px;
+    padding-right: ${(props) => props.isMobileScreen ? "0px" : "1.5rem"};
+    text-align: ${(props) => props.isMobileScreen ? "center" : ""};
+    gap: ${(props) => props.isMobileScreen ? "" : "30px"};
 `;
 
 const ContentTitle = styled.h3`
@@ -67,10 +70,11 @@ const ContentTitle = styled.h3`
 `;
 
 const ContentDesciptionContainer = styled.div`
-    display: flex;
-    flex-direction: row;
+    display: ${(props) => props.isMobileScreen ? "" : "flex"};
+    flex-direction: ${(props) => props.isMobileScreen ? "" : "row"};;
     padding: 10px 0px;
-    padding-right: 1.5rem;
+    padding-right: ${(props) => props.isMobileScreen ? "0px" : "1.5rem"};
+    text-align: ${(props) => props.isMobileScreen ? "center" : ""};
     justify-content: space-between;
 `;
 
@@ -79,7 +83,7 @@ const ContentDesciption = styled.p`
     margin: 0px;
     font-weight: 500;
     color: ${(props) => props.theme.palette.primary.main};
-    width: 40%;
+    width: ${(props) => props.isMobileScreen ? "" : "40%"};
 `;
 
 const riskMap = {
@@ -91,12 +95,17 @@ const riskMap = {
 };
 
 
+
 const HistoryCard = (props) => {
     const { risk = 0, time, from, to, onClick, favourite, onFavouriteClick} = props;
 
+    const isMobileScreen = useMediaQuery((theme) => {
+        return theme.breakpoints.down('lmd');
+      });
+
     return (
-        <HistoryCardContainer risk={risk} onClick={onClick}>
-            <LogoContainer onClick={
+        <HistoryCardContainer isMobileScreen = {isMobileScreen} risk={risk} onClick={onClick}>
+            <LogoContainer isMobileScreen = {isMobileScreen} onClick={
                 (e) => {
                     e.stopPropagation();
                     onFavouriteClick();
@@ -109,12 +118,12 @@ const HistoryCard = (props) => {
                 )}
             </LogoContainer>
             <ContentContainer>
-                <ContentTitleContainer>
+                <ContentTitleContainer isMobileScreen = {isMobileScreen}>
                     <ContentTitle> {riskMap[risk]} </ContentTitle>
                     <ContentTitle> {formatTime(time)} </ContentTitle>
                 </ContentTitleContainer>
-                <ContentDesciptionContainer>
-                    <ContentDesciption>
+                <ContentDesciptionContainer isMobileScreen = {isMobileScreen}>
+                    <ContentDesciption isMobileScreen = {isMobileScreen}>
                         {from?.formatted_address?.split(",")[0]}
                     </ContentDesciption>
                     <EastIcon
@@ -124,7 +133,7 @@ const HistoryCard = (props) => {
                             height: "0.75rem",
                         }}
                     />
-                    <ContentDesciption style={{textAlign: 'end'}}>
+                    <ContentDesciption isMobileScreen = {isMobileScreen} style={{textAlign: isMobileScreen ? 'center' : 'end'}}>
                         {to?.formatted_address?.split(",")[0]}
                     </ContentDesciption>
                 </ContentDesciptionContainer>

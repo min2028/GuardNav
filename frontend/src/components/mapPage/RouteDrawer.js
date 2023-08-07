@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RoutePlanner, RouteOptions, RouteInformation, RouteDirections } from '../index.js';
 import { addHistoryItemAsync } from '../../thunks/historyThunk.js';
 import { ContactlessOutlined } from '@mui/icons-material';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const FlowHolder = styled.div`
     display: flex;
@@ -79,9 +80,23 @@ const Divider = styled.hr`
     border-bottom-width: thin;
 `;
 
+
+
+const CustomDrawer = styled(Drawer)`
+    width: ${(props) => props.isMidScreen ? (props.isMobileScreen ?  "unset " : '50%') : '30% '} !important;
+`;
+
 const RouteDrawer = ({ open, onClose, option, setOption, directions, openSuccessMessage, setSuccessMessage, handleOptionChange }) => {
     const theme = useTheme();
     const dispatch = useDispatch();
+
+    const isMobileScreen = useMediaQuery((theme) => {
+        return theme.breakpoints.down('sm');
+    });
+    
+    const isMidScreen = useMediaQuery((theme) => {
+        return theme.breakpoints.down('md');
+    });
 
     const optionToRiskMap = {
         "safest": "low",
@@ -122,7 +137,9 @@ const RouteDrawer = ({ open, onClose, option, setOption, directions, openSuccess
     return (
         <>
             <FlowHolder open={open} />
-            <Drawer
+            <CustomDrawer
+                isMobileScreen = {isMobileScreen}
+                isMidScreen = {isMidScreen}
                 open={open}
             >
                 <DrawerHeader>
@@ -138,7 +155,7 @@ const RouteDrawer = ({ open, onClose, option, setOption, directions, openSuccess
                 <RouteInformation directions={directions} onAddRouteToHistory={onAddRouteToHistory} risk={optionToRiskMap[option]} onSendRouteToPhone={onSendRouteToPhone} />
                 <Divider />
                 <RouteDirections directions={directions} />
-            </Drawer>
+            </CustomDrawer>
         </>
     )
 };

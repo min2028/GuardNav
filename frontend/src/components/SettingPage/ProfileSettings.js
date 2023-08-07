@@ -1,9 +1,11 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { updateUserNameAsync, updateUserNumberAsync } from '../../thunks/userThunk';
-import MuiPhoneNumber from "mui-phone-number";
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css'
+
 
 const FormContainer = styled.div`
     display: flex;
@@ -81,6 +83,12 @@ const ProfileSettings = () => {
         }
     }
 
+    useEffect(() => {
+        if (originalPhoneNumber) {
+            window.document.getElementById('number').value = originalPhoneNumber;
+        }
+    }, [originalPhoneNumber]);
+
     return (
         <FormContainer>
             <FormWrapper>
@@ -92,7 +100,7 @@ const ProfileSettings = () => {
                     </div>
                     <div className="form-row">  
                         <label htmlFor="number">Phone Number</label>
-                        <MuiPhoneNumber defaultCountry={'ca'} id="number" />
+                        <PhoneInput id="number" value={originalPhoneNumber} onChange={() => {}} />
                     </div>
                     <button className="submit-button" type="submit">Save Changes</button>
                 </Form>

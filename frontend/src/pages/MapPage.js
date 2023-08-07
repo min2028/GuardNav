@@ -221,6 +221,12 @@ const MapPage = ({ isLoaded, google }) => {
     }
   }, [isLoaded, google]);
 
+  useEffect(() => {
+    if (hist) {
+      dispatch(setHistory(hist.payload));
+    }
+  }, [hist, dispatch]);
+
   const handleOptionChange = (option) => {
     if (option === "safest") {
       setWeightLimit(3.0);

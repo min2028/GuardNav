@@ -106,7 +106,9 @@ export default function SideNavBar({ setShowAllHistory, showAllHistory }) {
         { text: showAllHistory ? "Hide All History" : "Show All History" ,action: () => {
             setShowAllHistory(!showAllHistory);
         }},
-        { text: "Report", action: () => console.log("Report") },
+        { text: "Report", action: () => {
+            alert("We are sorry to hear that you are having issues with our app.");
+        } },
     ];
 
     const isMobileScreen = useMediaQuery((theme) => {

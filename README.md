@@ -1,6 +1,13 @@
-# GuardNav
-
-> A Safe Route Planning App
+<br />
+<p align="center">
+  <a href="./frontend/src/resources/logo.png">
+    <img width="30%" src="./frontend/src/resources/logo.png" alt="mystudy-space logo">
+  </a>
+  <p align="center">
+</p>
+  <h1 align="center">GuardNav</h1>
+  <h3 align="center">Plan a safe trip in Vancouver</h3>
+</p>
 
 ### Overview:
 GuardNav aims to provide users with a reliable and user-friendly navigation experience, prioritizing their safety by leveraging historic crime information. With features like safe route planning, data visualization through heat maps, the app empowers users to make informed decisions while navigating Vancouver and ensures their confidence in reaching their destinations securely.
@@ -96,6 +103,9 @@ We integrated the React Google Maps API for the entire map interface, including 
 
 #### Aayush Raghuvamshi
 Aayush took leadership in initiating and maintaining team conversations and often delegating tasks. Key contributions include working with the VPD crime dataset, implementing the Heat Map Layer, setting up Route planning, and implementing all of the math behind the route planning logic. He also took charge of the terms of service page and documentation.
+
+#### Dickson Ngan
+Dickson played a key role in the project by designing and developing the comprehensive map page, which includes integrating with Google Map's and creating the history component that enables users to add, favorite, and clear their previous routes. Additionally, he also implemented the functionality for users to seamlessly send route directions to their phones using Twilio and ensured smooth integration with the backend by establishing connections to the relevant endpoints.
 
 #### Andres Lee
 Andres worked on the frontend, backend, and the deployment of the app. Key contributions consist of making the styling of the static portion of the web app, media querries to make it mobile friendly, and one schema on mongoose.

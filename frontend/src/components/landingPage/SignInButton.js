@@ -21,8 +21,6 @@ const SignInButton = () => {
 
     const dispatch = useDispatch();
 
-    const userState = useSelector(state => state.user);
-
     const {
         user,
         loginWithRedirect,

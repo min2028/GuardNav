@@ -4,10 +4,9 @@ import { v4 as uuidv4 } from 'uuid';
 
 import CloseIcon from '@mui/icons-material/Close';
 import { useTheme } from '@mui/material/styles';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { RoutePlanner, RouteOptions, RouteInformation, RouteDirections } from '../index.js';
 import { addHistoryItemAsync } from '../../thunks/historyThunk.js';
-import { ContactlessOutlined } from '@mui/icons-material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 const FlowHolder = styled.div`

@@ -65,7 +65,7 @@ const GoalComponent = () => {
                     </GoalDesc>
                 </ContentContainer>
                 <ImageContainer theme = {theme}>
-                    <img src={Image} />
+                    <img src={Image} alt={"Guy using computer"} />
                 </ImageContainer>
             </LadingPageInnerContainer>
         </LadingPageOuterContainer>

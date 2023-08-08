@@ -4,7 +4,6 @@ import { useTheme } from '@mui/material/styles';
 import { useSelector } from "react-redux";
 
 import { StandaloneSearchBox, LoadScript } from "@react-google-maps/api";
-import SearchIcon from '@mui/icons-material/Search';
  
 const SearchInput = styled.input`
     height: 100%;

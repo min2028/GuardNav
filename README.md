@@ -37,33 +37,33 @@ The Safe Route Planning App is intended for the following user groups:
 
 **Minimal**
 >will definitely complete
-- Create a simple CRUD (Create, Read, Update, Delete) functionality to enable users to manage trips.
-- Users should be able to add trips by specifying a pair of source and destination locations.
-- Each trip should include the suggested routes, the primary route selected by the user.
-- Users should be able to update the origin or destination of the primary route, similar to the timeline functionality in Google Maps.
-- Utilize historic crime data to create the initial dataset for generating a heatmap.
-- The heatmap should display risk levels across Vancouver based on the crime data.
-- Develop a basic user interface (UI) that includes a map displaying the generated heatmap.
+- [x] Create a simple CRUD (Create, Read, Update, Delete) functionality to enable users to manage trips.
+- [x] Users should be able to add trips by specifying a pair of source and destination locations.
+- [x] Each trip should include the suggested routes, the primary route selected by the user.
+- [x] Users should be able to update the origin or destination of the primary route, similar to the timeline functionality in Google Maps.
+- [x] Utilize historic crime data to create the initial dataset for generating a heatmap.
+- [x] The heatmap should display risk levels across Vancouver based on the crime data.
+- [x] Develop a basic user interface (UI) that includes a map displaying the generated heatmap.
 
 **Standard**
 >will most likely complete
-- Integrate route planning that avoids high risk areas.
-- Multiple route suggestions with varying levels of risk.
-- Risk categorization. [intensity weighted]
+- [x] Integrate route planning that avoids high risk areas.
+- [x] Multiple route suggestions with varying levels of risk.
+- [x] Risk categorization. [intensity weighted]
 
 
 **Stretch Goals**
 >will complete if time permits
-- Implement a grid representation to validate hazard reports.
-- Use aggregated number of reports in the area for the validation
-- User authentication and user profiles.
-- User preferences for risk levels and categories.
-- Alert system if off-route.
-- CRUD to enable users to add, update, and delete their own reports of hazards and risks to be added to the database.
-- Enhance manual crime entry functionality with entry validation.
-- Real-time alerts of new hazards along the route.
-- Send directions to user via SMS.
-- (friendly design for mobile users)
+- [ ] Implement a grid representation to validate hazard reports.
+- [ ] Use aggregated number of reports in the area for the validation
+- [x] User authentication and user profiles.
+- [ ] User preferences for risk levels and categories.
+- [ ] Alert system if off-route.
+- [ ] CRUD to enable users to add, update, and delete their own reports of hazards and risks to be added to the database.
+- [ ] Enhance manual crime entry functionality with entry validation.
+- [ ] Real-time alerts of new hazards along the route.
+- [x] Send directions to user via SMS.
+- [x] friendly design for mobile users
 
 ## Prototypes:
 

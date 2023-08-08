@@ -69,13 +69,14 @@ function NavBar() {
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex'} }}>
                         {pages.map((page) => (
-                            <Button
-                                key={page}
-                                sx={{ my: 2, color: 'white', display: 'block', textAlign: 'center'}}
-                                href={`/${page}`}
-                            >
-                                {page}
-                            </Button>
+                            <Link to={`/${page}`}>
+                                <Button
+                                    key={page}
+                                    sx={{ my: 2, color: 'white', display: 'block', textAlign: 'center'}}
+                                >
+                                    {page}
+                                </Button>
+                            </Link>
                         ))}
                     </Box>
                     {isAuthenticated && (

@@ -72,3 +72,33 @@ The Safe Route Planning App is intended for the following user groups:
 
 <img width="635" alt="Map Page" src="https://github.com/min2028/GuardNav/assets/93061872/078f2c20-d15d-419f-9949-64d9c5d67200">
 
+## Utilizes tech from Units 1-5
+
+#### Unit 1: HTML, CSS, JS
+We leveraged HTML, CSS, and JS to build the entire frontend of our project, with the backend in JavaScript and Node Express. Using libraries such as Material UI and the React Google Maps API, we achieved a visually appealing design and an efficient map interface. The separation of these technologies ensured reduced coupling and increased cohesion.
+
+#### Unit 2: React & Redux
+React & Redux were vital in managing global and local states throughout the project, integrating changing components seamlessly. We used Redux for tracking user's geolocation and created several reducers for history list logic, user profiles, and other functionalities such as in our MapPage.js file.
+
+#### Unit 3: Node and Express
+[Placeholder for Unit 3 details]
+
+#### Unit 4: MongoDB
+[Placeholder for Unit 4 details]
+
+#### Unit 5: Builds and Deployment
+Our mono repo code base utilized git for version control with collaborative review of pull requests. We employed yarn and npm for package management and as build tools, resolving dependencies and conflicts. The site was deployed on Render, a cloud hosting platform, ensuring it remains up-to-date.
+
+## Description of 'Above and Beyond' Functionality
+We integrated the React Google Maps API for the entire map interface, including search bars, routing logic, heatmaps, and directions renderer. We utilized the OpenWeather API for current weather display and built the entire project around location services for route planning according to user input. [Additional contributions if needed]
+
+## List of Contributions
+
+#### Aayush Raghuvamshi
+Aayush took leadership in initiating and maintaining team conversations and often delegating tasks. Key contributions include working with the VPD crime dataset, implementing the Heat Map Layer, setting up Route planning, and implementing all of the math behind the route planning logic. He also took charge of the terms of service page and documentation.
+
+[Other team members' contributions]
+
+### Description of Next Steps
+We aim to further reduce bugs and are considering revamping the entire map interface by possibly using Mapbox instead of Google Maps for enhanced functionality in route planning. [Additional thoughts if needed]
+

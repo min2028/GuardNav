@@ -37,6 +37,7 @@ const SignInButton = () => {
             }).catch(err => {
                 console.log(err);
             });
+            setHistory(dispatch, user.history);
         }
     }, [isAuthenticated]);
 

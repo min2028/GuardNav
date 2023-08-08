@@ -18,10 +18,8 @@ import { calculateWeight } from "../utilities/DangerScoreCalculator";
 import proj4 from "proj4";
 import styled from "styled-components";
 import { formatTime } from "../utility/TimeUtil";
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
+import { setHistory } from "../reducers/HistoryReducer";
+import { setSavedLocation } from "../reducers/SavedLocationReducer";
 
 const Content = styled.div`
   display: flex;
@@ -30,13 +28,13 @@ const Content = styled.div`
   overflow-x: hidden;
 `;
 
-const MapPage = () => {
+const MapPage = ({ isLoaded, google }) => {
   const dispatch = useDispatch();
-  const [libraries] = useState(["places", "routes", "visualization"]);
-  const { isLoaded, google } = useJsApiLoader({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_KEY,
-    libraries,
-  });
+
+  const userState = useSelector((state) => state.user);
+
+  const saved_locations = setSavedLocation(useSelector((state) => state.user));
+  const addresses = saved_locations.payload.saved_location;
 
   const from = useSelector((state) => state.trip.from);
   const to = useSelector((state) => state.trip.to);
@@ -175,32 +173,7 @@ const MapPage = () => {
   useEffect(() => {
     if (isLoaded) {
       csv("/data/temp_data3.csv").then((data) => {
-        // data = data.filter(
-        //   (row) => !(parseFloat(row.X) === 0.0 || parseFloat(row.Y) === 0.0)
-        // );
-        // let minWeight = Infinity;
-        // let maxWeight = -Infinity;
         let newData = data.map((row) => {
-          // let x = parseFloat(row.X);
-          // let y = parseFloat(row.Y);
-          // if (isFinite(x) && isFinite(y)) {
-          //   let weight = calculateWeight(row);
-          //   if (weight < minWeight) {
-          //     minWeight = weight;
-          //   }
-          //   if (weight > maxWeight) {
-          //     maxWeight = weight;
-          //   }
-          //   // This lat/lon conversion logic is from chatGPT
-          //   const utmZone10 =
-          //     "+proj=utm +zone=10 +ellps=WGS84 +datum=WGS84 +units=m +no_defs";
-          //   let [lng, lat] = proj4(utmZone10).inverse([x, y]);
-          //   return {
-          //     location: new window.google.maps.LatLng(lat, lng),
-          //     weight: weight,
-          //   };
-          // }
-          // return null;
           return {
             location: new window.google.maps.LatLng(
               parseFloat(row.latitude),
@@ -212,17 +185,17 @@ const MapPage = () => {
 
         newData = newData.filter((item) => item !== null);
 
-        // newData = newData.map((item) => {
-        //   return {
-        //     ...item,
-        //     weight:
-        //       ((item.weight - minWeight) / (maxWeight - minWeight)) * 10 + 1,
-        //   };
-        // });
         setCrimeData(newData);
       });
     }
   }, [isLoaded, google]);
+
+  useEffect(() => {
+    if (userState) {
+      dispatch(setHistory(userState.history || []));
+      console.log(userState.history);
+    }
+  }, [userState]);
 
   const handleOptionChange = (option) => {
     if (option === "safest") {

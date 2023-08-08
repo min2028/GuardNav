@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-import { useSelector } from 'react-redux';
 
 const addHistoryItem = async (token, item) => {
     try {
+        console.log(token)
         const response = await axios.post(
             `${process.env.REACT_APP_API_URL}/protected/history`,
             item,

@@ -3,26 +3,21 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
 import Logo from '../../resources/logo.png';
-import SignInButton from '../landingPage/SignInButton';
 import { Logout } from '../../reducers/UserReducer';
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import {useAuth0} from "@auth0/auth0-react";
-import {useDispatch} from "react-redux";
+import { Link } from 'react-router-dom';
+import { useDispatch } from "react-redux";
+import ProfileDropdown from '../mapPage/ProfileDropdown';
 
 const pages = ['map', 'about'];
-const settings = ['Dashboard', 'Logout'];
 
 function NavBar() {
-
     const dispatch = useDispatch();
-
+    
     const {
         logout,
         isAuthenticated
@@ -35,7 +30,7 @@ function NavBar() {
     };
 
     const handleCloseUserMenu = (setting) => {
-        if (setting == "Logout") {
+        if (setting === "Logout") {
             logout();
             dispatch(Logout());
         }
@@ -46,8 +41,10 @@ function NavBar() {
         <AppBar position="fixed">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
+                    <Link to="/">
                     <Avatar alt="Logo" src={Logo} />
-                    <Typography
+                    </Link>
+                        <Typography
                         variant="h6"
                         noWrap
                         component="a"
@@ -64,53 +61,21 @@ function NavBar() {
                     >
                         GuardNav
                     </Typography>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                    <Box sx={{ flexGrow: 1, display: { xs: 'flex'} }}>
                         {pages.map((page) => (
-                            <Button
-                                key={page}
-                                sx={{ my: 2, color: 'white', display: 'block', textAlign: 'center'}}
-                                href={`/${page}`}
-                            >
-                                {page}
-                            </Button>
+                            <Link to={`/${page}`}>
+                                <Button
+                                    key={page}
+                                    sx={{ my: 2, color: 'white', display: 'block', textAlign: 'center'}}
+                                >
+                                    {page}
+                                </Button>
+                            </Link>
                         ))}
                     </Box>
-                    <Box sx={{ flexGrow: 0 }}>
-                        {
-                            !isAuthenticated ?
-                            <SignInButton /> :
-                            <React.Fragment>
-                                <Tooltip title="Open settings">
-                                <AccountCircleOutlinedIcon
-                                    onClick={handleOpenUserMenu}
-                                    sx={{fontSize: '2rem'}}
-                                />
-                                </Tooltip>
-                                <Menu
-                                    sx={{ mt: '45px' }}
-                                    id="menu-appbar"
-                                    anchorEl={anchorElUser}
-                                    anchorOrigin={{
-                                        vertical: 'top',
-                                        horizontal: 'right',
-                                    }}
-                                    keepMounted
-                                    transformOrigin={{
-                                        vertical: 'top',
-                                        horizontal: 'right',
-                                    }}
-                                    open={Boolean(anchorElUser)}
-                                    onClose={handleCloseUserMenu}
-                                >
-                                    {settings.map((setting) => (
-                                        <MenuItem key={setting} onClick={() => handleCloseUserMenu(setting)}>
-                                            <Typography textAlign="center">{setting}</Typography>
-                                        </MenuItem>
-                                    ))}
-                                </Menu>
-                            </React.Fragment>
-                        }
-                    </Box>
+                    {isAuthenticated && (
+                        <ProfileDropdown />
+                    )}
                 </Toolbar>
             </Container>
         </AppBar>

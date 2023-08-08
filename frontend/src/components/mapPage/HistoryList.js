@@ -1,8 +1,8 @@
 import styled, { css, keyframes } from 'styled-components';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { HistoryCard } from '../index';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { changeFavouriteAsync } from '../../thunks/historyThunk';
 
 const HistoryListContainer = styled.div`
@@ -14,7 +14,7 @@ const HistoryListContainer = styled.div`
     overflow-y: hidden;
     overflow-x: hidden;
     
-    ${props => props.expanded && css`
+    ${props => props.expanded === true && css`
         overflow-y: auto;
     `}
 `;
@@ -62,7 +62,7 @@ const ExpandedView = styled.div`
     position: relative;
     padding: 0;
 
-    ${props => props.open ? css`
+    ${props => props.open === true ? css`
         animation: ${appear} 0.2s ease-in-out forwards;
         pointer-events: auto;
         transform: translateY(0);
@@ -82,11 +82,12 @@ const sortByFavourite = (history) => {
     return [...favourite, ...notFavourite];
 };
 
-const HistoryList = ({ history, onClick, expanded }) => {
+const HistoryList = ({ onClick, expanded }) => {
     const dispatch = useDispatch();
 
-    const sortedHistory = sortByFavourite(history.items);
-    console.log(sortedHistory);
+    let history = useSelector(state => state.history.items);
+        
+    const sortedHistory = sortByFavourite(history || []);
 
     return (
         <HistoryListContainer expanded={expanded} className={"history-list"}>

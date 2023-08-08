@@ -5,6 +5,7 @@ import ButtonContainer from "./ButtonContainer";
 import {useAuth0} from "@auth0/auth0-react";
 import {getUserAsync} from "../../thunks/userThunk";
 import {useDispatch, useSelector} from "react-redux";
+import { setHistory } from "../../reducers/HistoryReducer";
 
 const Text = styled.div`
     margin-right: 8px;
@@ -12,13 +13,13 @@ const Text = styled.div`
 
 const SignInButtonContainer = styled.div`
     margin-top: 1rem;
+    margin-bottom: 1rem;
+    
 `;
 
 const SignInButton = () => {
 
     const dispatch = useDispatch();
-
-    const userState = useSelector(state => state.user);
 
     const {
         user,
@@ -27,7 +28,6 @@ const SignInButton = () => {
         getAccessTokenSilently
     } = useAuth0();
 
-
     useEffect(() => {
         if (isAuthenticated) {
             getAccessTokenSilently().then(token => {
@@ -35,17 +35,15 @@ const SignInButton = () => {
             }).catch(err => {
                 console.log(err);
             });
+            setHistory(dispatch, user.history);
         }
     }, [isAuthenticated]);
-
-    console.log(user)
-    console.log(userState);
 
     return (
         <SignInButtonContainer>
             {!isAuthenticated &&
                 <ButtonContainer onClick={loginWithRedirect}>
-                    <Text>Account</Text>
+                    <Text>Sign In</Text>
                     <LoginIcon />
                 </ButtonContainer>
             }

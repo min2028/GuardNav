@@ -12,6 +12,7 @@ export const getUserAsync = createAsyncThunk(
 export const updateUserNameAsync = createAsyncThunk(
     actionTypes.UPDATE_USER_NAME,
     async ({ token, id, name }) => {
+        console.log(token, id, name)
         return await UserService.updateUserName(token, id, name);
     }
 );
@@ -19,6 +20,7 @@ export const updateUserNameAsync = createAsyncThunk(
 export const updateUserNumberAsync = createAsyncThunk(
     actionTypes.UPDATE_USER_NUMBER,
     async ({ token, id, number }) => {
+        console.log(token, id, number)
         return await UserService.updateUserNumber(token, id, number);
     }
 );

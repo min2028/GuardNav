@@ -1,14 +1,18 @@
 const UserModel = require('../models/UserModel');
+require('dotenv').config();
+
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = require('twilio')(accountSid, authToken);
 
 const userController = {
     getUser: async function (req, res, next) {
         try {
             if (req.user) {
-                const userWithHistory = await UserModel.findById(req.user._id).populate('history');
-                console.log(userWithHistory)
-                if (!userWithHistory) {
-                    return res.status(404).send("User not found");
-                }
+                console.log(req.user)
+                const userWithHistory = await UserModel.findById(req.user._id)
+                    .populate("saved_location")
+                    .populate("history")
                 res.status(200).json(userWithHistory);
             } else {
                 res.status(404).send("User not found");
@@ -20,7 +24,7 @@ const userController = {
     updateUserNumber: async function (req, res, next) {
         try {
             if (req.user) {
-                const user = await UserModel.findById(req.user._id)
+                const user = await UserModel.findById(req.user._id).populate("history");
                 console.log(user.email)
                 if (!user) {
                     return res.status(404).send("User not found");
@@ -30,6 +34,12 @@ const userController = {
                 } else {
                     user.number = req.body.number;
                     await user.save();
+                    // add verified to twilio
+                    // client.validationRequests({
+                    //     friendlyName: user.name,
+                    //     phoneNumber: user.number
+                    // })
+
                     return res.status(200).json(user);
                 }
             } else {
@@ -42,7 +52,7 @@ const userController = {
     updateUserName: async function (req, res, next) {
         try {
             if (req.user) {
-                const user = await UserModel.findById(req.user._id)
+                const user = await UserModel.findById(req.user._id).populate("history");
                 console.log(user.email)
                 if (!user) {
                     return res.status(404).send("User not found");

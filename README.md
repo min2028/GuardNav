@@ -81,21 +81,24 @@ We leveraged HTML, CSS, and JS to build the entire frontend of our project, with
 React & Redux were vital in managing global and local states throughout the project, integrating changing components seamlessly. We used Redux for tracking user's geolocation and created several reducers for history list logic, user profiles, and other functionalities such as in our MapPage.js file.
 
 #### Unit 3: Node and Express
-[Placeholder for Unit 3 details]
+In Unit 3, we leveraged Node.js and the Express framework to build the backend of our GuardNav application. With Node.js, we created a robust and efficient server-side environment that handles user authentication, data management, and communication with the frontend. Express enabled us to set up routes, middleware, and handle HTTP requests effectively and through the integration of different packages, we managed user accounts, trip data, and communication with external services such as Auth0.
 
 #### Unit 4: MongoDB
-[Placeholder for Unit 4 details]
+Unit 4 played a crucial role in our GuardNav project as we utilized MongoDB, a NoSQL database, to manage and store our application's data. We modeled our data structures to optimize trip information and user-specific data such as user history. Through Mongoose, a MongoDB object modeling library for Node.js, we ensured data consistency, validation, and easy querying for various parts of our application.
 
 #### Unit 5: Builds and Deployment
 Our mono repo code base utilized git for version control with collaborative review of pull requests. We employed yarn and npm for package management and as build tools, resolving dependencies and conflicts. The site was deployed on Render, a cloud hosting platform, ensuring it remains up-to-date.
 
 ## Description of 'Above and Beyond' Functionality
-We integrated the React Google Maps API for the entire map interface, including search bars, routing logic, heatmaps, and directions renderer. We utilized the OpenWeather API for current weather display and built the entire project around location services for route planning according to user input. [Additional contributions if needed]
+We integrated the React Google Maps API for the entire map interface, including search bars, routing logic, heatmaps, and directions renderer. We utilized the OpenWeather API for current weather display and built the entire project around location services for route planning according to user input. We implemented Auth0 to handle user authentication and authorization seamlessly. Users can now create accounts, log in securely through email and password or external services like google, and access personalized features with confidence. [Additional contributions if needed]
 
 ## List of Contributions
 
 #### Aayush Raghuvamshi
 Aayush took leadership in initiating and maintaining team conversations and often delegating tasks. Key contributions include working with the VPD crime dataset, implementing the Heat Map Layer, setting up Route planning, and implementing all of the math behind the route planning logic. He also took charge of the terms of service page and documentation.
+
+#### Aung Khant Min
+Aung Khant Min played a pivotal role in GuardNav, leading backend development with robust APIs, MongoDB integration, and enhanced data management. He bolstered security by implementing Auth0-based authentication. Aung Khant Min's frontend-backend integration enabled real-time updates, while his UI contributions enriched user experience.
 
 [Other team members' contributions]
 

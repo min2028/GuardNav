@@ -88,7 +88,6 @@ export default function SideNavBar({ setShowAllHistory, showAllHistory }) {
     const dispatch = useDispatch();
     const theme = useTheme();
     const [open, setOpen] = useState(false);
-    // const [extend, setExtend] = useState(false);
 
     const handleDrawer = () => {
         setOpen(!open);

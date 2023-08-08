@@ -173,32 +173,7 @@ const MapPage = ({ isLoaded, google }) => {
   useEffect(() => {
     if (isLoaded) {
       csv("/data/temp_data3.csv").then((data) => {
-        // data = data.filter(
-        //   (row) => !(parseFloat(row.X) === 0.0 || parseFloat(row.Y) === 0.0)
-        // );
-        // let minWeight = Infinity;
-        // let maxWeight = -Infinity;
         let newData = data.map((row) => {
-          // let x = parseFloat(row.X);
-          // let y = parseFloat(row.Y);
-          // if (isFinite(x) && isFinite(y)) {
-          //   let weight = calculateWeight(row);
-          //   if (weight < minWeight) {
-          //     minWeight = weight;
-          //   }
-          //   if (weight > maxWeight) {
-          //     maxWeight = weight;
-          //   }
-          //   // This lat/lon conversion logic is from chatGPT
-          //   const utmZone10 =
-          //     "+proj=utm +zone=10 +ellps=WGS84 +datum=WGS84 +units=m +no_defs";
-          //   let [lng, lat] = proj4(utmZone10).inverse([x, y]);
-          //   return {
-          //     location: new window.google.maps.LatLng(lat, lng),
-          //     weight: weight,
-          //   };
-          // }
-          // return null;
           return {
             location: new window.google.maps.LatLng(
               parseFloat(row.latitude),
@@ -210,13 +185,6 @@ const MapPage = ({ isLoaded, google }) => {
 
         newData = newData.filter((item) => item !== null);
 
-        // newData = newData.map((item) => {
-        //   return {
-        //     ...item,
-        //     weight:
-        //       ((item.weight - minWeight) / (maxWeight - minWeight)) * 10 + 1,
-        //   };
-        // });
         setCrimeData(newData);
       });
     }

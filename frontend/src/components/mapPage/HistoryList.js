@@ -4,7 +4,6 @@ import { HistoryCard } from '../index';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { changeFavouriteAsync } from '../../thunks/historyThunk';
-import { setHistory } from '../../reducers/HistoryReducer';
 
 const HistoryListContainer = styled.div`
     display: flex;

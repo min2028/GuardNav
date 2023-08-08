@@ -88,7 +88,7 @@ const HistoryList = ({ onClick, expanded }) => {
 
     let history = useSelector(state => state.history.items);
         
-    const sortedHistory = sortByFavourite(history);
+    const sortedHistory = sortByFavourite(history || []);
 
     return (
         <HistoryListContainer expanded={expanded} className={"history-list"}>

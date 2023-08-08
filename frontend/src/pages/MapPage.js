@@ -31,7 +31,8 @@ const Content = styled.div`
 const MapPage = ({ isLoaded, google }) => {
   const dispatch = useDispatch();
 
-  const hist = setHistory(useSelector((state) => state.user.history));
+  const userState = useSelector((state) => state.user);
+
   const saved_locations = setSavedLocation(useSelector((state) => state.user));
   const addresses = saved_locations.payload.saved_location;
 
@@ -222,10 +223,11 @@ const MapPage = ({ isLoaded, google }) => {
   }, [isLoaded, google]);
 
   useEffect(() => {
-    if (hist) {
-      dispatch(setHistory(hist.payload));
+    if (userState) {
+      dispatch(setHistory(userState.history || []));
+      console.log(userState.history);
     }
-  }, [hist, dispatch]);
+  }, [userState]);
 
   const handleOptionChange = (option) => {
     if (option === "safest") {

@@ -122,8 +122,6 @@ const RouteDrawer = ({ open, onClose, option, setOption, directions, openSuccess
             favourite: false,
         }
 
-        console.log(route._id)
-
         dispatch(addHistoryItemAsync(route));
         setSuccessMessage('Route Added Successfully! Note that only the 50 most recent routes are saved.');
         openSuccessMessage();

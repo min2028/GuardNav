@@ -97,6 +97,10 @@ We integrated the React Google Maps API for the entire map interface, including 
 #### Aayush Raghuvamshi
 Aayush took leadership in initiating and maintaining team conversations and often delegating tasks. Key contributions include working with the VPD crime dataset, implementing the Heat Map Layer, setting up Route planning, and implementing all of the math behind the route planning logic. He also took charge of the terms of service page and documentation.
 
+#### Andres Lee
+Andres worked on the frontend, backend, and the deployment of the app. Key contributions consist of making the styling of the static portion of the web app, media querries to make it mobile friendly, and one schema on mongoose.
+
+
 [Other team members' contributions]
 
 ### Description of Next Steps

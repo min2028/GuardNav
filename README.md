@@ -105,7 +105,7 @@ We integrated the React Google Maps API for the entire map interface, including 
 Aayush took leadership in initiating and maintaining team conversations and often delegating tasks. Key contributions include working with the VPD crime dataset, implementing the Heat Map Layer, setting up Route planning, and implementing all of the math behind the route planning logic. He also took charge of the terms of service page and documentation.
 
 #### Dickson Ngan
-Dickson played a key role in the project by designing and developing the comprehensive map page, which includes integrating with Google Map's and creating the history component that enables users to add, favorite, and clear their previous routes. Additionally, he also implemented the functionality for users to seamlessly send route directions to their phones using Twilio and ensured smooth integration with the backend by establishing connections to the relevant endpoints.
+Dickson played a key role in the project by designing and developing the comprehensive map page, which includes integrating with Google Map's API and creating the history component that enables users to add, favorite, and clear their previous routes. Additionally, he also implemented the functionality for users to seamlessly send route directions to their phones using Twilio and ensured smooth integration with the backend by establishing connections to the relevant endpoints.
 
 #### Andres Lee
 Andres worked on the frontend, backend, and the deployment of the app. Key contributions consist of making the styling of the static portion of the web app, media querries to make it mobile friendly, and one schema on mongoose.

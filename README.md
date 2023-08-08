@@ -37,33 +37,33 @@ The Safe Route Planning App is intended for the following user groups:
 
 **Minimal**
 >will definitely complete
-- Create a simple CRUD (Create, Read, Update, Delete) functionality to enable users to manage trips.
-- Users should be able to add trips by specifying a pair of source and destination locations.
-- Each trip should include the suggested routes, the primary route selected by the user.
-- Users should be able to update the origin or destination of the primary route, similar to the timeline functionality in Google Maps.
-- Utilize historic crime data to create the initial dataset for generating a heatmap.
-- The heatmap should display risk levels across Vancouver based on the crime data.
-- Develop a basic user interface (UI) that includes a map displaying the generated heatmap.
+- [x] Create a simple CRUD (Create, Read, Update, Delete) functionality to enable users to manage trips.
+- [x] Users should be able to add trips by specifying a pair of source and destination locations.
+- [x] Each trip should include the suggested routes, the primary route selected by the user.
+- [x] Users should be able to update the origin or destination of the primary route, similar to the timeline functionality in Google Maps.
+- [x] Utilize historic crime data to create the initial dataset for generating a heatmap.
+- [x] The heatmap should display risk levels across Vancouver based on the crime data.
+- [x] Develop a basic user interface (UI) that includes a map displaying the generated heatmap.
 
 **Standard**
 >will most likely complete
-- Integrate route planning that avoids high risk areas.
-- Multiple route suggestions with varying levels of risk.
-- Risk categorization. [intensity weighted]
+- [x] Integrate route planning that avoids high risk areas.
+- [x] Multiple route suggestions with varying levels of risk.
+- [x] Risk categorization. [intensity weighted]
 
 
 **Stretch Goals**
 >will complete if time permits
-- Implement a grid representation to validate hazard reports.
-- Use aggregated number of reports in the area for the validation
-- User authentication and user profiles.
-- User preferences for risk levels and categories.
-- Alert system if off-route.
-- CRUD to enable users to add, update, and delete their own reports of hazards and risks to be added to the database.
-- Enhance manual crime entry functionality with entry validation.
-- Real-time alerts of new hazards along the route.
-- Send directions to user via SMS.
-- (friendly design for mobile users)
+- [ ] Implement a grid representation to validate hazard reports.
+- [ ] Use aggregated number of reports in the area for the validation
+- [x] User authentication and user profiles.
+- [ ] User preferences for risk levels and categories.
+- [ ] Alert system if off-route.
+- [ ] CRUD to enable users to add, update, and delete their own reports of hazards and risks to be added to the database.
+- [ ] Enhance manual crime entry functionality with entry validation.
+- [ ] Real-time alerts of new hazards along the route.
+- [x] Send directions to user via SMS.
+- [x] friendly design for mobile users
 
 ## Prototypes:
 
@@ -82,10 +82,20 @@ The Safe Route Planning App is intended for the following user groups:
 ## Utilizes tech from Units 1-5
 
 #### Unit 1: HTML, CSS, JS
-We leveraged HTML, CSS, and JS to build the entire frontend of our project, with the backend in JavaScript and Node Express. Using libraries such as Material UI and the React Google Maps API, we achieved a visually appealing design and an efficient map interface. The separation of these technologies ensured reduced coupling and increased cohesion.
+We leveraged HTML, CSS, and JS to build the entire frontend of our project, with the backend in JavaScript and Node Express.
+
+- **HTML**: HTML played a foundational role within the development of our application. Through the use of HTML, we were able to create the framework structure of each of the components' JSX that we were then able to further design using CSS and add functionality using JS.
+- **CSS**: CSS was used extensively towards the design of the application to ensure it is both visually appealing and accessible through the use of styled-components, which we leveraged to enhance modularity and encapsulation of the design within each component.
+- **JS**: JavaScript served as the backbone of interactivity and functionality within our navigation application. Leveraging its capabilities, we were able to create a dynamic and engaging user experience that facilitated seamless navigation and real-time updates. For example, we used JS to parse and perform data pre-processing on the VPD's crime data to ensure it was formatted correctly to display the heatmap and allow us to generate routes using it.
 
 #### Unit 2: React & Redux
-React & Redux were vital in managing global and local states throughout the project, integrating changing components seamlessly. We used Redux for tracking user's geolocation and created several reducers for history list logic, user profiles, and other functionalities such as in our MapPage.js file.
+React & Redux were vital in managing global and local states throughout the project, integrating changing components seamlessly:
+
+- **React**: The React framework was the core of our application. State management in React ensured that our application could respond to user interactions and dynamic changes. Through hooks, we maintained and updated the application's state in real time. This was particularly important for displaying navigation routes, updating directions, and handling user inputs.
+
+  Also, to facilate and accelerate our development, we used MUI for their pre-designed components and applied our own styling using styled-components.
+
+- **Redux**: In our navigation application, we adopted Redux, a robust state management library, to efficiently manage the complex data flow and interactions within the application. Redux provided a structured approach to handling state, making it easier to maintain a consistent user experience across various components. This was used to store the user location, the saved routes, the user profile, and the saved destinations.
 
 #### Unit 3: Node and Express
 In Unit 3, we leveraged Node.js and the Express framework to build the backend of our GuardNav application. With Node.js, we created a robust and efficient server-side environment that handles user authentication, data management, and communication with the frontend. Express enabled us to set up routes, middleware, and handle HTTP requests effectively and through the integration of different packages, we managed user accounts, trip data, and communication with external services such as Auth0.
@@ -97,7 +107,9 @@ Unit 4 played a crucial role in our GuardNav project as we utilized MongoDB, a N
 Our mono repo code base utilized git for version control with collaborative review of pull requests. We employed yarn and npm for package management and as build tools, resolving dependencies and conflicts. The site was deployed on Render, a cloud hosting platform, ensuring it remains up-to-date.
 
 ## Description of 'Above and Beyond' Functionality
-We integrated the React Google Maps API for the entire map interface, including search bars, routing logic, heatmaps, and directions renderer. We utilized the OpenWeather API for current weather display and built the entire project around location services for route planning according to user input. We implemented Auth0 to handle user authentication and authorization seamlessly. Users can now create accounts, log in securely through email and password or external services like google, and access personalized features with confidence. [Additional contributions if needed]
+We integrated the React Google Maps API for the entire map interface, including search bars, routing logic, heatmaps, and directions renderer. We utilized the OpenWeather API for current weather display and built the entire project around location services for route planning according to user input. We implemented Auth0 to handle user authentication and authorization seamlessly. Users can now create accounts, log in securely through email and password or external services like google, and access personalized features with confidence.
+
+Furthermore, to ensure the widest accessibility of our navigation application, we have been focused on creating a seamless experience for users across various platforms. This includes implementing a responsive design that caters to both desktop and mobile devices. Additionally, we have integrated Twilio's SMS messaging API, enabling users to receive directions directly on their phones. This functionality proves invaluable, allowing users to navigate even in areas with limited or no service coverage.
 
 ## List of Contributions
 
@@ -116,5 +128,5 @@ Aung Khant Min played a pivotal role in GuardNav, leading backend development wi
 [Other team members' contributions]
 
 ### Description of Next Steps
-We aim to further reduce bugs and are considering revamping the entire map interface by possibly using Mapbox instead of Google Maps for enhanced functionality in route planning. [Additional thoughts if needed]
+We aim to further reduce bugs and are considering revamping the entire map interface by possibly using Mapbox instead of Google Maps for enhanced functionality in route planning as Google Maps shown repeated limitations during route creation such as the limitations of waypoints. We also have some stretch goals that we deemed out of our scope such as allowing users to self-report hazards that would be a possibility in the future.
 

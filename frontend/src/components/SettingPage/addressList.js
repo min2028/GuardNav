@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import AddressItem from "./addressItem";
 import { setSavedLocation } from "../../reducers/SavedLocationReducer";
+import { v4 as uuidv4 } from "uuid";
 
 const AddressListContainer = styled.div`
     height: 300px;
@@ -43,7 +44,7 @@ const AddressList = () => {
             <CenteredHeading>Saved Address</CenteredHeading>
             <AddressListContainer ref={addressListRef}>
                 {addresses.map((address) => (
-                    <AddressItemWrapper key={address.id}>
+                    <AddressItemWrapper key={uuidv4()}>
                         <AddressItem address={address} />
                     </AddressItemWrapper>
                 ))}

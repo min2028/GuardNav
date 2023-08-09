@@ -54,7 +54,6 @@ const AddRouteButton = styled(Button)`
 
 const RouteInformation = ({ directions, onAddRouteToHistory, risk, onSendRouteToPhone }) => {
     const theme = useTheme();
-    const [ successOpen, setSuccessOpen ] = useState(false);
     const [ disabledPhone, setDisabledPhone ] = useState(false);
 
     let token = useSelector((state) => state.user.token);

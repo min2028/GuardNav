@@ -193,7 +193,6 @@ const MapPage = ({ isLoaded, google }) => {
   useEffect(() => {
     if (userState) {
       dispatch(setHistory(userState.history || []));
-      console.log(userState.history);
     }
   }, [userState]);
 

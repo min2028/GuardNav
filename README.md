@@ -63,7 +63,7 @@ The Safe Route Planning App is intended for the following user groups:
 - [ ] Enhance manual crime entry functionality with entry validation.
 - [ ] Real-time alerts of new hazards along the route.
 - [x] Send directions to user via SMS.
-- [x] friendly design for mobile users
+- [ ] friendly design for mobile users
 
 ## Prototypes:
 
@@ -82,20 +82,18 @@ The Safe Route Planning App is intended for the following user groups:
 ## Utilizes tech from Units 1-5
 
 #### Unit 1: HTML, CSS, JS
-We leveraged HTML, CSS, and JS to build the entire frontend of our project, with the backend in JavaScript and Node Express.
 
 - **HTML**: HTML played a foundational role within the development of our application. Through the use of HTML, we were able to create the framework structure of each of the components' JSX that we were then able to further design using CSS and add functionality using JS.
 - **CSS**: CSS was used extensively towards the design of the application to ensure it is both visually appealing and accessible through the use of styled-components, which we leveraged to enhance modularity and encapsulation of the design within each component.
-- **JS**: JavaScript served as the backbone of interactivity and functionality within our navigation application. Leveraging its capabilities, we were able to create a dynamic and engaging user experience that facilitated seamless navigation and real-time updates. For example, we used JS to parse and perform data pre-processing on the VPD's crime data to ensure it was formatted correctly to display the heatmap and allow us to generate routes using it.
+- **JS**: JavaScript served as the backbone of interactivity and functionality within our navigation application. Leveraging its capabilities, we were able to create a dynamic and engaging user experience that facilitated seamless navigation and real-time updates.
 
 #### Unit 2: React & Redux
-React & Redux were vital in managing global and local states throughout the project, integrating changing components seamlessly:
 
-- **React**: The React framework was the core of our application. State management in React ensured that our application could respond to user interactions and dynamic changes. Through hooks, we maintained and updated the application's state in real time. This was particularly important for displaying navigation routes, updating directions, and handling user inputs.
+- **React**: The React framework was the core of our application. Through hooks, we maintained and updated the application's state in real time. This was particularly important for displaying navigation routes, updating directions, and handling user inputs.
 
   Also, to facilate and accelerate our development, we used MUI for their pre-designed components and applied our own styling using styled-components.
 
-- **Redux**: In our navigation application, we adopted Redux, a robust state management library, to efficiently manage the complex data flow and interactions within the application. Redux provided a structured approach to handling state, making it easier to maintain a consistent user experience across various components. This was used to store the user location, the saved routes, the user profile, and the saved destinations.
+- **Redux**: Redux provided a structured approach to handling state, making it easier to maintain a consistent user experience across various components. This was used to store the user location, the saved routes, the user profile, and the saved destinations.
 
 #### Unit 3: Node and Express
 In Unit 3, we leveraged Node.js and the Express framework to build the backend of our GuardNav application. With Node.js, we created a robust and efficient server-side environment that handles user authentication, data management, and communication with the frontend. Express enabled us to set up routes, middleware, and handle HTTP requests effectively and through the integration of different packages, we managed user accounts, trip data, and communication with external services such as Auth0.

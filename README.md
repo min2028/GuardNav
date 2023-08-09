@@ -111,20 +111,20 @@ Furthermore, to ensure the widest accessibility of our navigation application, w
 
 ## List of Contributions
 
-#### Aayush Raghuvamshi
+### Aayush Raghuvamshi
 Aayush took leadership in initiating and maintaining team conversations and often delegating tasks. Key contributions include working with the VPD crime dataset, implementing the Heat Map Layer, setting up Route planning, and implementing all of the math behind the route planning logic. He also took charge of the terms of service page and documentation.
 
-#### Dickson Ngan
+### Dickson Ngan
 Dickson played a key role in the project by designing and developing the comprehensive map page, which includes integrating with Google Map's API and creating the history component that enables users to add, favorite, and clear their previous routes. Additionally, he also implemented the functionality for users to seamlessly send route directions to their phones using Twilio and ensured smooth integration with the backend by establishing connections to the relevant endpoints.
 
-#### Andres Lee
+### Andres Lee
 Andres worked on the frontend, backend, and the deployment of the app. Key contributions consist of making the styling of the static portion of the web app, media querries to make it mobile friendly, and one schema on mongoose.
 
-#### Aung Khant Min
+### Aung Khant Min
 Aung Khant Min played a pivotal role in GuardNav, leading backend development with robust APIs, MongoDB integration, and enhanced data management. He bolstered security by implementing Auth0-based authentication. Aung Khant Min's frontend-backend integration enabled real-time updates, while his UI contributions enriched user experience.
 
-[Other team members' contributions]
+### Ryosuke Urawa
+Ryosuke played a core role in both technical and non-technical side of GuardNav by creating necessary designs on figma; refining requirement time to time, such as having crime data loaded for offline use case; and implementing sub-features. Namely, he suggested having a user saved location, allowing user to have a custom shortcut, and implemented both frontend and backend side of the feature.
 
 ### Description of Next Steps
 We aim to further reduce bugs and are considering revamping the entire map interface by possibly using Mapbox instead of Google Maps for enhanced functionality in route planning as Google Maps shown repeated limitations during route creation such as the limitations of waypoints. We also have some stretch goals that we deemed out of our scope such as allowing users to self-report hazards that would be a possibility in the future.
-

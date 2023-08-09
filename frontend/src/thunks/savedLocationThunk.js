@@ -19,7 +19,6 @@ export const addSavedLocationAsync = createAsyncThunk(
 export const deleteSavedLocationAsync = createAsyncThunk(
     savedLocationTypes.DELETE_SAVEDLOCATION,
     async (item, thunkAPI) => {
-        console.log(item)
         let user = thunkAPI.getState().user;
         while (user.user) {
             user = user.user;

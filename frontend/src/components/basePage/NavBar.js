@@ -12,6 +12,7 @@ import {useAuth0} from "@auth0/auth0-react";
 import { Link } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import ProfileDropdown from '../mapPage/ProfileDropdown';
+import { v4 as uuidv4 } from "uuid";
 
 const pages = ['map', 'about'];
 
@@ -63,9 +64,9 @@ function NavBar() {
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex'} }}>
                         {pages.map((page) => (
-                            <Link to={`/${page}`}>
+                            <Link to={`/${page}`} key={uuidv4()}>
                                 <Button
-                                    key={page}
+                                    key={uuidv4()}
                                     sx={{ my: 2, color: 'white', display: 'block', textAlign: 'center'}}
                                 >
                                     {page}

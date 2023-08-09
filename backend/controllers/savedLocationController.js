@@ -42,8 +42,6 @@ const savedLocationController = {
                 user.saved_location.splice(index, 1);
             }
             await user.save();
-            console.log(user.saved_location)
-
             await SavedLocationModel.findByIdAndDelete(req.params.id);
             res.status(204).send();
         } catch (err) {

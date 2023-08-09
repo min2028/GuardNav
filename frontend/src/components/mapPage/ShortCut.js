@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { useTheme } from "@mui/material/styles";
 import { setSavedLocation } from "../../reducers/SavedLocationReducer";
+import { v4 as uuidv4 } from "uuid";
 
 const InformationContainer = styled.div`
     display: flex;
@@ -35,7 +36,7 @@ const ShortCut = ({ onClick }) => {
                 addresses.length > 0 && (
                     <InformationContainer theme={theme}>
                         {addresses.map((address) => (
-                            <div key={address.id}>
+                            <div key={uuidv4()}>
                                 <ShortCutIcon
                                     address={address}
                                     onClick={() => onClick(address.to)} // Call the onClick prop here

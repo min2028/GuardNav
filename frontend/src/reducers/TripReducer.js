@@ -1,41 +1,40 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const tripReducer = createSlice({
-  name: "trip",
-  initialState: {
-    from: {},
-    to: {},
-  },
-  reducers: {
-    setFrom: (state, action) => {
-        const from = { ...action.payload };
+    name: "trip",
+    initialState: {
+        from: {},
+        to: {},
+    },
+    reducers: {
+        setFrom: (state, action) => {
+            const from = { ...action.payload };
 
-        if (typeof from.lat === "string") {
-          from.lat = parseFloat(from.lat);
-        }
+            if (typeof from.lat === "string") {
+                from.lat = parseFloat(from.lat);
+            }
 
-        if (typeof from.lng === "string") {
-          from.lng = parseFloat(from.lng);
-        }
+            if (typeof from.lng === "string") {
+                from.lng = parseFloat(from.lng);
+            }
 
-        state.from = from;
-    }, 
-    setTo: (state, action) => {
-      const to = { ...action.payload }
+            state.from = from;
+        },
+        setTo: (state, action) => {
+            const to = { ...action.payload };
 
-      if (typeof to.lat === "string") {
-        to.lat = parseFloat(to.lat);
-      }
+            if (typeof to.lat === "string") {
+                to.lat = parseFloat(to.lat);
+            }
 
-      if (typeof to.lng === "string") {
-        to.lng = parseFloat(to.lng);
-      }
+            if (typeof to.lng === "string") {
+                to.lng = parseFloat(to.lng);
+            }
 
-      state.to = to;
-    }
-  },
+            state.to = to;
+        },
+    },
 });
-
 
 export const { setFrom, setTo } = tripReducer.actions;
 export default tripReducer.reducer;

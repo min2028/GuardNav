@@ -19,10 +19,8 @@ const ShortCutIcon = ({ address, onClick }) => {
     };
 
     return (
-        <Tooltip title={`Copy ${address.type} Address`}>
-            <IconButton onClick={onClick}>
-                {getIconByType()}
-            </IconButton>
+        <Tooltip title={`${address.formatted_address}`}>
+            <IconButton onClick={onClick}>{getIconByType()}</IconButton>
         </Tooltip>
     );
 };

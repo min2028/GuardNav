@@ -17,8 +17,6 @@ async function getUserInfo (req, res, next) {
             const payload = response.data;
             const user = await UserModel.findOne({ _id: payload.sub });
 
-            console.log("userinfo ", payload);
-
             if (user) {
                 req.user = user;
                 next();

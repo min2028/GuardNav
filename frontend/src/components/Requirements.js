@@ -35,7 +35,6 @@ const List = styled.ul`
 
 const Requirements = () => {
     const theme = useTheme();
-    console.log(theme.breakpoints.values.md);
     return (
         <LadingPageOuterContainer>
             <LadingPageInnerContainerNew theme = {theme}>

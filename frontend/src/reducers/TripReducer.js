@@ -18,8 +18,6 @@ const tripReducer = createSlice({
           from.lng = parseFloat(from.lng);
         }
 
-        console.log(from);
-
         state.from = from;
     }, 
     setTo: (state, action) => {

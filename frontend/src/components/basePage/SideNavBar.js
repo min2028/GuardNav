@@ -26,6 +26,7 @@ import { clearHistoryAsync } from "../../thunks/historyThunk";
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 
+
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({

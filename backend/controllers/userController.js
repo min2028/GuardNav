@@ -9,7 +9,6 @@ const userController = {
     getUser: async function (req, res, next) {
         try {
             if (req.user) {
-                console.log(req.user)
                 const userWithHistory = await UserModel.findById(req.user._id)
                     .populate("saved_location")
                     .populate("history")
@@ -25,7 +24,6 @@ const userController = {
         try {
             if (req.user) {
                 const user = await UserModel.findById(req.user._id).populate("history");
-                console.log(user.email)
                 if (!user) {
                     return res.status(404).send("User not found");
                 }
@@ -34,12 +32,6 @@ const userController = {
                 } else {
                     user.number = req.body.number;
                     await user.save();
-                    // add verified to twilio
-                    // client.validationRequests({
-                    //     friendlyName: user.name,
-                    //     phoneNumber: user.number
-                    // })
-
                     return res.status(200).json(user);
                 }
             } else {
@@ -53,7 +45,6 @@ const userController = {
         try {
             if (req.user) {
                 const user = await UserModel.findById(req.user._id).populate("history");
-                console.log(user.email)
                 if (!user) {
                     return res.status(404).send("User not found");
                 }

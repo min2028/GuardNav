@@ -1,10 +1,10 @@
 import React from "react";
 import {
-  GoogleMap,
-  Marker,
-  DirectionsRenderer,
-  DirectionsService,
-  HeatmapLayer,
+    GoogleMap,
+    Marker,
+    DirectionsRenderer,
+    DirectionsService,
+    HeatmapLayer,
 } from "@react-google-maps/api";
 import { useDispatch, useSelector } from "react-redux";
 import PageContainer from "../basePage/PageContainer";
@@ -31,10 +31,10 @@ const MapTopLeft = styleComp.div`
 
     transition: all 0.4s ease-in-out;
     ${({ hide }) =>
-      hide &&
-      css`
-        transform: translateX(-100%);
-      `}
+        hide &&
+        css`
+            transform: translateX(-100%);
+        `}
 `;
 
 const MapSearch = styleComp.div`
@@ -46,7 +46,7 @@ const MapSearch = styleComp.div`
     width: 60%;
     height: 100%;
     margin: ${({ theme }) =>
-      `${theme.margins.values.marginSides} ${theme.margins.values.marginTopBottom}`};
+        `${theme.margins.values.marginSides} ${theme.margins.values.marginTopBottom}`};
 `;
 
 const MapTopRight = styleComp.div`
@@ -55,130 +55,130 @@ const MapTopRight = styleComp.div`
     justify-content: start;
     gap: 1.5rem;
     padding: ${({ theme }) =>
-      `${theme.margins.values.marginSides} ${theme.margins.values.marginTopBottom}`};
+        `${theme.margins.values.marginSides} ${theme.margins.values.marginTopBottom}`};
 `;
 
 const Map = ({
-  openRouteDrawer,
-  isRouteDrawerOpen,
-  directions,
-  directionsServiceOptions,
-  directionsCallback,
-  showAllHistory,
-  crimeData,
-  setOption
+    openRouteDrawer,
+    isRouteDrawerOpen,
+    directions,
+    directionsServiceOptions,
+    directionsCallback,
+    showAllHistory,
+    crimeData,
+    setOption,
 }) => {
-  const dispatch = useDispatch();
-  const { currentPosition } = useSelector((state) => state.location);
+    const dispatch = useDispatch();
+    const { currentPosition } = useSelector((state) => state.location);
 
-  const onHistoryCardClick = (from, to, option) => {
-    dispatch(setFrom(from));
-    dispatch(setTo(to));
-    setOption(option);
-  
-    openRouteDrawer();
-  };
+    const onHistoryCardClick = (from, to, option) => {
+        dispatch(setFrom(from));
+        dispatch(setTo(to));
+        setOption(option);
 
-  const onShortCutClick = (to) => {
-    dispatch(setTo(to));
-    openRouteDrawer();
-  };
+        openRouteDrawer();
+    };
 
-  const onSearch = (to) => {
-    dispatch(setTo(currentPosition));
-    dispatch(setTo(to));
-    openRouteDrawer();
-  };
+    const onShortCutClick = (to) => {
+        dispatch(setTo(to));
+        openRouteDrawer();
+    };
 
-  const UserMarker = {
-    path: window.google.maps.SymbolPath.CIRCLE,
-    fillColor: '#4285F4',
-    fillOpacity: 1,
-    scale: 8,
-    strokeColor: 'white',
-    strokeWeight: 2,
-};
+    const onSearch = (to) => {
+        dispatch(setTo(currentPosition));
+        dispatch(setTo(to));
+        openRouteDrawer();
+    };
 
-const BorderMarker = {
-    path: window.google.maps.SymbolPath.CIRCLE,
-    fillColor: '#4285F4',
-    fillOpacity: 0.3,
-    scale: 16,
-    strokeWeight: 0,
-};
+    const UserMarker = {
+        path: window.google.maps.SymbolPath.CIRCLE,
+        fillColor: "#4285F4",
+        fillOpacity: 1,
+        scale: 8,
+        strokeColor: "white",
+        strokeWeight: 2,
+    };
 
-  return (
-      <PageContainer style={{ flexGrow: 1 }}>
-          <div
-              style={{
-                  width: "100%",
-                  height: "100%",
-              }}
-          >
-              {currentPosition && (
-                  <GoogleMap
-                      mapContainerStyle={{
-                          width: "100%",
-                          height: "100%",
-                      }}
-                      center={currentPosition}
-                      zoom={15}
-                      options={{
-                          disableDefaultUI: true,
-                          zoomControl: true,
-                          rotateControl: true,
-                      }}
-                  >
-                      <HeatmapLayer
-                          data={crimeData.map((item) => ({
-                              location: item.location,
-                              weight: item.weight,
-                          }))}
-                          options={{
-                              radius: 10,
-                          }}
-                      />
-                      <MapTopContainer>
-                          <MapTopLeft hide={isRouteDrawerOpen}>
-                              <MapSearch>
-                                  <PageSearchBar onSearch={onSearch} />
-                                  <HistoryList
-                                      onClick={onHistoryCardClick}
-                                                        expanded={showAllHistory}
-                                  />
-                              </MapSearch>
-                              <WeatherInformation />
-                              <ShortCut onClick={onShortCutClick} />
-                          </MapTopLeft>
-                          <MapTopRight>
-                              <ProfileDropdown />
-                          </MapTopRight>
-                          {isRouteDrawerOpen && (
-                              <>
-                                  <DirectionsService
-                                      options={directionsServiceOptions}
-                                      callback={directionsCallback}
-                                  />
-                                  <DirectionsRenderer
-                                      directions={directions}
-                                      preserveViewport={true}
-                                  />
-                              </>
-                          )}
-                          <Marker
-                              position={currentPosition}
-                              icon={UserMarker}
-                          />
-                          <Marker
-                              position={currentPosition}
-                              icon={BorderMarker}
-                          />
-                      </MapTopContainer>
-                  </GoogleMap>
-              )}
-          </div>
-      </PageContainer>
-  );
+    const BorderMarker = {
+        path: window.google.maps.SymbolPath.CIRCLE,
+        fillColor: "#4285F4",
+        fillOpacity: 0.3,
+        scale: 16,
+        strokeWeight: 0,
+    };
+
+    return (
+        <PageContainer style={{ flexGrow: 1 }}>
+            <div
+                style={{
+                    width: "100%",
+                    height: "100%",
+                }}
+            >
+                {currentPosition && (
+                    <GoogleMap
+                        mapContainerStyle={{
+                            width: "100%",
+                            height: "100%",
+                        }}
+                        center={currentPosition}
+                        zoom={15}
+                        options={{
+                            disableDefaultUI: true,
+                            zoomControl: true,
+                            rotateControl: true,
+                        }}
+                    >
+                        <HeatmapLayer
+                            data={crimeData.map((item) => ({
+                                location: item.location,
+                                weight: item.weight,
+                            }))}
+                            options={{
+                                radius: 10,
+                            }}
+                        />
+                        <MapTopContainer>
+                            <MapTopLeft hide={isRouteDrawerOpen}>
+                                <MapSearch>
+                                    <PageSearchBar onSearch={onSearch} />
+                                    <HistoryList
+                                        onClick={onHistoryCardClick}
+                                        expanded={showAllHistory}
+                                    />
+                                </MapSearch>
+                                <WeatherInformation />
+                                <ShortCut onClick={onShortCutClick} />
+                            </MapTopLeft>
+                            <MapTopRight>
+                                <ProfileDropdown />
+                            </MapTopRight>
+                            {isRouteDrawerOpen && (
+                                <>
+                                    <DirectionsService
+                                        options={directionsServiceOptions}
+                                        callback={directionsCallback}
+                                    />
+                                    <DirectionsRenderer
+                                        directions={directions}
+                                        preserveViewport={true}
+                                    />
+                                </>
+                            )}
+                            <Marker
+                                position={currentPosition}
+                                icon={UserMarker}
+                            />
+                            <Marker
+                                position={currentPosition}
+                                icon={BorderMarker}
+                            />
+                        </MapTopContainer>
+                    </GoogleMap>
+                )}
+            </div>
+        </PageContainer>
+    );
 };
 
 export default Map;

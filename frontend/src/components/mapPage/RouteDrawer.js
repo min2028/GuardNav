@@ -149,7 +149,7 @@ const RouteDrawer = ({ open, onClose, option, setOption, directions, openSuccess
                 <RoutePlanner directions={directions} />
                 <RouteOptions option={option} setOption={setOption} handleOptionChange={handleOptionChange} />
                 <Divider />
-                <RouteInformation directions={directions} onAddRouteToHistory={onAddRouteToHistory} risk={optionToRiskMap[option]} onSendRouteToPhone={onSendRouteToPhone} />
+                <RouteInformation directions={directions} onAddRouteToHistory={onAddRouteToHistory} risk={option} onSendRouteToPhone={onSendRouteToPhone} />
                 <Divider />
                 <RouteDirections directions={directions} />
             </CustomDrawer>

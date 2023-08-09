@@ -91,6 +91,12 @@ const RouteInformation = ({ directions, onAddRouteToHistory, risk, onSendRouteTo
         onSendRouteToPhone();
     }
 
+    const optionToRiskMap = {
+        "safest": "low",
+        "balanced": "mid",
+        "fastest": "high",
+    }
+
     return (
         <RouteInformationContainer>
             <TimeAndAddRoute>
@@ -136,9 +142,9 @@ const RouteInformation = ({ directions, onAddRouteToHistory, risk, onSendRouteTo
                 <BodyText>{distance}</BodyText>
                 <BodyText
                     style={{
-                        color: theme.palette.risk[risk?.toLowerCase()]
+                        color: theme.palette.risk[optionToRiskMap[risk]?.toLowerCase()]
                     }}
-                >{capitalize(risk)} Risk</BodyText>
+                >{capitalize(risk)}</BodyText>
             </DistanceAndRisk>
         </RouteInformationContainer>
     )

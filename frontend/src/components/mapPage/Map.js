@@ -66,13 +66,15 @@ const Map = ({
   directionsCallback,
   showAllHistory,
   crimeData,
+  setOption
 }) => {
   const dispatch = useDispatch();
   const { currentPosition } = useSelector((state) => state.location);
 
-  const onHistoryCardClick = (from, to) => {
+  const onHistoryCardClick = (from, to, option) => {
     dispatch(setFrom(from));
     dispatch(setTo(to));
+    setOption(option);
   
     openRouteDrawer();
   };

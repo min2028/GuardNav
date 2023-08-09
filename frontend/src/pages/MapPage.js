@@ -246,6 +246,10 @@ const MapPage = ({ isLoaded, google }) => {
               onClose={() => {
                 setTo(null);
                 setRouteDrawerOpen(false);
+
+                setTimeout(() => {
+                  setOption("safest");
+                }, 500);
               }}
               option={option}
               setOption={setOption}
@@ -264,6 +268,7 @@ const MapPage = ({ isLoaded, google }) => {
               directionsCallback={directionsCallback}
               crimeData={crimeData}
               showAllHistory={showAllHistory}
+              setOption={setOption}
             />
           </Content>
         </>

@@ -63,7 +63,7 @@ The Safe Route Planning App is intended for the following user groups:
 - [ ] Enhance manual crime entry functionality with entry validation.
 - [ ] Real-time alerts of new hazards along the route.
 - [x] Send directions to user via SMS.
-- [x] friendly design for mobile users
+- [ ] friendly design for mobile users
 
 ## Prototypes:
 

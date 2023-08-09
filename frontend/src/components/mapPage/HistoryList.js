@@ -89,6 +89,12 @@ const HistoryList = ({ onClick, expanded }) => {
         
     const sortedHistory = sortByFavourite(history || []);
 
+    const riskToTextMap = {
+        "low": "safest",
+        "mid": "balanced",
+        "high": "fastest"
+    };
+
     return (
         <HistoryListContainer expanded={expanded} className={"history-list"}>
             <DefaultView>
@@ -100,7 +106,7 @@ const HistoryList = ({ onClick, expanded }) => {
                             from={trip.from}
                             to={trip.to}
                             favourite={trip.favourite}
-                            onClick={() => onClick(trip.from, trip.to)}
+                            onClick={() => onClick(trip.from, trip.to, riskToTextMap[trip.risk])}
                             onFavouriteClick={() => dispatch(changeFavouriteAsync({ id: trip._id, favourite: !trip.favourite}))}
                         />
                     ))
@@ -115,7 +121,7 @@ const HistoryList = ({ onClick, expanded }) => {
                             from={trip.from}
                             to={trip.to}
                             favourite={trip.favourite}
-                            onClick={() => onClick(trip.from, trip.to)}
+                            onClick={() => onClick(trip.from, trip.to, riskToTextMap[trip.risk])}
                             onFavouriteClick={() => dispatch(changeFavouriteAsync({ id: trip._id, favourite: !trip.favourite}))}
                         />
                     ))
